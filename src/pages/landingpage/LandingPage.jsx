@@ -32,12 +32,12 @@ const Landingpage = () => {
             </li>
             <li>
               <Link to="/signup">
-                <a className="signup">SignUp </a>
+                <a className="signup">Signup </a>
               </Link>
             </li>
             <li>
               <Link to="/signin">
-                <a className="signin">SignIn </a>
+                <a className="signin">Signin </a>
               </Link>
             </li>
           </ul>
@@ -53,13 +53,19 @@ const Landingpage = () => {
               it's about helping
               <br /> our clients automate there business by using tech.
             </p>
-            <Link to="/signin">
-              <button className="hero-signin">SignIn</button>
-            </Link>
 
             <Link to="/signup">
               <button className="signup">Register Now</button>
             </Link>
+
+            <Link to="/signup">
+              <button className="hero-signup">Signup</button>
+            </Link>
+            
+            <Link to="/signin">
+              <button className="hero-signin">Signin</button>
+            </Link>
+
           </div>
           <img src={hero} alt="Hero" />
         </div>

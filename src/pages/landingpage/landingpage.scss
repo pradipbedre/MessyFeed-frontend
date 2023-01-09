@@ -2,12 +2,15 @@
   padding: 0px 50px 0px 50px;
   background-color: #0e2e3c;
   nav {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
     overflow: hidden;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    background-color: #0e2e3c;
     .logo {
       font-weight: 700;
       font-size: 1.9rem;
@@ -94,7 +97,9 @@
     }
     .hero-signin {
       display: none;
-      text-decoration: none;
+    }
+    .hero-signup {
+      display: none;
     }
     img {
       width: 600px;
@@ -111,11 +116,13 @@
       display: none;
     }
     .left {
+      width: 50%;
       img {
-        width: 600px;
+        width: 500px;
       }
     }
     .right {
+      width: 50%;
       color: white;
       display: flex;
       flex-direction: column;
@@ -159,11 +166,13 @@
     justify-content: center;
     color: white;
     .leftSide {
+      width: 50%;
       img {
-        width: 600px;
+        width: 450px;
       }
     }
     .rightSide {
+      width: 50%;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -244,6 +253,9 @@
     }
   }
   .company {
+    h1 {
+      margin-left: -2px;
+    }
     p {
       margin-top: 10px;
       a {
@@ -259,6 +271,7 @@
 @media screen and (max-width: 940px) {
   .main {
     nav {
+      position: sticky;
       .menu-btn {
         font-size: 30px;
         cursor: pointer;
@@ -271,11 +284,14 @@
       .signin {
         display: none;
       }
+      .signup {
+        display: none;
+      }
       ul {
         position: fixed;
         top: 80px;
         background-color: #e18a39;
-        left: -110%;
+        left: -150%;
         color: white;
         height: 100vh;
         width: 100vw;
@@ -309,15 +325,35 @@
         background-color: #cc6200;
         color: white;
         margin-top: 20px;
+        border-radius: 1rem;
         margin-right: 5px;
         cursor: pointer;
         transition: all 0.3s ease;
         &:hover {
-          background-color: #e18a39;
+          text-decoration: underline;
+        }
+      }
+      .hero-signup {
+        display: inline;
+        padding: 0.4rem 1.6rem;
+        border: 1px solid #cc6200;
+        background: transparent;
+        border-radius: 0.2rem;
+        border-radius: 1rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: white;
+        margin-top: 20px;
+        margin-right: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        &:hover {
+          text-decoration: underline;
         }
       }
       .signup {
         transition: all 0.3s ease;
+        display: none;
         &:hover {
           background-color: #e18a39;
         }
