@@ -1,0 +1,56 @@
+.userDashboardSidebar {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  height: 100vh;
+  background-color: black;
+  color: white;
+  position: -webkit-sticky;
+  position: sticky;
+
+  nav {
+    display: flex;
+    #menu {
+      display: none;
+    }
+    .menu-btn {
+      font-size: 30px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+    h2 {
+      cursor: pointer;
+    }
+  }
+  .link-sections {
+    margin-top: 3rem;
+
+    ul {
+      list-style: none;
+
+      li {
+        display: flex;
+        gap: 10px;
+        font-size: 20px;
+        margin-bottom: 30px;
+        cursor: pointer;
+        padding: 5px;
+        transition: all 0.3s ease;
+        &:hover {
+          background-color: rgb(78, 72, 72);
+        }
+      }
+    }
+  }
+  .logout {
+    padding: 5px;
+    background-color: rgb(78, 72, 72);
+    color: white;
+    width: 50%;
+    cursor: pointer;
+    &:hover {
+      background-color: #8a8686;
+    }
+  }
+}
