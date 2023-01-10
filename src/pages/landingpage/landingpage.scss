@@ -4,8 +4,8 @@
   nav {
     position: -webkit-sticky;
     position: sticky;
-    top: 0;
     overflow: hidden;
+    top: 0;
     height: 80px;
     display: flex;
     align-items: center;
@@ -150,6 +150,7 @@
         background: #cc6200;
         border-radius: 10px;
         color: white;
+        border: none;
         font-size: 1.1rem;
         transition: all 0.3s ease;
         &:hover {

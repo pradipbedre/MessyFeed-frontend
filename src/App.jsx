@@ -1,10 +1,10 @@
 import React from "react";
 import "./app.module.scss";
 import { Routes, Route } from "react-router-dom";
-import Signup from "./pages/auth/Signup";
-import Signin from "./pages/auth/Signin";
+import Signup from "./pages/landingpage/auth/Signup/Signup";
+import Signin from "./pages/landingpage/auth/Signin/Signin";
+import Dashboard from "./pages/user/dashboard/Dashboard";
 import LandingPage from "./pages/landingpage/LandingPage";
-import Dashboard from "./pages/user/Dashboard";
 const App = () => {
   return (
     <div>

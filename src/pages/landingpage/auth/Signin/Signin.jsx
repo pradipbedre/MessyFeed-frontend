@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { FcGoogle } from "react-icons/Fc";
 import { Link, useNavigate } from "react-router-dom";
 import "./signin.scss";
-import welcome from "../../assets/welcome.svg";
+import welcome from "../../../../assets/welcome.svg";
 
-const Signup = () => {
+const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -78,4 +78,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Signin;

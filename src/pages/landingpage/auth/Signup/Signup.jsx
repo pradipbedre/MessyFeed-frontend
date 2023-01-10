@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./signup.scss";
 import { FcGoogle } from "react-icons/Fc";
-import welcome from "../../assets/welcome.svg";
+import welcome from "../../../../assets/welcome.svg";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
