@@ -1,90 +1,83 @@
-.userDashboard {
-  .userDashboardSidebar {
-    position: fixed;
-    overflow-x: hidden;
-    padding: 5px;
-    width: 20%;
-    height: 100%;
-    z-index: 1;
+$brandColor: #cc6200;
+$brandBackColor: #0e2e3c;
+
+.userDashboardContainer {
+  display: flex;
+  flex-direction: column;
+  .dashboard-content {
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
-    background-color: black;
-    color: white;
-    nav {
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    .stats {
       display: flex;
-      #menu {
-        display: none;
-      }
-      .menu-btn {
-        font-size: 30px;
-        margin-right: 5px;
-        cursor: pointer;
-      }
-      h2 {
-        cursor: pointer;
-      }
-    }
-    .link-sections {
-      margin-top: 3rem;
-
-      ul {
-        list-style: none;
-        .active {
-          background-color: rgb(78, 72, 72);
-        }
-        li {
-          display: flex;
-          gap: 10px;
-          font-size: 20px;
-          margin-bottom: 30px;
-          cursor: pointer;
-          padding: 5px;
-          transition: all 0.3s ease;
-          &:hover {
-            background-color: rgb(78, 72, 72);
-          }
-        }
+      align-items: center;
+      justify-content: center;
+      margin-top: 2rem;
+      gap: 40px;
+      .total {
+        align-items: center;
+        box-shadow: 1px 1px 20px $brandBackColor;
+        border-radius: 10px;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        width: 15rem;
+        height: 10rem;
+        background-color: rgb(251, 251, 251);
       }
     }
-    .logout {
-      padding: 9px;
-      background-color: rgb(78, 72, 72);
-      color: white;
-      margin-left: 4px;
-      width: 50%;
-      cursor: pointer;
-      margin-top: 27rem;
-      &:hover {
-        background-color: #8a8686;
+    .all-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      padding: 50px 50px;
+      box-shadow: 1px 1px 20px $brandBackColor;
+      border-radius: 10px;
+      button {
+        padding: 10px 15px;
+        background-color: $brandBackColor;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+          box-shadow: 1px 1px 10px $brandBackColor;
+        }
       }
     }
   }
-  .mainContent {
+}
+
+@media screen and (max-width: 900px) {
+  .dashboard-content {
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
-    width: 80%;
-    margin-left: 20%;
-    .Navbar {
-      position: fixed;
-      z-index: 1;
-      width: 80%;
-      height: 2.8rem;
-      display: flex;
-      justify-content: space-between;
-      background-color: black;
-      color: white;
-      .mess-name {
-        margin: 8px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    .stats {
+      flex-direction: column;
+      .total {
+        align-items: center;
+        box-shadow: 0px 2px 17px black;
+        border-radius: 10px;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        width: 15rem;
+        height: 10rem;
+        background-color: rgb(251, 251, 251);
       }
-      .user-profile {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: #999;
-        margin-right: 20px;
-        border: 1px solid white;
-        margin: 8px 10px;
-      }
+    }
+    .all-buttons {
+      flex-direction: column;
+    }
+    .userDImg {
+      width: 500px;
     }
   }
 }

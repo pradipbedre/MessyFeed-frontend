@@ -54,18 +54,17 @@ const Landingpage = () => {
               <br /> our clients automate there business by using tech.
             </p>
 
-            <Link to="/signup">
+            <Link to="/signup" style={{ textDecoration: "none" }}>
               <button className="signup">Register Now</button>
             </Link>
 
-            <Link to="/signup">
+            <Link to="/signup" style={{ textDecoration: "none" }}>
               <button className="hero-signup">Signup</button>
             </Link>
-            
-            <Link to="/signin">
+
+            <Link to="/signin" style={{ textDecoration: "none" }}>
               <button className="hero-signin">Signin</button>
             </Link>
-
           </div>
           <img src={hero} alt="Hero" />
         </div>
