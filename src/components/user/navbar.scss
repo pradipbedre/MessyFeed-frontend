@@ -82,3 +82,30 @@ $brandBackColor: #0e2e3c;
     }
   }
 }
+
+@media screen and (max-width: 900px) {
+  .navbarContainer {
+    nav {
+      .sub-menu-wrap {
+        .sub-menu {
+          padding: 5px;
+          .user-info {
+            h3 {
+              font-size: 16px;
+            }
+            img {
+              width: 30px;
+            }
+          }
+          hr {
+            height: 2px;
+          }
+          .sub-menu-links {
+            margin: 12px 10px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
