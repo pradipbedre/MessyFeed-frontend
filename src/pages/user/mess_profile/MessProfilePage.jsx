@@ -1,11 +1,11 @@
-import React from 'react'
-
+import React from "react";
+import Navbar from "../../../components/user/navbar/Navbar";
 const MessProfilePage = () => {
   return (
     <div>
-      from mess profile
+      <Navbar />
     </div>
-  )
-}
+  );
+};
 
 export default MessProfilePage;

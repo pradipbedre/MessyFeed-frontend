@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../../../components/user/Navbar";
+import Navbar from "../../../components/user/navbar/Navbar";
 
 const MealCouponPage = () => {
   return (

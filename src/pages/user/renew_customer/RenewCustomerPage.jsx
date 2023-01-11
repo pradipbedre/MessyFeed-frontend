@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../../../components/user/navbar/Navbar";
 
 const RenewCustomerPage = () => {
   return (
     <div>
-      RenewCustomer
+      <Navbar />
     </div>
-  )
-}
+  );
+};
 
 export default RenewCustomerPage;

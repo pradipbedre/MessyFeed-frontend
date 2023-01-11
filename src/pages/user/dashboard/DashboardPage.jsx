@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./dashboard.scss";
 import { Link } from "react-router-dom";
 import userDImg from "../../../assets/user-dashboard.svg";
-import Navbar from "../../../components/user/Navbar";
+import Navbar from "../../../components/user/navbar/Navbar";
 const DashboardPage = () => {
   return (
     <div className="userDashboardContainer">

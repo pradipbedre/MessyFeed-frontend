@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../../../components/user/navbar/Navbar";
 
 const ViewAllCustomerPage = () => {
   return (
     <div>
-      view all customner
+      <Navbar />
     </div>
-  )
-}
+  );
+};
 
 export default ViewAllCustomerPage;
