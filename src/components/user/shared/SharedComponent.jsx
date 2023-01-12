@@ -38,3 +38,7 @@ export const DashboardButton = () => {
 export const CustomButtom = ({ name }) => {
   return <button className="dashboardBtn">{name}</button>;
 };
+
+export const MediumCustomButtom = ({ name }) => {
+  return <button className="MediumCustomeButton">{name}</button>;
+};

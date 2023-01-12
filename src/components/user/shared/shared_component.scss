@@ -9,12 +9,27 @@ $brandBackColor: #0e2e3c;
   width: 110px;
   background-color: $brandBackColor;
   border: none;
-  box-shadow: 0px 0px 12px black;
+  box-shadow: 0px 0px 12px $brandBackColor;
   color: white;
   transition: ease all 0.2s;
   border-radius: 5px;
   &:hover {
     background-color: #cc6200;
+  }
+}
+
+.MediumCustomeButton {
+  padding: 10px 15px;
+  background-color: #0e2e3c;
+  border: none;
+  width: 10rem;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: ease all 0.2s;
+  &:hover {
+    background-color: #cc6200;
+    box-shadow: 0px 0px 12px $brandBackColor;
   }
 }
 

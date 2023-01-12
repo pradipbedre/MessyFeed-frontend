@@ -3,6 +3,7 @@ import "./dashboard.scss";
 import { Link } from "react-router-dom";
 import userDImg from "../../../assets/user-dashboard.svg";
 import Navbar from "../../../components/user/navbar/Navbar";
+import { MediumCustomButtom } from "../../../components/user/shared/SharedComponent";
 const DashboardPage = () => {
   return (
     <div className="userDashboardContainer">
@@ -20,16 +21,17 @@ const DashboardPage = () => {
         </div>
         <div className="all-buttons">
           <Link to="/dashboard/addNewCustomer">
-            <button>Add New Customer</button>
+            <MediumCustomButtom name={"Add New Customer"} />
           </Link>
           <Link to="/dashboard/viewAllCustomer">
-            <button>View All Customer</button>
+            <MediumCustomButtom name={"View All Customer"} />
+            <button></button>
           </Link>
           <Link to="/dashboard/mealCoupon">
-            <button>Meal Coupons</button>
+            <MediumCustomButtom name={"Meal Coupons"} />
           </Link>
           <Link to="/dashboard/renewCustomer">
-            <button>Renew Customer</button>
+            <MediumCustomButtom name={"Renew Customer"} />
           </Link>
         </div>
         <img src={userDImg} className="userDImg" />

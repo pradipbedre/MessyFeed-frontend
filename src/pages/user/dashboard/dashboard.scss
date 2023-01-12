@@ -36,18 +36,7 @@ $brandBackColor: #0e2e3c;
       padding: 50px 50px;
       box-shadow: 1px 1px 20px $brandBackColor;
       border-radius: 10px;
-      button {
-        padding: 10px 15px;
-        background-color: $brandBackColor;
-        border: none;
-        width: 10rem;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-        &:hover {
-          box-shadow: 1px 1px 10px $brandBackColor;
-        }
-      }
+    
     }
   }
 }
