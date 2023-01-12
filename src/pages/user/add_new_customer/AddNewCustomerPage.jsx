@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../../../components/user/navbar/Navbar";
 import "./add_new_customer.scss";
-import {
-  DashboardButton,
-  PopUp,
-} from "../../../components/user/shared/SharedComponent";
+import { PopUp } from "../../../components/user/shared/SharedComponent";
 
 const AddNewCustomerPage = () => {
   const [popup, setPopup] = useState(false);
@@ -14,7 +11,6 @@ const AddNewCustomerPage = () => {
   return (
     <div className="addNewCustomerContainer">
       <Navbar />
-      <DashboardButton />
       <div className="container">
         <h1 className="heading">Add New customer</h1>
         <form>
@@ -66,6 +62,9 @@ const AddNewCustomerPage = () => {
             </div>
             <div className="col-75">
               <select id="Gender" name="Gender">
+                <option value="Female" selected>
+                  Other
+                </option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </select>

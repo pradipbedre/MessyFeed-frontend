@@ -1,0 +1,54 @@
+$brandColor: #cc6200;
+$brandBackColor: #0e2e3c;
+$cardColor: #f2f2f2;
+$shadow: 0px 0px 20px black;
+
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .slides {
+    width: 80vw;
+    height: 40vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    .slide {
+      width: 75vw;
+      height: 35vh;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 10px;
+      .icon {
+        font-size: 35px;
+        margin: 10px;
+        cursor: pointer;
+        &:hover {
+          color: $brandColor;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .sliderContainer {
+   
+
+    .slides {
+      width: 90vw;
+      height: 40vh;
+
+      .slide {
+        width: 90vw;
+        height: 35vh;
+      }
+    }
+  }
+}
+@media screen and (max-width: 450px) {
+}

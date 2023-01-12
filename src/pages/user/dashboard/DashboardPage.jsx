@@ -9,16 +9,6 @@ const DashboardPage = () => {
     <div className="userDashboardContainer">
       <Navbar />
       <div className="dashboard-content">
-        <div className="stats">
-          <div className="total">
-            <h3>Total Meal Soled</h3>
-            <p>30</p>
-          </div>
-          <div className="total">
-            <h3>Total Actice Customer</h3>
-            <p>30</p>
-          </div>
-        </div>
         <div className="all-buttons">
           <Link to="/dashboard/addNewCustomer">
             <MediumCustomButtom name={"Add New Customer"} />
@@ -33,6 +23,16 @@ const DashboardPage = () => {
           <Link to="/dashboard/renewCustomer">
             <MediumCustomButtom name={"Renew Customer"} />
           </Link>
+        </div>
+        <div className="stats">
+          <div className="total">
+            <h3>Total Meal Soled</h3>
+            <p>30</p>
+          </div>
+          <div className="total">
+            <h3>Total Actice Customer</h3>
+            <p>30</p>
+          </div>
         </div>
         <img src={userDImg} className="userDImg" />
       </div>

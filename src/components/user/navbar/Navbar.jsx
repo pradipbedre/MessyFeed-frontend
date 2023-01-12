@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { RiProfileLine } from "react-icons/Ri";
 import { CgProfile } from "react-icons/Cg";
 import { BiLogOutCircle } from "react-icons/Bi";
-const Navbar = () => {
+import { DashboardButton } from "../shared/SharedComponent";
+const Navbar = ({ PropCompo }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggalMenu = () => setIsOpen(!isOpen);
   return (

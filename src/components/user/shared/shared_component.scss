@@ -4,20 +4,19 @@ $brandBackColor: #0e2e3c;
 
 /* Dashboard CSS */
 .dashboardBtn {
-  margin: 10px 20px;
+  margin: 0px 20px;
   padding: 8px;
   width: 110px;
   background-color: $brandBackColor;
   border: none;
-  box-shadow: 0px 0px 12px $brandBackColor;
   color: white;
   transition: ease all 0.2s;
   border-radius: 5px;
+  cursor: pointer;
   &:hover {
     background-color: #cc6200;
   }
 }
-
 .MediumCustomeButton {
   padding: 10px 15px;
   background-color: #0e2e3c;
@@ -27,6 +26,7 @@ $brandBackColor: #0e2e3c;
   border-radius: 5px;
   cursor: pointer;
   transition: ease all 0.2s;
+  cursor: pointer;
   &:hover {
     background-color: #cc6200;
     box-shadow: 0px 0px 12px $brandBackColor;

@@ -13,36 +13,22 @@ const UserProfilePage = () => {
     <div className="userProfileContainer">
       <Navbar />
       <div className="profileContent">
-        <div className="image">
-          <img src={Profile} alt="profil pic" />
-        </div>
-        <h2 className="user-name">Pradip Bedre</h2>
-        <div className="user-info">
-          <div className="item">
-            <label htmlFor="" className="header">
-              Email:
-            </label>
-            <label className="detail">pradip@gmail.com</label>
+        <div className="userContent">
+          <div className="user-item">
+            <label>Name:</label>
+            <label>Email:</label>
+            <label>Password:</label>
+            <label>Mobile No:</label>
+            <label>Gender:</label>
+            <label>Address:</label>
           </div>
-          <div className="item">
-            <label htmlFor="" className="header">
-              Password:
-            </label>
-            <label className="detail">Pk@9168207271</label>
-          </div>
-          <div className="item">
-            <label htmlFor="" className="header">
-              Mobile No:
-            </label>
-            <label className="detail">9168207273</label>
-          </div>
-          <div className="item">
-            <label htmlFor=" " className="header">
-              Address:
-            </label>
-            <label className="detail">
-              at post loha nanded maharashtra 431708
-            </label>
+          <div className="user-info">
+            <label>Pradip Bedre</label>
+            <label>pradip@gmail.com</label>
+            <label>Pk@9168207271</label>
+            <label>9168207273</label>
+            <label>Male</label>
+            <p>at post loha nanded </p>
           </div>
         </div>
         <div className="buttons">
