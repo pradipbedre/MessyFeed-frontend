@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../../components/user/navbar/Navbar";
 import ImageSlider from "../../../components/user/imageSlider/ImageSlider";
 import "./mess_profile.scss";
+import { Link } from "react-router-dom";
 import {
   CustomButtom,
   DashboardButton,
@@ -35,7 +36,9 @@ const MessProfilePage = () => {
           </div>
         </div>
         <div className="buttons">
-          <CustomButtom name={"update profile"} />
+          <Link to="/dashboard/messProfile/update">
+            <CustomButtom name={"update profile"} />
+          </Link>
           <DashboardButton />
         </div>
       </div>

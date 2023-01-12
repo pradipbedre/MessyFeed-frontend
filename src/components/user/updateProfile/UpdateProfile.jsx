@@ -16,28 +16,28 @@ const UpdateProfile = () => {
         <form>
           <div className="row">
             <div className="col-25">
-              <label htmlFor="fname">Password:</label>
+              <label htmlFor="password">Password:</label>
             </div>
             <div className="col-75">
               <input
                 required
+                id="password"
                 type="password"
-                id="fname"
-                name="firstname"
+                name="name"
                 placeholder="enter new password"
               />
             </div>
           </div>
           <div className="row">
             <div className="col-25">
-              <label htmlFor="lname">Mobile No:</label>
+              <label htmlFor="mobileno">Mobile No:</label>
             </div>
             <div className="col-75">
               <input
                 required
                 type="number"
-                id="lname"
-                name="lastname"
+                id="mobileno"
+                name="mobileno"
                 placeholder="enter mobile no"
               />
             </div>
@@ -58,11 +58,11 @@ const UpdateProfile = () => {
           </div>
           <div className="row">
             <div className="col-25">
-              <label htmlFor="subject">Address:</label>
+              <label htmlFor="address">Address:</label>
             </div>
             <div className="col-75">
               <textarea
-                id="subject"
+                id="address"
                 name="subject"
                 placeholder="enter address to update"
                 style={{ height: "100px" }}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { RiProfileLine } from "react-icons/Ri";
 import { CgProfile } from "react-icons/Cg";
 import { BiLogOutCircle } from "react-icons/Bi";
-import { DashboardButton } from "../shared/SharedComponent";
+import { MdOutlineDashboard } from "react-icons/Md";
 const Navbar = ({ PropCompo }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggalMenu = () => setIsOpen(!isOpen);
@@ -44,6 +44,12 @@ const Navbar = ({ PropCompo }) => {
                 <RiProfileLine />
               </i>
               <p> Mess Profile</p>
+            </Link>
+            <Link to="/dashboard" className="sub-menu-links">
+              <i>
+                <MdOutlineDashboard />
+              </i>
+              <p>Dashboard</p>
             </Link>
             <Link to="/" className="sub-menu-links">
               <i>

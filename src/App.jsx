@@ -12,6 +12,7 @@ import ViewAllCustomerPage from "./pages/user/view_all_customer/ViewAllCustomerP
 import MealCouponPage from "./pages/user/meal_coupon/MealCouponPage";
 import RenewCustomerPage from "./pages/user/renew_customer/RenewCustomerPage";
 import UpdateProfile from "./components/user/updateProfile/UpdateProfile";
+import UpadateMess from "./components/user/updateMess/UpadateMess";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/signin" element={<Signin />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/dashboard/messProfile" element={<MessProfilePage />} />
+        <Route path="/dashboard/messProfile/update" element={<UpadateMess />} />
         <Route path="/dashboard/userProfile" element={<UserProfilePage />} />
         <Route
           path="/dashboard/userProfile/update"
