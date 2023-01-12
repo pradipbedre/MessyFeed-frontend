@@ -11,6 +11,7 @@ import AddNewCustomerPage from "./pages/user/add_new_customer/AddNewCustomerPage
 import ViewAllCustomerPage from "./pages/user/view_all_customer/ViewAllCustomerPage";
 import MealCouponPage from "./pages/user/meal_coupon/MealCouponPage";
 import RenewCustomerPage from "./pages/user/renew_customer/RenewCustomerPage";
+import UpdateProfile from "./components/user/updateProfile/UpdateProfile";
 
 const App = () => {
   return (
@@ -22,6 +23,10 @@ const App = () => {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/dashboard/messProfile" element={<MessProfilePage />} />
         <Route path="/dashboard/userProfile" element={<UserProfilePage />} />
+        <Route
+          path="/dashboard/userProfile/update"
+          element={<UpdateProfile />}
+        />
         <Route
           path="/dashboard/addNewCustomer"
           element={<AddNewCustomerPage />}

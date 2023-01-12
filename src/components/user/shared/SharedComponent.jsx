@@ -34,3 +34,7 @@ export const DashboardButton = () => {
     </Link>
   );
 };
+
+export const CustomButtom = ({ name }) => {
+  return <button className="dashboardBtn">{name}</button>;
+};
