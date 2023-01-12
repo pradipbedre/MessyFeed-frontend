@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../../../components/user/navbar/Navbar";
-import "./add_new_customer.css";
+import "./add_new_customer.scss";
 import {
   DashboardButton,
   PopUp,
