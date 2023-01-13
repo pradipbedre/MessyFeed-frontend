@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../../../components/user/navbar/Navbar";
 import "./meal_coupon.scss";
-import coupon from "../../../assets/coupon.svg";
 import { Link } from "react-router-dom";
-import { CustomButton } from "../../../components/user/shared/SharedComponent";
 const MealCouponPage = () => {
   return (
     <div className="mealCouponContainer">
@@ -41,7 +39,6 @@ const MealCouponPage = () => {
           <input type="submit" value="Send OTP" />
         </Link>
       </div>
-      <img src={coupon} alt="coupon" className="couponImage" />
     </div>
   );
 };

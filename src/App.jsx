@@ -14,7 +14,8 @@ import RenewCustomerPage from "./pages/user/renew_customer/RenewCustomerPage";
 import UpdateProfile from "./components/user/updateProfile/UpdateProfile";
 import UpadateMess from "./components/user/updateMess/UpadateMess";
 import ValidateOtp from "./components/user/validateOtp/ValidateOtp";
-
+import CustomerDetails from "./components/user/customerDetails/CustomerDetails";
+import UpdateCustmer from "./components/user/updateProfile/UpdateProfile";
 const App = () => {
   return (
     <div>
@@ -37,6 +38,14 @@ const App = () => {
         <Route
           path="/dashboard/viewAllCustomer"
           element={<ViewAllCustomerPage />}
+        />
+        <Route
+          path="/dashboard/viewAllCustomer/viewCustomer"
+          element={<CustomerDetails />}
+        />
+        <Route
+          path="/dashboard/viewAllCustomer/updateCustomer"
+          element={<UpdateCustmer />}
         />
         <Route path="/dashboard/mealCoupon" element={<MealCouponPage />} />
         <Route
