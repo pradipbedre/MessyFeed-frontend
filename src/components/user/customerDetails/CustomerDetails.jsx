@@ -31,7 +31,7 @@ const CustomerDetails = () => {
           </div>
         </div>
         <div className="buttons">
-          <Link to="/dashboard/viewAllCustomer/viewCustomer/update">
+          <Link to="/dashboard/viewAllCustomer/updateCustomer/update">
             <CustomButton name={"Update Profile"} />
           </Link>
           <DashboardButton />
