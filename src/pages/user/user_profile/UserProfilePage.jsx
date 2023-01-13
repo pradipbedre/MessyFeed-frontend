@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "../../../components/user/navbar/Navbar";
 import "./user_profile.scss";
-import Profile from "../../../assets/profile.png";
 import {
   DashboardButton,
   CustomButton,

@@ -1,0 +1,71 @@
+/* Global CSS */
+$brandColor: #cc6200;
+$brandBackColor: #0e2e3c;
+$cardColor: #f2f2f2;
+$shadow: 0px 0px 20px black;
+
+/* Component Css */
+
+.customerProfileContainer {
+  display: flex;
+  flex-direction: column;
+  .profileContent {
+    background-color: $cardColor;
+    box-shadow: $shadow;
+    width: 70vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    margin: 15vh 15vw;
+    align-items: center;
+    border-radius: 20px;
+    gap: 20px;
+
+    .user-name {
+      margin-top: 15px;
+    }
+    .userContent {
+      display: flex;
+      gap: 40px;
+      margin-top: 20px;
+      align-items: center;
+      justify-content: center;
+      .user-item {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 25px;
+        margin-top: 100px;
+      }
+      .user-info {
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 25px;
+      }
+    }
+    .buttons {
+      margin-top: 80px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .customerProfileContainer {
+    .profileContent {
+      width: 95vw;
+      height: 50vh;
+      margin: 15vh 2.5vw;
+      .userContent {
+        .user-item {
+          font-size: 20px;
+        }
+        .user-info {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
