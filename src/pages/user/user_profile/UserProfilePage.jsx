@@ -4,7 +4,7 @@ import "./user_profile.scss";
 import Profile from "../../../assets/profile.png";
 import {
   DashboardButton,
-  CustomButtom,
+  CustomButton,
 } from "../../../components/user/shared/SharedComponent";
 import { Link } from "react-router-dom";
 
@@ -33,7 +33,7 @@ const UserProfilePage = () => {
         </div>
         <div className="buttons">
           <Link to="/dashboard/userProfile/update">
-            <CustomButtom name={"Update Profile"} />
+            <CustomButton name={"Update Profile"} />
           </Link>
           <DashboardButton />
         </div>

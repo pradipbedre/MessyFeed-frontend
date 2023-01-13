@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../../components/user/navbar/Navbar";
-import { CustomButtom } from "../../../components/user/shared/SharedComponent";
+import { CustomButton } from "../../../components/user/shared/SharedComponent";
 const ViewAllCustomerPage = () => {
   return (
     <div className="viewAllCustomerContainer">
@@ -8,7 +8,7 @@ const ViewAllCustomerPage = () => {
       <div className="viewAllCustomer">
         <div className="search-box">
           <input type="text" />
-          <CustomButtom name={"Search"} />
+          <CustomButton name={"Search"} />
         </div>
         <div className="all-customer">
           <table>

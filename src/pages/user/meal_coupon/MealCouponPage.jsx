@@ -1,27 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../../components/user/navbar/Navbar";
-import { CustomButtom } from "../../../components/user/shared/SharedComponent";
 import "./meal_coupon.scss";
 import coupon from "../../../assets/coupon.svg";
+import { Link } from "react-router-dom";
+import { CustomButton } from "../../../components/user/shared/SharedComponent";
 const MealCouponPage = () => {
   return (
     <div className="mealCouponContainer">
       <Navbar />
-      <div className="get-details">
-        <div className="item">
-          <label htmlFor="">Enter Email</label>
-          <input type="text" />
-        </div>
-        <div className="meal-time">
-          <label htmlFor="Meal">Meal Time</label>
-          <select id="Meal" name="Meal">
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
-          </select>
-        </div>
-        <CustomButtom name={"Send OTP"} />
+      <div className="container">
+        <h1 className="heading">Mark Coupon</h1>
+        <form>
+          <div className="row">
+            <div className="col-25">
+              <label htmlFor="email">Email: </label>
+            </div>
+            <div className="col-75">
+              <input
+                required
+                id="email"
+                type="password"
+                placeholder="enter email..."
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-25">
+              <label htmlFor="Mess Plan">Meal Time:</label>
+            </div>
+            <div className="col-75" required>
+              <select id="Mess Plan" name="Mess Plan">
+                <option value="Plan A">Lunch</option>
+                <option value="Plan B">Dinner</option>
+              </select>
+            </div>
+          </div>
+        </form>
+        <Link to="/dashboard/mealCoupon/validateOtp">
+          <input type="submit" value="Send OTP" />
+        </Link>
       </div>
-      <img src={coupon} alt="coupon" />
+      <img src={coupon} alt="coupon" className="couponImage" />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import ImageSlider from "../../../components/user/imageSlider/ImageSlider";
 import "./mess_profile.scss";
 import { Link } from "react-router-dom";
 import {
-  CustomButtom,
+  CustomButton,
   DashboardButton,
 } from "../../../components/user/shared/SharedComponent";
 const MessProfilePage = () => {
@@ -37,7 +37,7 @@ const MessProfilePage = () => {
         </div>
         <div className="buttons">
           <Link to="/dashboard/messProfile/update">
-            <CustomButtom name={"update profile"} />
+            <CustomButton name={"update profile"} />
           </Link>
           <DashboardButton />
         </div>

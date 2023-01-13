@@ -13,6 +13,7 @@ import MealCouponPage from "./pages/user/meal_coupon/MealCouponPage";
 import RenewCustomerPage from "./pages/user/renew_customer/RenewCustomerPage";
 import UpdateProfile from "./components/user/updateProfile/UpdateProfile";
 import UpadateMess from "./components/user/updateMess/UpadateMess";
+import ValidateOtp from "./components/user/validateOtp/ValidateOtp";
 
 const App = () => {
   return (
@@ -38,6 +39,10 @@ const App = () => {
           element={<ViewAllCustomerPage />}
         />
         <Route path="/dashboard/mealCoupon" element={<MealCouponPage />} />
+        <Route
+          path="/dashboard/mealCoupon/validateOtp"
+          element={<ValidateOtp />}
+        />
         <Route
           path="/dashboard/renewCustomer"
           element={<RenewCustomerPage />}
