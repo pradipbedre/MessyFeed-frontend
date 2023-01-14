@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import AppRoutes from './AppRoutes';
 
 const App = () => {
   return (
     <div>
-      App
+      <AppRoutes/>
     </div>
   )
 }
 
-export default App
+export default App;
