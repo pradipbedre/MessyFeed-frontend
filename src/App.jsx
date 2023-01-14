@@ -1,6 +1,7 @@
 import React from "react";
 import "./app.module.scss";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import PivateRoutes from "./utils/ProtectedRoutes";
 import LandingPage from "./pages/landingpage/LandingPage";
 import Signup from "./pages/landingpage/auth/Signup/Signup";
 import Signin from "./pages/landingpage/auth/Signin/Signin";
@@ -20,42 +21,49 @@ const App = () => {
   return (
     <div>
       <Routes>
+        {/* Private Routes */}
+        <Route element={<PivateRoutes />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/dashboard/messProfile" element={<MessProfilePage />} />
+          <Route
+            path="/dashboard/messProfile/update"
+            element={<UpadateMess />}
+          />
+          <Route path="/dashboard/userProfile" element={<UserProfilePage />} />
+          <Route
+            path="/dashboard/userProfile/update"
+            element={<UpdateProfile />}
+          />
+          <Route
+            path="/dashboard/addNewCustomer"
+            element={<AddNewCustomerPage />}
+          />
+          <Route
+            path="/dashboard/viewAllCustomer"
+            element={<ViewAllCustomerPage />}
+          />
+          <Route
+            path="/dashboard/viewAllCustomer/viewCustomer"
+            element={<CustomerDetails />}
+          />
+          <Route
+            path="/dashboard/viewAllCustomer/updateCustomer/update"
+            element={<UpdateCustomer />}
+          />
+          <Route path="/dashboard/mealCoupon" element={<MealCouponPage />} />
+          <Route
+            path="/dashboard/mealCoupon/validateOtp"
+            element={<ValidateOtp />}
+          />
+          <Route
+            path="/dashboard/renewCustomer"
+            element={<RenewCustomerPage />}
+          />
+        </Route>
+        {/* Public Routes */}
         <Route index element={<LandingPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/dashboard/messProfile" element={<MessProfilePage />} />
-        <Route path="/dashboard/messProfile/update" element={<UpadateMess />} />
-        <Route path="/dashboard/userProfile" element={<UserProfilePage />} />
-        <Route
-          path="/dashboard/userProfile/update"
-          element={<UpdateProfile />}
-        />
-        <Route
-          path="/dashboard/addNewCustomer"
-          element={<AddNewCustomerPage />}
-        />
-        <Route
-          path="/dashboard/viewAllCustomer"
-          element={<ViewAllCustomerPage />}
-        />
-        <Route
-          path="/dashboard/viewAllCustomer/viewCustomer"
-          element={<CustomerDetails />}
-        />
-        <Route
-          path="/dashboard/viewAllCustomer/updateCustomer/update"
-          element={<UpdateCustomer />}
-        />
-        <Route path="/dashboard/mealCoupon" element={<MealCouponPage />} />
-        <Route
-          path="/dashboard/mealCoupon/validateOtp"
-          element={<ValidateOtp />}
-        />
-        <Route
-          path="/dashboard/renewCustomer"
-          element={<RenewCustomerPage />}
-        />
       </Routes>
     </div>
   );

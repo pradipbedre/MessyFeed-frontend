@@ -3,25 +3,26 @@ import "./signup.scss";
 import { FcGoogle } from "react-icons/Fc";
 import welcome from "../../../../assets/welcome.svg";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
+  const [phoneNo, setphoneNo] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const navigate = useNavigate();
-  /*
+
   const registerUser = async (e) => {
     e.preventDefault();
-    if (email === "" || mobile === "" || password === "" || name === "") {
+    if (email === "" || phoneNo === "" || password === "" || name === "") {
       alert("please enter valid details!");
     } else {
       try {
-        const res = await axios.post("/api/auth/signup", {
+        const res = await axios.post("http://localhost:8800/api/auth/signup", {
           name,
           email,
           password,
-          mobile,
+          phoneNo,
         });
         if (res.data.user) {
           alert("This email is already register, sign up with another email.");
@@ -29,7 +30,7 @@ const Signup = () => {
           alert("Your Registration Successfully Compleated.");
           navigate("/signin");
           setEmail("");
-          setMobile("");
+          setphoneNo("");
           setName("");
           setPassword("");
         }
@@ -40,7 +41,9 @@ const Signup = () => {
         }
       }
     }
-  } */ return (
+  };
+
+  return (
     <div>
       <div className="signup-container">
         <div className="left">
@@ -53,6 +56,14 @@ const Signup = () => {
             <Link to="/signin"> Login to account</Link>
           </p>
           <form action="">
+            <label htmlFor="">Enter Name:*</label>
+            <input
+              type="text"
+              placeholder="enter name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
             <label htmlFor="">Email:*</label>
             <input
               type="email"
@@ -61,13 +72,13 @@ const Signup = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <label htmlFor="">Mobile No:*</label>
+            <label htmlFor="">PhoneNo:*</label>
             <input
               type="number"
-              placeholder="mobile no"
+              placeholder="phone number"
               pattern="/^\+?[1-9][0-9]{7,14}$/"
-              value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
+              value={phoneNo}
+              onChange={(e) => setphoneNo(e.target.value)}
               required
             />
             <label htmlFor="">Password:*</label>
@@ -78,15 +89,8 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <label htmlFor="">Enter Name:*</label>
-            <input
-              type="text"
-              placeholder="enter name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <button className="signup" type="submit">
+
+            <button className="signup" type="submit" onClick={registerUser}>
               Sign Up
             </button>
             <button className="google">

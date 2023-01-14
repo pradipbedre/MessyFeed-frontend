@@ -3,27 +3,29 @@ import { FcGoogle } from "react-icons/Fc";
 import { Link, useNavigate } from "react-router-dom";
 import "./signin.scss";
 import welcome from "../../../../assets/welcome.svg";
+import axios from "axios";
+import { setCookie } from "../../../../utils/Cookie";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  /*
+
   const loginUser = async (e) => {
     e.preventDefault();
     if (email === "" || password === "") {
       alert("please enter valid details!");
     } else {
       try {
-        const res = await axios.post("/api/auth/signin", {
+        const res = await axios.post("http://localhost:8800/api/auth/signin", {
           email,
           password,
         });
-      
+        console.log(res);
         if (res.data.Msg) {
           alert(`${res.data.Msg}`);
         }
-        if (res.status === 200 && res.data.Auth) {
+        if (res.status === 200 && res.data.auth) {
           setCookie("jwt_token", res.data.token);
           navigate("/dashboard");
         }
@@ -33,7 +35,7 @@ const Signin = () => {
         }
       }
     }
-  }; */
+  };
 
   return (
     <div>
@@ -64,7 +66,7 @@ const Signin = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button className="signin" type="submit">
+            <button className="signin" type="submit" onClick={loginUser}>
               Sign In
             </button>
             <button className="google">
