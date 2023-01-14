@@ -17,6 +17,8 @@ import UpadateMess from "./components/user/updateMess/UpadateMess";
 import ValidateOtp from "./components/user/validateOtp/ValidateOtp";
 import CustomerDetails from "./components/user/customerDetails/CustomerDetails";
 import UpdateCustomer from "./components/user/updateCustomer/UpdateCustomer";
+import MessList from "./components/user/messList/MessList";
+import MessDetails from "./components/user/messDetails/MessDetails";
 const App = () => {
   return (
     <div>
@@ -61,6 +63,8 @@ const App = () => {
           />
         </Route>
         {/* Public Routes */}
+        <Route path="/messList" element={<MessList />} />
+        <Route exact path="/messList/:id" element={<MessDetails />} />
         <Route index element={<LandingPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />

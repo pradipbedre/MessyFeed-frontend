@@ -80,7 +80,9 @@ const Landingpage = () => {
               help you to find best suitable mess for you.
             </p>
             <input type="text" placeholder="Enter your area pincode" />
-            <button>Search</button>
+            <Link to="/messList">
+              <button>Search</button>
+            </Link>
           </div>
         </section>
         <section id="whywe">
