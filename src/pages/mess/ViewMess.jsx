@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { useState, useEffect } from "react";
 import UpdateMess from "./UpdateMess";
+import ViewPlans from "./ViewPlans.jsx";
 
 const tabList = [
   {
@@ -140,8 +141,8 @@ const ViewMess = () => {
 
   return (
     <div>
-      <Row gutter={[8, 8]}>
-        <Col xs={24} sm={12}>
+      <Row gutter={[24, 8]}>
+        <Col xs={24} sm={8}>
           <h3>Mess Info</h3>
           <Descriptions column={1} bordered>
             <Descriptions.Item label="Mess Name">Super Mess</Descriptions.Item>
@@ -184,8 +185,11 @@ const ViewMess = () => {
             <p>Are you sure??</p>
           </Modal>
         </Col>
-
-        <Col xs={24} sm={12}>
+        <Col xs={24} sm={8}>
+          <h3>Mess Plans</h3>
+          <ViewPlans />
+        </Col>
+        <Col xs={24} sm={6}>
           <h3>Mess Daily Reports</h3>
           <Card
             hoverable={true}
@@ -199,6 +203,10 @@ const ViewMess = () => {
           </Card>
         </Col>
       </Row>
+      {/* <Divider></Divider>
+      <Row>
+        <ViewPlans />
+      </Row> */}
       <Divider></Divider>
       <h3>Mess Images</h3>
       <Row around="xs" gutter={[8, 8]}>

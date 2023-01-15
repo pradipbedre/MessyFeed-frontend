@@ -1,4 +1,4 @@
-import { DatePicker, Form, Input, Select, Button } from "antd";
+import { DatePicker, Form, Input, Select } from "antd";
 import { useState } from "react";
 const { Option } = Select;
 
@@ -10,10 +10,9 @@ const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 
-const PlanRenewal = () => {
+export const PlanDetails = ({ form }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [inputValue, setInputValue] = useState("");
-  const [form] = Form.useForm();
 
   const handleSelectChange = (value) => {
     console.log(value);
@@ -25,29 +24,15 @@ const PlanRenewal = () => {
     setInputValue(selectedOption);
   };
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    form
-      .validateFields()
-      .then((values) => {
-        console.log("Values: ", values);
-      })
-      .catch((errorInfo) => {
-        console.log(errorInfo);
-      });
-  };
-
   return (
     <>
       <Form
         form={form}
         labelCol={{
-          xs: { span: 24 },
-          sm: { span: 8 },
+          span: 8,
         }}
         wrapperCol={{
-          xs: { span: 24 },
-          sm: { span: 10 },
+          span: 10,
         }}
         layout="horizontal"
         action=""
@@ -55,16 +40,6 @@ const PlanRenewal = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            { required: true, message: "Please enter email" },
-            { type: "email", message: "Pleasse enter valid email" },
-          ]}
-        >
-          <Input />
-        </Form.Item>
         <Form.Item
           name="mealPlan"
           label="Meal Plan"
@@ -93,20 +68,7 @@ const PlanRenewal = () => {
         <Form.Item label="Start Date" name="startDate">
           <DatePicker />
         </Form.Item>
-
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button type="primary" htmlType="submit" onClick={handleClick}>
-            Renew Plan
-          </Button>
-        </Form.Item>
       </Form>
     </>
   );
 };
-
-export default PlanRenewal;

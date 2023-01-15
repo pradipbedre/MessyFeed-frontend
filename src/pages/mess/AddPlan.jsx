@@ -10,7 +10,7 @@ const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 
-const PlanRenewal = () => {
+const AddPlan = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [form] = Form.useForm();
@@ -56,42 +56,29 @@ const PlanRenewal = () => {
         onFinishFailed={onFinishFailed}
       >
         <Form.Item
-          label="Email"
-          name="email"
+          label="Plan Name"
+          name="name"
           rules={[
-            { required: true, message: "Please enter email" },
-            { type: "email", message: "Pleasse enter valid email" },
+            { required: true, message: "Please enter name of the meal plan" },
           ]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          name="mealPlan"
-          label="Meal Plan"
-          rules={[
-            {
-              required: true,
-              message: "Please select Meal Plan",
-            },
-          ]}
+          label="Plan Cost"
+          name="cost"
+          rules={[{ required: true, message: "Please enter the plan cost" }]}
         >
-          <Select
-            placeholder="select Meal Plan"
-            value={selectedOption}
-            onChange={handleSelectChange}
-          >
-            <Option value="plan1">One Meal - 1000</Option>
-            <Option value="plan2">Two Meal - 2000</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item name="planAmount" label="Plan Amount">
-          <Input value={inputValue} onChange={handleInputChange} />
-        </Form.Item>
-        <Form.Item label="Payment Mode" name="paymentMode" initialValue="Cash">
           <Input />
         </Form.Item>
-        <Form.Item label="Start Date" name="startDate">
-          <DatePicker />
+        <Form.Item
+          label="Meal count"
+          name="meals"
+          rules={[
+            { required: true, message: "Please enter no of meals per plan" },
+          ]}
+        >
+          <Input />
         </Form.Item>
 
         <Form.Item
@@ -101,7 +88,7 @@ const PlanRenewal = () => {
           }}
         >
           <Button type="primary" htmlType="submit" onClick={handleClick}>
-            Renew Plan
+            Add Plan
           </Button>
         </Form.Item>
       </Form>
@@ -109,4 +96,4 @@ const PlanRenewal = () => {
   );
 };
 
-export default PlanRenewal;
+export default AddPlan;

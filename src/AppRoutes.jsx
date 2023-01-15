@@ -1,36 +1,41 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import MessPage from "./pages/mess/Mess.jsx";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ViewMess from "./pages/mess/ViewMess.jsx";
 import AddMess from "./pages/mess/AddMess.jsx";
-import UpdateMess from "./pages/mess/UpdateMess.jsx";
-import DeleteMess from "./pages/mess/DeleteMess.jsx";
+import AddPlan from "./pages/mess/AddPlan.jsx";
 import UpdateCustomer from "./pages/customer/UpdateCustomer.jsx";
-import ViewCustomer from "./pages/customer/ViewCustomer.jsx";
 import AddCustomer from "./pages/customer/AddCustomer.jsx";
 import DeleteCustomer from "./pages/customer/DeleteCustomer.jsx";
 import SendOtp from "./pages/customer/SendOtp.jsx";
 import ValidateOtp from "./pages/customer/ValidateOtp.jsx";
 import PlanRenewal from "./pages/customer/PlanRenewal.jsx";
-import CustomerPage from "./pages/customer/Customer.jsx";
+import ViewCustomers from "./pages/customer/ViewCustomers.jsx";
+import ViewProfile from "./pages/user/ViewProfile.jsx";
+import Logout from "./pages/user/Logout.jsx";
+import UserPage from "./pages/user/User.jsx";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/mess" element={<MessPage />}>
-        <Route path="view" element={<ViewMess />} />
-        <Route path="add" element={<AddMess />} />
-        {/* <Route path="update" element={<UpdateMess />} /> */}
-        {/* <Route path="delete" element={<DeleteMess />} /> */}
+      {/* <Navigate to="mess" replace /> */}
+      <Route path="/user" element={<UserPage />}>
+        <Route path="profile" element={<ViewProfile />} />
+        <Route path="logout" element={<Logout />} />
 
-        <Route path="customer">
-          <Route path="view" element={<ViewCustomer />} />
-          <Route path="add" element={<AddCustomer />} />
-          <Route path="update" element={<UpdateCustomer />} />
-          <Route path="delete" element={<DeleteCustomer />} />
-          <Route path="sendOtp" element={<SendOtp />} />
-          <Route path="validateOtp" element={<ValidateOtp />} />
-          <Route path="planRenewal" element={<PlanRenewal />} />
+        <Route path="/user/mess">
+          <Route path="view" element={<ViewMess />} />
+          <Route path="add" element={<AddMess />} />
+          <Route path="plans" element={<AddPlan />} />
+
+          <Route path="/user/mess/customer">
+            <Route path="view" element={<ViewCustomers />} />
+            <Route path="add" element={<AddCustomer />} />
+            <Route path="update" element={<UpdateCustomer />} />
+            <Route path="delete" element={<DeleteCustomer />} />
+            <Route path="sendOtp" element={<SendOtp />} />
+            <Route path="validateOtp" element={<ValidateOtp />} />
+            <Route path="planRenewal" element={<PlanRenewal />} />
+          </Route>
         </Route>
       </Route>
     </Routes>

@@ -24,10 +24,36 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem("Mess", "sub1", <DesktopOutlined />, [
+  getItem("User", "sub1", <DesktopOutlined />, [
+    // getItem(
+    //   <>
+    //     <Link to="/user" title="UserProfile">
+    //       User Profile
+    //     </Link>
+    //   </>,
+    //   "14"
+    // ),
     getItem(
       <>
-        <Link to="view" title="ViewMess">
+        <Link to="/user/profile" title="User Profile">
+          User Profile
+        </Link>
+      </>,
+      "15"
+    ),
+    getItem(
+      <>
+        <Link to="/user/logout" title="Logout">
+          Logout
+        </Link>
+      </>,
+      "16"
+    ),
+  ]),
+  getItem("Mess", "sub2", <DesktopOutlined />, [
+    getItem(
+      <>
+        <Link to="/user/mess/view" title="ViewMess">
           View Mess
         </Link>
       </>,
@@ -35,33 +61,25 @@ const items = [
     ),
     getItem(
       <>
-        <Link to="add" title="AddMess">
+        <Link to="/user/mess/add" title="AddMess">
           Add New Mess
         </Link>
       </>,
       "4"
     ),
-    // getItem(
-    //   <>
-    //     <Link to="update" title="UpdateMess">
-    //       Update Mess
-    //     </Link>
-    //   </>,
-    //   "5"
-    // ),
-    // getItem(
-    //   <>
-    //     <Link to="delete" title="DeleteMess">
-    //       Delete Mess
-    //     </Link>
-    //   </>,
-    //   "6"
-    // ),
-  ]),
-  getItem("Customer", "sub2", <UserOutlined />, [
     getItem(
       <>
-        <Link to="customer/view" title="ViewCustomer">
+        <Link to="/user/mess/plans" title="AddPlans">
+          Add New Plan
+        </Link>
+      </>,
+      "5"
+    ),
+  ]),
+  getItem("Customer", "sub3", <UserOutlined />, [
+    getItem(
+      <>
+        <Link to="/user/mess/customer/view" title="ViewCustomer">
           View All Customers
         </Link>
       </>,
@@ -69,7 +87,7 @@ const items = [
     ),
     getItem(
       <>
-        <Link to="customer/add" title="AddCustomer">
+        <Link to="/user/mess/customer/add" title="AddCustomer">
           Add New Customer
         </Link>
       </>,
@@ -77,7 +95,7 @@ const items = [
     ),
     getItem(
       <>
-        <Link to="customer/update" title="UpdateCustomer">
+        <Link to="/user/mess/customer/update" title="UpdateCustomer">
           Update Customer
         </Link>
       </>,
@@ -85,7 +103,7 @@ const items = [
     ),
     getItem(
       <>
-        <Link to="customer/delete" title="DeleteCustomer">
+        <Link to="/user/mess/customer/delete" title="DeleteCustomer">
           Delete Customer
         </Link>
       </>,
@@ -93,7 +111,7 @@ const items = [
     ),
     getItem(
       <>
-        <Link to="customer/sendOtp" title="sendOtp">
+        <Link to="/user/mess/customer/sendOtp" title="sendOtp">
           Send Otp
         </Link>
       </>,
@@ -101,7 +119,7 @@ const items = [
     ),
     getItem(
       <>
-        <Link to="customer/validateOtp" title="validateOtp">
+        <Link to="/user/mess/customer/validateOtp" title="validateOtp">
           validate Otp
         </Link>
       </>,
@@ -109,17 +127,16 @@ const items = [
     ),
     getItem(
       <>
-        <Link to="customer/PlanRenewal" title="planRenewal">
+        <Link to="/user/mess/customer/PlanRenewal" title="planRenewal">
           Plan Renewal
         </Link>
       </>,
       "13"
     ),
   ]),
-  ,
 ];
 
-const MessPage = () => {
+const UserPage = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -135,6 +152,14 @@ const MessPage = () => {
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
+        style={{
+          overflow: "auto",
+          height: "100vh",
+          //   position: "sticky",
+          left: 0,
+          top: 0,
+          bottom: 0,
+        }}
       >
         <div
           style={{
@@ -154,12 +179,6 @@ const MessPage = () => {
         />
       </Sider>
       <Layout className="site-layout">
-        {/* <Header
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-          }}
-        /> */}
         <Content
           style={{
             margin: "0 16px",
@@ -168,8 +187,6 @@ const MessPage = () => {
           <Breadcrumb
             style={{
               margin: "16px 0",
-              //   border: "1px solid transparent",
-              //   background: colorBgContainer,
             }}
           >
             <Breadcrumb.Item>Mess</Breadcrumb.Item>
@@ -185,15 +202,8 @@ const MessPage = () => {
             <Outlet />
           </div>
         </Content>
-        {/* <Footer
-          style={{
-            textAlign: "center",
-          }}
-        >
-          Ant Design ©2023 Created by Ant UED
-        </Footer> */}
       </Layout>
     </Layout>
   );
 };
-export default MessPage;
+export default UserPage;

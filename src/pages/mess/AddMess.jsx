@@ -11,12 +11,6 @@ const AddMess = () => {
   };
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
-      {/* <Input
-        style={{
-          width: 10,
-        }}
-        initialValues="+91"
-      /> */}
       <Select
         style={{
           width: 70,
@@ -30,7 +24,7 @@ const AddMess = () => {
   return (
     <>
       <Form
-        autocomplete="off"
+        autoComplete="off"
         labelCol={{
           span: 8,
         }}

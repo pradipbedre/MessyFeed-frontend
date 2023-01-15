@@ -1,54 +1,45 @@
-import React from "react";
-import { Select, Button, TimePicker, Form, Input, Upload } from "antd";
+import { DatePicker, Form, Input, Select } from "antd";
+import { useState } from "react";
+const { Option } = Select;
 
-const UpdateCustomer = () => {
-  const [form] = Form.useForm();
+const onFinish = (values) => {
+  console.log("Success:", values);
+};
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="91">+91</Option>
-      </Select>
-    </Form.Item>
-  );
+const onFinishFailed = (errorInfo) => {
+  console.log("Failed:", errorInfo);
+};
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    form
-      .validateFields()
-      .then((values) => {
-        console.log("Values: ", values);
-      })
-      .catch((errorInfo) => {
-        console.log(errorInfo);
-      });
-  };
+const prefixSelector = (
+  <Form.Item name="prefix" noStyle>
+    <Select
+      style={{
+        width: 70,
+      }}
+    >
+      <Option value="91">+91</Option>
+    </Select>
+  </Form.Item>
+);
 
+export const PersonalDetails = ({ form }) => {
   return (
     <>
       <Form
         form={form}
-        autoComplete="off"
         labelCol={{
-          span: 8,
+          xs: { span: 24 },
+          sm: { span: 8 },
         }}
         wrapperCol={{
-          span: 10,
+          xs: { span: 24 },
+          sm: { span: 10 },
         }}
         layout="horizontal"
         action=""
         initialValues={{
           remember: true,
+          messname: "Super",
           prefix: "+91",
         }}
         onFinish={onFinish}
@@ -107,40 +98,19 @@ const UpdateCustomer = () => {
           </Select>
         </Form.Item>
         <Form.Item label="Address">
-          <Form.Item name="street" noStyle>
-            <Input
-              placeholder="Street"
-              style={{ width: "45%", marginRight: "3%" }}
-            />
-          </Form.Item>
-          <Form.Item name="city" noStyle>
-            <Input placeholder="City" style={{ width: "45%" }} />
-          </Form.Item>
+          <Input placeholder="Building no/Area" />
           <br />
           <br />
-          <Form.Item name="state" noStyle>
-            <Input
-              placeholder="State"
-              style={{ width: "45%", marginRight: "3%" }}
-            />
-          </Form.Item>
-          <Form.Item name="pincode" noStyle>
-            <Input placeholder="Pincode" style={{ width: "45%" }} />
-          </Form.Item>
-        </Form.Item>
-
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button type="primary" htmlType="submit" onClick={handleClick}>
-            Update Customer
-          </Button>
+          <Input placeholder="City" />
+          <br />
+          <br />
+          <Input placeholder="State" /> <br />
+          <br />
+          <Input placeholder="Country" /> <br />
+          <br />
+          <Input placeholder="Pincode" />
         </Form.Item>
       </Form>
     </>
   );
 };
-export default UpdateCustomer;
