@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageSlider from "../imageSlider/ImageSlider";
 import "./mess_details.scss";
+import { useSelector } from "react-redux";
+import axios from "axios";
+
 const MessDetails = () => {
   const [formActive, setFormActive] = useState(false);
+  const messId = useSelector((state) => state.setCommonMessId);
+  const [mess, setMess] = useState("");
+
+  // fetching mess details
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        `http://localhost:8800/api/user/mess/${messId}`
+      );
+      setMess(res.data);
+    };
+    fetchData();
+  }, []);
+
+  // Mess Images
   const urls = [
-    "https://cdn.pixabay.com/photo/2016/01/08/11/57/butterflies-1127666_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2014/09/14/18/04/dandelion-445228_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg",
+    mess && mess.photos[0],
+    mess && mess.photos[1],
+    mess && mess.photos[2],
   ];
 
   return (
@@ -16,23 +34,23 @@ const MessDetails = () => {
       </nav>
 
       <div className="name-rating">
-        <h2>Jay Ram Mess</h2>
+        <h2>{mess.name}</h2>
         <p>rating</p>
       </div>
 
       <div className="images">
-        <ImageSlider urls={urls} />
+        <ImageSlider urls={mess && urls} />
       </div>
 
       <div className="mess-info">
         <div className="mess">
           <h3>Address</h3>
-          <p>Sivaji nagger, goregav park pune 202222 </p>
+          <p>{mess.address} </p>
           <h3>Contact Details</h3>
           <p>
-            Mo: 9168207235
+            {mess.contactNo}
             <br />
-            Email: mess@gmail.com
+            {mess.email}
           </p>
         </div>
         <div className="plans">

@@ -144,6 +144,11 @@
         margin-bottom: 1rem;
         color: white;
       }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
       button {
         padding: 10px 20px;
         width: 9rem;

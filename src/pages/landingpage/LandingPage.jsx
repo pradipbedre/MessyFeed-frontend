@@ -5,8 +5,13 @@ import hero from "../../assets/hero.svg";
 import SearchMess from "../../assets/search-mess.svg";
 import WhyWe from "../../assets/whywe.svg";
 import "./landingpage.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { setPin } from "../../redux-store/actions/index";
+
 const Landingpage = () => {
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
+  const pincodeSetting = useSelector((state) => state.setCommonPincode);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -87,9 +92,13 @@ const Landingpage = () => {
               value={pincode}
               onChange={(e) => setPincode(e.target.value)}
             />
-            <Link to={`/messList/:${pincode}`}>
-              <button>Search</button>
-            </Link>
+            {pincode && (
+              <Link to={`/messList`}>
+                <button onClick={() => dispatch(setPin(pincode))}>
+                  Search
+                </button>
+              </Link>
+            )}
           </div>
         </section>
         <section id="whywe">

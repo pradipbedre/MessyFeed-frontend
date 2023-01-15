@@ -1,6 +1,6 @@
 import React from "react";
 import "./app.module.scss";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import PivateRoutes from "./utils/ProtectedRoutes";
 import LandingPage from "./pages/landingpage/LandingPage";
 import Signup from "./pages/landingpage/auth/Signup/Signup";
@@ -63,7 +63,7 @@ const App = () => {
           />
         </Route>
         {/* Public Routes */}
-        <Route path="/messList/:pincode" element={<MessList />} />
+        <Route path="/messList" element={<MessList />} />
         <Route exact path="/messList/:id" element={<MessDetails />} />
         <Route index element={<LandingPage />} />
         <Route path="/signup" element={<Signup />} />
