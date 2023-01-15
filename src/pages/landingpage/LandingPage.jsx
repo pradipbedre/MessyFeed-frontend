@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiMenu } from "react-icons/Hi";
 import { Link } from "react-router-dom";
 import hero from "../../assets/hero.svg";
@@ -6,6 +6,8 @@ import SearchMess from "../../assets/search-mess.svg";
 import WhyWe from "../../assets/whywe.svg";
 import "./landingpage.scss";
 const Landingpage = () => {
+  const [pincode, setPincode] = useState(0);
+
   return (
     <>
       <div className="main">
@@ -79,8 +81,13 @@ const Landingpage = () => {
               You can search any mess according to your area pincode, it will
               help you to find best suitable mess for you.
             </p>
-            <input type="text" placeholder="Enter your area pincode" />
-            <Link to="/messList">
+            <input
+              type="number"
+              placeholder="Enter your area pincode"
+              value={pincode}
+              onChange={(e) => setPincode(e.target.value)}
+            />
+            <Link to={`/messList/:${pincode}`}>
               <button>Search</button>
             </Link>
           </div>

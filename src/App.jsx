@@ -63,7 +63,7 @@ const App = () => {
           />
         </Route>
         {/* Public Routes */}
-        <Route path="/messList" element={<MessList />} />
+        <Route path="/messList/:pincode" element={<MessList />} />
         <Route exact path="/messList/:id" element={<MessDetails />} />
         <Route index element={<LandingPage />} />
         <Route path="/signup" element={<Signup />} />
