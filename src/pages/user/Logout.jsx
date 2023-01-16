@@ -4,19 +4,12 @@ import { useState } from "react";
 const Logout = () => {
   const [visible, setVisible] = useState(true);
 
-  const showDrawer = () => {
-    setVisible(true);
-  };
-
   const onClose = () => {
     setVisible(false);
   };
 
   return (
     <>
-      {/* <Button type="danger" onClick={showDrawer}>
-        Logout
-      </Button> */}
       <Drawer
         title="Are you sure you want to logout?"
         placement="right"

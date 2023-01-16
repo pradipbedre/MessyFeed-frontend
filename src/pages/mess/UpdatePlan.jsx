@@ -1,4 +1,5 @@
-import { DatePicker, Form, Input, Select, Button } from "antd";
+import { Popconfirm, Form, Input, Select, Button } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 import { useState } from "react";
 const { Option } = Select;
 
@@ -10,8 +11,28 @@ const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 
-const AddPlan = () => {
+const handleConfirm = (e) => {
+  {
+    console.log(e);
+  }
+  <UpdateForm />;
+};
+
+const UpdateForm = () => {
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [form] = Form.useForm();
+
+  const showUpdateModal = () => {
+    setIsUpdateModalOpen(true);
+  };
+
+  const handleUpdate = () => {
+    setIsUpdateModalOpen(false);
+  };
+
+  const handleUpdateCancel = () => {
+    setIsUpdateModalOpen(false);
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -24,7 +45,6 @@ const AddPlan = () => {
         console.log(errorInfo);
       });
   };
-
   return (
     <>
       <Form
@@ -76,7 +96,7 @@ const AddPlan = () => {
           }}
         >
           <Button type="primary" htmlType="submit" onClick={handleClick}>
-            Add Plan
+            Update Plan
           </Button>
         </Form.Item>
       </Form>
@@ -84,4 +104,20 @@ const AddPlan = () => {
   );
 };
 
-export default AddPlan;
+export const UpdatePlan = () => {
+  return (
+    <Popconfirm
+      title="Update the Plan"
+      description="Are you sure to update this plan?"
+      okText="Yes"
+      cancelText="No"
+      onConfirm={handleConfirm}
+    >
+      <a href="#">
+        <EditOutlined style={{ color: "blue" }} />
+      </a>
+    </Popconfirm>
+  );
+};
+
+export default UpdatePlan;

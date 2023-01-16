@@ -1,9 +1,16 @@
 import React from "react";
-import { Input, Space, Table } from "antd";
-import { useState } from "react";
+import { Table, Button } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import DeletePlan from "./DeletePlan.jsx";
+import UpdatePlan from "./UpdatePlan.jsx";
 
-const { Search } = Input;
-
+const TableActions = () => (
+  <>
+    <UpdatePlan />
+    &nbsp;&nbsp;&nbsp;
+    <DeletePlan />
+  </>
+);
 const columns = [
   {
     title: "Plan Name",
@@ -17,6 +24,10 @@ const columns = [
     title: "Meal Count",
     dataIndex: "meals",
   },
+  {
+    title: "Actions",
+    dataIndex: "actions",
+  },
 ];
 const tableData = [
   {
@@ -24,18 +35,21 @@ const tableData = [
     name: "One Meal",
     cost: 1000,
     meals: 30,
+    actions: <TableActions />,
   },
   {
     key: "2",
     name: "Two Meal",
     cost: 2000,
     meals: 60,
+    actions: <TableActions />,
   },
   {
     key: "3",
     name: "Mixed Meal",
     cost: 1500,
     meals: 45,
+    actions: <TableActions />,
   },
 ];
 
@@ -56,10 +70,6 @@ const ViewPlans = () => {
 
   return (
     <div>
-      {/* <Space direction="vertical">
-        <Search placeholder="Search" onSearch={handleSearch} enterButton />
-      </Space> */}
-
       <Table
         columns={columns}
         dataSource={tableData}

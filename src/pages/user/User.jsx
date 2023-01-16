@@ -24,32 +24,6 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem("User", "sub1", <DesktopOutlined />, [
-    // getItem(
-    //   <>
-    //     <Link to="/user" title="UserProfile">
-    //       User Profile
-    //     </Link>
-    //   </>,
-    //   "14"
-    // ),
-    getItem(
-      <>
-        <Link to="/user/profile" title="User Profile">
-          User Profile
-        </Link>
-      </>,
-      "15"
-    ),
-    getItem(
-      <>
-        <Link to="/user/logout" title="Logout">
-          Logout
-        </Link>
-      </>,
-      "16"
-    ),
-  ]),
   getItem("Mess", "sub2", <DesktopOutlined />, [
     getItem(
       <>
@@ -132,6 +106,24 @@ const items = [
         </Link>
       </>,
       "13"
+    ),
+  ]),
+  getItem("User", "sub1", <DesktopOutlined />, [
+    getItem(
+      <>
+        <Link to="/user/profile" title="User Profile">
+          User Profile
+        </Link>
+      </>,
+      "15"
+    ),
+    getItem(
+      <>
+        <Link to="/user/logout" title="Logout">
+          Logout
+        </Link>
+      </>,
+      "16"
     ),
   ]),
 ];
