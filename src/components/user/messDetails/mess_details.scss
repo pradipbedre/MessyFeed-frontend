@@ -57,12 +57,28 @@ $shadow: 0px 0px 20px black;
         margin-bottom: 5px;
         font-size: 30px;
       }
-      p {
-        margin-bottom: 5px;
+      .plan {
+        margin-bottom: 20px;
+        h4 {
+          text-decoration: underline;
+          font-size: 23px;
+        }
+        .cost {
+          color: #cc6200;
+          font-size: 20px;
+          font-weight: 700;
+          margin-bottom: 3px;
+          margin-top: 5px;
+        }
+        .meal {
+          font-size: 20px;
+          font-weight: 700;
+          margin-bottom: 3px;
+        }
       }
     }
   }
-  .listofrating {
+  .rating-system-form {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -104,6 +120,7 @@ $shadow: 0px 0px 20px black;
       }
       textarea {
         border-radius: 10px;
+        padding: 7px;
       }
       button {
         padding: 10px 20px;

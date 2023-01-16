@@ -21,7 +21,7 @@ const MessList = () => {
       const res = await axios.get(
         `http://localhost:8800/api/home/search?q=${pincode}`
       );
-      console.log(res);
+      //console.log(res);
       setMessList(res.data);
     };
 
