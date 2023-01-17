@@ -65,6 +65,9 @@ const MessDetails = () => {
       console.log(error);
       if (error) {
         alert("Enter valid details or you are not customer of this mess.");
+        setEmail("");
+        setRating("");
+        setReview("");
       }
     }
   };
@@ -94,8 +97,8 @@ const MessDetails = () => {
 
       {/* Mess Topbar */}
       <div className="name-rating">
-        <h2>{mess.name}</h2>
-        <p>{<StarRating rating={totalRating} />}</p>
+        <h1>{mess.name}</h1>
+        <h2>{<StarRating rating={totalRating} />}</h2>
       </div>
 
       {/* Mess Images */}
@@ -110,9 +113,9 @@ const MessDetails = () => {
           <p>{`${mess.address}, ${mess.pincode}`} </p>
           <h3>Contact Details</h3>
           <p>
-            {mess.contactNo}
+            {`Mobile: ${mess.contactNo}`}
             <br />
-            {mess.email}
+            {`Email: ${mess.email}`}
           </p>
         </div>
         <div className="plans">
@@ -180,7 +183,7 @@ const MessDetails = () => {
       </div>
 
       <div className="footer">
-        <p>© Copyright 2022, All Rights Reserved | MessyFeed </p>
+        <p>© Copyright 2023, All Rights Reserved | MessyFeed </p>
       </div>
     </div>
   );

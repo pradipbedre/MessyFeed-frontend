@@ -55,7 +55,7 @@ const MessList = () => {
       <div className="footer">
         <p>{`All Messes In This Area ${pincode} Pincode`}</p>
         <div className="rights">
-          <p>© Copyright 2022, All Rights Reserved | MessyFeed </p>
+          <p>© Copyright 2023, All Rights Reserved | MessyFeed </p>
         </div>
       </div>
     </div>

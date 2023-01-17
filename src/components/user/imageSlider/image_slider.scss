@@ -13,9 +13,10 @@ $shadow: 0px 0px 20px black;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    margin-bottom: 30px;
     .slide {
-      width: 75vw;
-      height: 35vh;
+      width: 80vw;
+      height: 40vh;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -37,8 +38,6 @@ $shadow: 0px 0px 20px black;
 
 @media screen and (max-width: 900px) {
   .sliderContainer {
-   
-
     .slides {
       width: 90vw;
       height: 40vh;

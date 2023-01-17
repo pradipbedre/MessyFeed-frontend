@@ -171,7 +171,7 @@ const Landingpage = () => {
       <section id="footer">
         <div className="copyright">
           <h1>Messyfeed</h1>
-          <p>© Copyright 2022, All Rights Reserved | MessyFeed</p>
+          <p>© Copyright 2023, All Rights Reserved | MessyFeed</p>
         </div>
         <div className="features">
           <h1>Features</h1>

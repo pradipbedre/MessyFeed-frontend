@@ -4,7 +4,7 @@ $cardColor: #f2f2f2;
 $shadow: 0px 0px 20px black;
 
 .messDetailsContainer {
-  background-color: $cardColor;
+  background-color: rgb(255, 255, 255);
   nav {
     padding: 10px 20px;
     background-color: $brandBackColor;
@@ -30,6 +30,7 @@ $shadow: 0px 0px 20px black;
     justify-content: center;
     align-items: center;
     gap: 100px;
+
     .mess {
       padding: 40px;
       box-shadow: $shadow;
@@ -114,7 +115,7 @@ $shadow: 0px 0px 20px black;
           width: 200px;
         }
         select {
-          padding: 5px;
+          padding: 5px 10px;
           border-radius: 10px;
         }
       }
@@ -164,6 +165,8 @@ $shadow: 0px 0px 20px black;
   .messDetailsContainer {
     .mess-info {
       flex-direction: column;
+      margin-top: -40px;
+      gap: 30px;
       .mess {
         width: 90vw;
       }
