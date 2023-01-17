@@ -4,6 +4,8 @@ import { FcGoogle } from "react-icons/Fc";
 import welcome from "../../../../assets/welcome.svg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { auth, provider } from "../../../../utils/Firebase";
+import { signInWithPopup } from "firebase/auth";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -42,6 +44,24 @@ const Signup = () => {
       }
     }
   };
+
+  /*   const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        axios
+          .post(`http://localhost:8800/api/auth/signup`, {
+            name: result.user.displayName,
+            email: result.user.email,
+          })
+          .then((res) => {
+            console.log(res);
+            navigate("/signin");
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }; */
 
   return (
     <div>

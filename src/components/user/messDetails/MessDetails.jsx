@@ -3,6 +3,7 @@ import ImageSlider from "../imageSlider/ImageSlider";
 import "./mess_details.scss";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import StarRating from "../starrRating/StarRating";
 
 const MessDetails = () => {
   const [formActive, setFormActive] = useState(false);
@@ -75,6 +76,15 @@ const MessDetails = () => {
     mess && mess.photos[2],
   ];
 
+  // Average Rating
+  let count = 0;
+  let averageRating = 0;
+  for (let i = 0; i < allReviews.length; i++) {
+    count = count + 1;
+    averageRating = averageRating + allReviews[i].rating;
+  }
+  let totalRating = averageRating / count;
+
   return (
     <div className="messDetailsContainer">
       {/* Navbar */}
@@ -85,7 +95,7 @@ const MessDetails = () => {
       {/* Mess Topbar */}
       <div className="name-rating">
         <h2>{mess.name}</h2>
-        <p>rating</p>
+        <p>{<StarRating rating={totalRating} />}</p>
       </div>
 
       {/* Mess Images */}
@@ -163,7 +173,7 @@ const MessDetails = () => {
             <div className="review">
               <p>{rev.review}</p>
               <div className="rating">
-                <p>{rev.rating}</p>
+                <p>{<StarRating rating={rev.rating} />}</p>
               </div>
             </div>
           ))}
