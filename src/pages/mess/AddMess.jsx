@@ -1,29 +1,47 @@
 import React from "react";
+import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import { Select, Button, TimePicker, Form, Input, Upload } from "antd";
+import { useState } from "react";
 
 const AddMess = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const [messData, setMessData] = useState();
+  const [form] = Form.useForm();
+
+  const onFinish = async (values) => {
+    const addr = `${values.address.street}  ${values.address.city}  ${values.address.state}`;
+    const pin = parseInt(`${values.address.pincode}`);
+    const { address, ...otherValues } = values;
+    try {
+      const response = await axios.post(
+        "http://localhost:8800/api/user/mess/",
+        { address: addr, pincode: pin, ...otherValues },
+        {
+          headers: {
+            Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+          },
+        }
+      );
+      console.log(response.status);
+      if (response.status === 200) {
+        setMessData(response.data);
+        form.resetFields();
+      }
+    } catch (err) {
+      form.resetFields();
+      console.log(err.message);
+    }
+    // console.log("Response... :", response.data);
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="91">+91</Option>
-      </Select>
-    </Form.Item>
-  );
 
   return (
     <>
       <Form
+        form={form}
         autoComplete="off"
         labelCol={{
           span: 8,
@@ -35,15 +53,13 @@ const AddMess = () => {
         action=""
         initialValues={{
           remember: true,
-          messname: "Super",
-          prefix: "+91",
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
         <Form.Item
           label="Mess Name"
-          name="messname"
+          name="name"
           rules={[{ required: true, message: "Please enter mess name" }]}
         >
           <Input placeholder="Enter the name of the mess" />
@@ -59,7 +75,7 @@ const AddMess = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          name="phone"
+          name="contactNo"
           label="Contact No"
           rules={[
             {
@@ -69,31 +85,38 @@ const AddMess = () => {
           ]}
         >
           <Input
-            addonBefore={prefixSelector}
             style={{
               width: "100%",
             }}
           />
         </Form.Item>
-        <Form.Item label="Time slot">
+        {/* <Form.Item label="Time slot">
           From &nbsp;
           <TimePicker />
           &nbsp; To &nbsp;
           <TimePicker />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="Address">
-          {/* <TextArea rows={4} /> */}
-          <Input placeholder="Building no/Area" />
+          <Form.Item name={["address", "street"]} noStyle>
+            <Input
+              placeholder="Street"
+              style={{ width: "45%", marginRight: "3%" }}
+            />
+          </Form.Item>
+          <Form.Item name={["address", "city"]} noStyle>
+            <Input placeholder="City" style={{ width: "45%" }} />
+          </Form.Item>
           <br />
           <br />
-          <Input placeholder="City" />
-          <br />
-          <br />
-          <Input placeholder="State" /> <br />
-          <br />
-          <Input placeholder="Country" /> <br />
-          <br />
-          <Input placeholder="Pincode" />
+          <Form.Item name={["address", "state"]} noStyle>
+            <Input
+              placeholder="State"
+              style={{ width: "45%", marginRight: "3%" }}
+            />
+          </Form.Item>
+          <Form.Item name={["address", "pincode"]} noStyle>
+            <Input placeholder="Pincode" style={{ width: "45%" }} />
+          </Form.Item>
         </Form.Item>
         <Form.Item label="Images" valuePropName="fileList">
           <Upload action="/upload.do" listType="picture-card">

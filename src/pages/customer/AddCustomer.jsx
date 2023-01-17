@@ -3,6 +3,7 @@ import { Steps, Select, Button, Form, Input } from "antd";
 import { useState } from "react";
 import { PlanDetails } from "./PlanDetails.jsx";
 import { PersonalDetails } from "./PersonalDetails.jsx";
+import { ConfirmData } from "./ConfirmData.jsx";
 
 const AddCustomer = () => {
   const [current, setCurrent] = useState(0);
@@ -52,12 +53,7 @@ const AddCustomer = () => {
     },
     {
       title: "Confirm Details",
-      content: (
-        <div>
-          <p>Name : {formValues.mealPlan}</p>
-          <p>Email : {formValues.email}</p>
-        </div>
-      ),
+      content: <ConfirmData formData={formValues} />,
     },
   ];
 
@@ -79,6 +75,11 @@ const AddCustomer = () => {
           {current < steps.length - 1 && (
             <Button type="primary" onClick={handleNext}>
               Next
+            </Button>
+          )}
+          {current === steps.length - 1 && (
+            <Button type="primary" style={{ marginRight: 0 }}>
+              Confirm
             </Button>
           )}
         </div>

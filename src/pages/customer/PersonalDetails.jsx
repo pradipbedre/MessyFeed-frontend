@@ -10,17 +10,17 @@ const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 
-const prefixSelector = (
-  <Form.Item name="prefix" noStyle>
-    <Select
-      style={{
-        width: 70,
-      }}
-    >
-      <Option value="91">+91</Option>
-    </Select>
-  </Form.Item>
-);
+// const prefixSelector = (
+//   <Form.Item name="prefix" noStyle>
+//     <Select
+//       style={{
+//         width: 70,
+//       }}
+//     >
+//       <Option value="91">+91</Option>
+//     </Select>
+//   </Form.Item>
+// );
 
 export const PersonalDetails = ({ form }) => {
   return (
@@ -39,8 +39,6 @@ export const PersonalDetails = ({ form }) => {
         action=""
         initialValues={{
           remember: true,
-          messname: "Super",
-          prefix: "+91",
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -75,7 +73,7 @@ export const PersonalDetails = ({ form }) => {
           ]}
         >
           <Input
-            addonBefore={prefixSelector}
+            // addonBefore={prefixSelector}
             style={{
               width: "100%",
             }}
@@ -92,23 +90,32 @@ export const PersonalDetails = ({ form }) => {
           ]}
         >
           <Select placeholder="select your gender">
-            <Option value="male">Male</Option>
-            <Option value="female">Female</Option>
-            <Option value="other">Other</Option>
+            <Option value="Male">Male</Option>
+            <Option value="Female">Female</Option>
+            <Option value="Other">Other</Option>
           </Select>
         </Form.Item>
         <Form.Item label="Address">
-          <Input placeholder="Building no/Area" />
+          <Form.Item name="street" noStyle>
+            <Input
+              placeholder="Street"
+              style={{ width: "45%", marginRight: "3%" }}
+            />
+          </Form.Item>
+          <Form.Item name="city" noStyle>
+            <Input placeholder="City" style={{ width: "45%" }} />
+          </Form.Item>
           <br />
           <br />
-          <Input placeholder="City" />
-          <br />
-          <br />
-          <Input placeholder="State" /> <br />
-          <br />
-          <Input placeholder="Country" /> <br />
-          <br />
-          <Input placeholder="Pincode" />
+          <Form.Item name="state" noStyle>
+            <Input
+              placeholder="State"
+              style={{ width: "45%", marginRight: "3%" }}
+            />
+          </Form.Item>
+          <Form.Item name="pincode" noStyle>
+            <Input placeholder="Pincode" style={{ width: "45%" }} />
+          </Form.Item>
         </Form.Item>
       </Form>
     </>

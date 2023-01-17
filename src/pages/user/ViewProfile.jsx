@@ -1,74 +1,111 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import { Button, Descriptions, Modal } from "antd";
 import { useState } from "react";
+import { UpdateProfile } from "./UpdateProfile";
 
 export const ViewProfile = () => {
-  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [updateModal, setUpdateModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [userData, setUserData] = useState();
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const response = await axios.get(
+        "http://localhost:8800/api/user/",
+
+        {
+          headers: {
+            Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+          },
+        }
+      );
+      setUserData(response.data);
+    };
+    getUserData();
+  }, []);
 
   const showUpdateModal = () => {
-    setIsUpdateModalOpen(true);
+    setUpdateModal(true);
   };
   const showDeleteModal = () => {
-    setIsDeleteModalOpen(true);
+    setDeleteModal(true);
   };
+
   const handleUpdate = () => {
-    setIsUpdateModalOpen(false);
+    setDeleteModal(false);
   };
   const handleDelete = () => {
-    setIsDeleteModalOpen(false);
+    setDeleteModal(false);
   };
   const handleUpdateCancel = () => {
-    setIsUpdateModalOpen(false);
+    setUpdateModal(false);
   };
 
   const handleDeleteCancel = () => {
-    setIsDeleteModalOpen(false);
+    setDeleteModal(false);
   };
 
   return (
     <div>
-      <h3>Mess Info</h3>
-      <Descriptions column={1} bordered>
-        <Descriptions.Item label="Mess Name">Super Mess</Descriptions.Item>
-        <Descriptions.Item label="Email">
-          super.mess@gmail.com
-        </Descriptions.Item>
-        <Descriptions.Item label="Phone">9618263578</Descriptions.Item>
-        <Descriptions.Item label="Address">
-          Hyderabad
+      <h3>User Profile</h3>
+      {userData ? (
+        <>
+          <Descriptions column={1} bordered>
+            <Descriptions.Item label="Name">{userData?.name}</Descriptions.Item>
+            <Descriptions.Item label="Gender">
+              {userData?.gender}
+            </Descriptions.Item>
+            <Descriptions.Item label="Email">
+              {userData?.email}
+            </Descriptions.Item>
+            <Descriptions.Item label="Phone No">
+              {userData?.phoneNo}
+            </Descriptions.Item>
+            <Descriptions.Item label="Address">
+              {userData?.address}
+            </Descriptions.Item>
+            <Descriptions.Item label="Role">{userData?.role}</Descriptions.Item>
+          </Descriptions>
           <br />
-          500082
-        </Descriptions.Item>
-      </Descriptions>
-      <br />
-      <br />
-      <Button type="primary" onClick={showUpdateModal}>
-        Update Profile
-      </Button>
-      <Modal
-        title="Update Mess Details"
-        okText="Update"
-        open={isUpdateModalOpen}
-        onOk={handleUpdate}
-        onCancel={handleUpdateCancel}
-        centered={true}
-      >
-        <p>Are you sure??</p>
-      </Modal>
-      &nbsp;&nbsp;&nbsp;
-      <Button type="primary" onClick={showDeleteModal}>
-        Delete Profile
-      </Button>
-      <Modal
-        title="Delete Mess"
-        okText="Delete"
-        open={isDeleteModalOpen}
-        onOk={handleDelete}
-        onCancel={handleDeleteCancel}
-      >
-        <p>Are you sure??</p>
-      </Modal>
+          <br />
+          <Button type="primary" onClick={showUpdateModal}>
+            Update Profile
+          </Button>
+          <Modal
+            destroyOnClose={true}
+            title="Update User Profile"
+            okText="Update Profile"
+            open={updateModal}
+            onOk={handleUpdate}
+            onCancel={handleUpdateCancel}
+            centered={true}
+            footer={null}
+          >
+            <UpdateProfile
+              userData={userData}
+              setUserData={setUserData}
+              setUpdateModal={setUpdateModal}
+            />
+          </Modal>
+          &nbsp;&nbsp;&nbsp;
+          <Button type="primary" onClick={showDeleteModal}>
+            Delete Profile
+          </Button>
+          <Modal
+            destroyOnClose={true}
+            title="Delete User PRofile"
+            okText="Delete"
+            open={deleteModal}
+            onOk={handleDelete}
+            onCancel={handleDeleteCancel}
+          >
+            <p>Are you sure??</p>
+          </Modal>
+        </>
+      ) : (
+        <p>User data is not available</p>
+      )}
     </div>
   );
 };

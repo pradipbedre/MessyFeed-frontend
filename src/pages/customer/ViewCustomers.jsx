@@ -1,49 +1,10 @@
 import React from "react";
 import { Input, Space, Table } from "antd";
 import { useState } from "react";
-import ShowCustomer from "./ShowCustomer.jsx";
+import { Link } from "react-router-dom";
 
 const { Search } = Input;
 
-const handleClick = () => {
-  <ShowCustomer />;
-};
-
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    render: (text) => <a onClick={handleClick}>{text}</a>,
-  },
-  {
-    title: "Email",
-    dataIndex: "email",
-  },
-  {
-    title: "Phone No",
-    dataIndex: "phone",
-  },
-  {
-    title: "Gender",
-    dataIndex: "gender",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-  },
-  {
-    title: "Plan",
-    dataIndex: "plan",
-  },
-  {
-    title: "End Date",
-    dataIndex: "endDate",
-  },
-];
 const tableData = [
   {
     key: "1",
@@ -138,6 +99,46 @@ const ViewCustomers = () => {
     );
     setFilteredData(filtered);
   };
+
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      render: (text, record) => (
+        <Link to="/user/mess/customer/view" state={record}>
+          {text}
+        </Link>
+      ),
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
+      title: "Phone No",
+      dataIndex: "phone",
+    },
+    {
+      title: "Gender",
+      dataIndex: "gender",
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+    },
+    {
+      title: "Plan",
+      dataIndex: "plan",
+    },
+    {
+      title: "End Date",
+      dataIndex: "endDate",
+    },
+  ];
 
   return (
     <div>

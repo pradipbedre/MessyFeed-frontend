@@ -15,7 +15,7 @@ const Logout = () => {
         placement="right"
         closable={false}
         onClose={onClose}
-        visible={visible}
+        open={visible}
         width={320}
       >
         <p>You can put your logout logic here</p>

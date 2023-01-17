@@ -1,28 +1,44 @@
+import axios from "axios";
 import { DatePicker, Form, Input, Select, Button } from "antd";
 import { useState } from "react";
 const { Option } = Select;
 
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-
 const AddPlan = () => {
   const [form] = Form.useForm();
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  const onFinish = () => {
     form
       .validateFields()
-      .then((values) => {
-        console.log("Values: ", values);
+      .then(async (values) => {
+        const { mealCount, planCost, ...otherValues } = values;
+        const response = await axios.post(
+          "http://localhost:8800/api/user/mess/plan/",
+          {
+            mealCount: parseInt(mealCount),
+            planCost: parseInt(planCost),
+            ...otherValues,
+          },
+          {
+            headers: {
+              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+            },
+          }
+        );
+        console.log(response.status);
+        if (response.status === 200) {
+          form.resetFields();
+        } else {
+          console.log(response.data.message);
+          form.resetFields();
+        }
       })
       .catch((errorInfo) => {
         console.log(errorInfo);
       });
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -54,14 +70,14 @@ const AddPlan = () => {
         </Form.Item>
         <Form.Item
           label="Plan Cost"
-          name="cost"
+          name="planCost"
           rules={[{ required: true, message: "Please enter the plan cost" }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Meal count"
-          name="meals"
+          name="mealCount"
           rules={[
             { required: true, message: "Please enter no of meals per plan" },
           ]}
@@ -75,7 +91,7 @@ const AddPlan = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit" onClick={handleClick}>
+          <Button type="primary" htmlType="submit">
             Add Plan
           </Button>
         </Form.Item>

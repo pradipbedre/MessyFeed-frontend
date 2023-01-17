@@ -13,6 +13,7 @@ import ViewCustomers from "./pages/customer/ViewCustomers.jsx";
 import ViewProfile from "./pages/user/ViewProfile.jsx";
 import Logout from "./pages/user/Logout.jsx";
 import UserPage from "./pages/user/User.jsx";
+import ShowCustomer from "./pages/customer/ShowCustomer.jsx";
 
 const AppRoutes = () => {
   return (
@@ -28,7 +29,8 @@ const AppRoutes = () => {
           <Route path="plans" element={<AddPlan />} />
 
           <Route path="/user/mess/customer">
-            <Route path="view" element={<ViewCustomers />} />
+            <Route path="viewAll" element={<ViewCustomers />} />
+            <Route path="view" element={<ShowCustomer />} />
             <Route path="add" element={<AddCustomer />} />
             <Route path="update" element={<UpdateCustomer />} />
             <Route path="delete" element={<DeleteCustomer />} />

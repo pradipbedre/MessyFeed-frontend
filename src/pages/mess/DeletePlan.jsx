@@ -4,6 +4,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 const handleCancel = (e) => {
   console.log("Cancelled");
 };
+
 const handleConfirm = (e) => {
   console.log(e);
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   Button,
   Row,
@@ -41,16 +42,42 @@ const contentList = {
 
 const ViewMess = () => {
   const [activeTabKey1, setActiveTabKey1] = useState("tab1");
-  const onTab1Change = (key) => {
-    setActiveTabKey1(key);
-  };
+  const [messData, setMessData] = useState();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
 
-  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [updateModal, setUpdateModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [imageModal, setImageModal] = useState(false);
+
+  const onTab1Change = (key) => {
+    setActiveTabKey1(key);
+  };
+
+  useEffect(() => {
+    const getMessData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8800/api/user/mess/",
+          {
+            headers: {
+              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          setMessData(response.data);
+        } else {
+          console.log(response.message);
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
+    getMessData();
+  }, []);
 
   useEffect(() => {
     fetchData();
@@ -110,33 +137,30 @@ const ViewMess = () => {
   };
 
   const showImageModal = () => {
-    setIsImageModalOpen(true);
+    setImageModal(true);
   };
   const showUpdateModal = () => {
-    setIsUpdateModalOpen(true);
+    setUpdateModal(true);
   };
   const showDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-  };
-  const handleUpdate = () => {
-    setIsUpdateModalOpen(false);
+    setDeleteModal(true);
   };
   const handleDelete = () => {
-    setIsDeleteModalOpen(false);
+    setDeleteModal(false);
   };
   const handleUpdateCancel = () => {
-    setIsUpdateModalOpen(false);
+    setUpdateModal(false);
   };
 
   const handleDeleteCancel = () => {
-    setIsDeleteModalOpen(false);
+    setDeleteModal(false);
   };
 
   const handleImage = () => {
-    setIsImageModalOpen(false);
+    setImageModal(false);
   };
   const handleImageCancel = () => {
-    setIsImageModalOpen(false);
+    setImageModal(false);
   };
 
   return (
@@ -144,46 +168,60 @@ const ViewMess = () => {
       <Row gutter={[24, 8]}>
         <Col xs={24} sm={8}>
           <h3>Mess Info</h3>
-          <Descriptions column={1} bordered>
-            <Descriptions.Item label="Mess Name">Super Mess</Descriptions.Item>
-            <Descriptions.Item label="Email">
-              super.mess@gmail.com
-            </Descriptions.Item>
-            <Descriptions.Item label="Phone">9618263578</Descriptions.Item>
-            <Descriptions.Item label="Address">
-              Hyderabad
+          {messData ? (
+            <>
+              <Descriptions column={1} bordered>
+                <Descriptions.Item label="Name">
+                  {messData?.name}
+                </Descriptions.Item>
+                <Descriptions.Item label="Email">
+                  {messData?.email}
+                </Descriptions.Item>
+                <Descriptions.Item label="Phone No">
+                  {messData?.contactNo}
+                </Descriptions.Item>
+                <Descriptions.Item label="Address">
+                  {messData?.address + " " + messData?.pincode}
+                </Descriptions.Item>
+              </Descriptions>
               <br />
-              500082
-            </Descriptions.Item>
-          </Descriptions>
-          <br />
-          <br />
-          <Button type="primary" onClick={showUpdateModal}>
-            Update Mess
-          </Button>
-          <Modal
-            title="Update Mess Details"
-            okText="Update"
-            open={isUpdateModalOpen}
-            onOk={handleUpdate}
-            onCancel={handleUpdateCancel}
-            centered={true}
-          >
-            <UpdateMess />
-          </Modal>
-          &nbsp;&nbsp;&nbsp;
-          <Button type="primary" onClick={showDeleteModal}>
-            Delete Mess
-          </Button>
-          <Modal
-            title="Delete Mess"
-            okText="Delete"
-            open={isDeleteModalOpen}
-            onOk={handleDelete}
-            onCancel={handleDeleteCancel}
-          >
-            <p>Are you sure??</p>
-          </Modal>
+              <br />
+              <Button type="primary" onClick={showUpdateModal}>
+                Update Mess
+              </Button>
+              <Modal
+                destroyOnClose={true}
+                title="Update Mess Details"
+                okText="Update"
+                open={updateModal}
+                onCancel={handleUpdateCancel}
+                centered={true}
+                footer={null}
+              >
+                <UpdateMess
+                  messData={messData}
+                  setMessData={setMessData}
+                  setUpdateModal={setUpdateModal}
+                />
+              </Modal>
+              &nbsp;&nbsp;&nbsp;
+              <Button type="primary" onClick={showDeleteModal}>
+                Delete Mess
+              </Button>
+              <Modal
+                destroyOnClose={true}
+                title="Delete Mess"
+                okText="Delete"
+                open={deleteModal}
+                onOk={handleDelete}
+                onCancel={handleDeleteCancel}
+              >
+                <p>Are you sure??</p>
+              </Modal>
+            </>
+          ) : (
+            <p>Mess data is not available</p>
+          )}
         </Col>
         <Col xs={24} sm={8}>
           <h3>Mess Plans</h3>
@@ -203,10 +241,6 @@ const ViewMess = () => {
           </Card>
         </Col>
       </Row>
-      {/* <Divider></Divider>
-      <Row>
-        <ViewPlans />
-      </Row> */}
       <Divider></Divider>
       <h3>Mess Images</h3>
       <Row around="xs" gutter={[8, 8]}>
@@ -229,7 +263,7 @@ const ViewMess = () => {
               cancelText=""
               onOk={handleImage}
               onCancel={handleImageCancel}
-              open={isImageModalOpen}
+              open={imageModal}
             >
               <Carousel autoplay={true}>
                 {[1, 2, 3, 4].map(() => (

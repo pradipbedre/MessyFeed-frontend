@@ -1,16 +1,11 @@
 import React from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { Table, Button } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import DeletePlan from "./DeletePlan.jsx";
 import UpdatePlan from "./UpdatePlan.jsx";
 
-const TableActions = () => (
-  <>
-    <UpdatePlan />
-    &nbsp;&nbsp;&nbsp;
-    <DeletePlan />
-  </>
-);
 const columns = [
   {
     title: "Plan Name",
@@ -18,64 +13,74 @@ const columns = [
   },
   {
     title: "Plan Cost",
-    dataIndex: "cost",
+    dataIndex: "planCost",
   },
   {
     title: "Meal Count",
-    dataIndex: "meals",
+    dataIndex: "mealCount",
   },
   {
     title: "Actions",
     dataIndex: "actions",
   },
 ];
-const tableData = [
-  {
-    key: "1",
-    name: "One Meal",
-    cost: 1000,
-    meals: 30,
-    actions: <TableActions />,
-  },
-  {
-    key: "2",
-    name: "Two Meal",
-    cost: 2000,
-    meals: 60,
-    actions: <TableActions />,
-  },
-  {
-    key: "3",
-    name: "Mixed Meal",
-    cost: 1500,
-    meals: 45,
-    actions: <TableActions />,
-  },
-];
+
+// Sample tableData = [
+// {
+//   key: "1",
+//   name: "One Meal",
+//   cost: 1000,
+//   meals: 30,
+//   actions: <TableActions />,
+// }
+// ];
 
 const ViewPlans = () => {
-  //   const [data, setData] = useState(tableData);
-  //   const [searchText, setSearchText] = useState("");
-  //   const [filteredData, setFilteredData] = useState(data);
+  const [plansData, setPlansData] = useState();
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8800/api/user/mess/plans",
 
-  //   const handleSearch = (e) => {
-  //     setSearchText(e);
-  //     const filtered = data.filter((item) =>
-  //       Object.values(item).some((val) =>
-  //         val.toString().toLowerCase().includes(searchText.toLowerCase())
-  //       )
-  //     );
-  //     setFilteredData(filtered);
-  //   };
+          {
+            headers: {
+              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+            },
+          }
+        );
+        setPlansData(
+          response?.data?.map((data) => {
+            console.log(data);
+            data.key = data?._id;
+            data.actions = (
+              <>
+                <UpdatePlan
+                  planData={data}
+                  plansData={plansData}
+                  setPlansData={setPlansData}
+                />
+                &nbsp;&nbsp;&nbsp;
+                <DeletePlan />
+              </>
+            );
+            return data;
+          })
+        );
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    getUserData();
+  }, []);
 
   return (
     <div>
       <Table
         columns={columns}
-        dataSource={tableData}
+        dataSource={plansData}
         bordered
-        // title={() => "All Customers"}
-        pagination={{ defaultPageSize: "5" }}
+        pagination={{ defaultPageSize: "3" }}
       />
     </div>
   );

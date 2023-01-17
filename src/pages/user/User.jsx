@@ -53,7 +53,7 @@ const items = [
   getItem("Customer", "sub3", <UserOutlined />, [
     getItem(
       <>
-        <Link to="/user/mess/customer/view" title="ViewCustomer">
+        <Link to="/user/mess/customer/viewAll" title="ViewCustomer">
           View All Customers
         </Link>
       </>,
