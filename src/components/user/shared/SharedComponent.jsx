@@ -1,9 +1,9 @@
 import React from "react";
 import "./shared_component.scss";
 import okBtn from "../../../assets/popup.png";
-import { Link } from "react-router-dom";
+import { MdDangerous } from "react-icons/Md";
 
-export const PopUp = ({ setPopup, name }) => {
+export const SuccessPopUp = ({ setPopup, name }) => {
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -27,18 +27,26 @@ export const PopUp = ({ setPopup, name }) => {
   );
 };
 
-export const DashboardButton = () => {
+export const DangerPopUp = ({ setPopup, name }) => {
   return (
-    <Link to="/dashboard">
-      <button className="dashboardBtn">Dashboard</button>
-    </Link>
+    <div className="modalBackground">
+      <div className="modalContainer">
+        <div className="titleCloseBtn">
+          <button
+            onClick={() => {
+              setPopup(false);
+            }}
+          >
+            X
+          </button>
+        </div>
+        <div className="body">
+          <MdDangerous />
+        </div>
+        <div className="title">
+          <h1>{name ? name : "Not Valid"}</h1>
+        </div>
+      </div>
+    </div>
   );
-};
-
-export const CustomButton = ({ name }) => {
-  return <button className="dashboardBtn">{name}</button>;
-};
-
-export const MediumCustomButton = ({ name }) => {
-  return <button className="MediumCustomeButton">{name}</button>;
 };
