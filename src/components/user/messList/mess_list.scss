@@ -1,0 +1,90 @@
+$brandColor: #cc6200;
+$brandBackColor: #0e2e3c;
+$cardColor: #f2f2f2;
+$shadow: 0px 0px 20px black;
+
+.messListContainer {
+  nav {
+    padding: 10px 20px;
+    background-color: $brandBackColor;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    overflow: hidden;
+    top: 0;
+
+    .back {
+      padding: 5px 20px;
+      background: transparent;
+      border: 2px solid $brandColor;
+      color: white;
+      border-radius: 25px;
+      transition: all 0.2s ease;
+      &:hover {
+        background-color: #cc6200;
+      }
+    }
+  }
+  .mess-list {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 130px;
+    .mess-card {
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: $cardColor;
+      box-shadow: $shadow;
+      margin: 20px;
+      flex: 0 0 20%;
+      transition: transform 0.2s;
+      img {
+        width: 200px;
+        border-radius: 10px;
+      }
+      p {
+        font-size: 14px;
+      }
+      &:hover {
+        background-color: $brandBackColor;
+        color: white;
+      }
+    }
+  }
+  .footer {
+    background-color: $brandBackColor;
+    color: white;
+    padding: 40px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    bottom: 0;
+    .rights {
+      display: flex;
+      justify-content: center;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .messListContainer {
+    .footer {
+      .rights {
+      }
+    }
+  }
+}
+@media screen and (max-width: 450px) {
+}
