@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import "./signin.scss";
 import welcome from "../../../../assets/welcome.svg";
 import axios from "axios";
 import { setCookie } from "../../../../utils/Cookie";
+
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,7 @@ const Signin = () => {
     } else {
       try {
         const res = await axios.post(
-          `${import.meta.env.VITE_BASE_URL}` + "/auth/signin",
+          `${import.meta.env.VITE_BASE_URL}auth/signin`,
           {
             email,
             password,
@@ -29,10 +29,6 @@ const Signin = () => {
         }
         if (res.status === 200 && res.data.auth) {
           setCookie("jwt_token", res.data.token);
-          // localStorage.setItem(
-          //   "access_token",
-          //   JSON.stringify(res?.data?.token)
-          // );
           navigate("/user");
         }
       } catch (error) {
@@ -74,10 +70,6 @@ const Signin = () => {
             />
             <button className="signin" type="submit" onClick={loginUser}>
               Sign In
-            </button>
-            <button className="google">
-              <FcGoogle />
-              signin with google
             </button>
           </form>
         </div>

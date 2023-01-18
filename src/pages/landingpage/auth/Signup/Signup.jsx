@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import "./signup.scss";
-import { FcGoogle } from "react-icons/fc";
 import welcome from "../../../../assets/welcome.svg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { auth, provider } from "../../../../utils/Firebase";
-import { signInWithPopup } from "firebase/auth";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +18,7 @@ const Signup = () => {
     } else {
       try {
         const res = await axios.post(
-          `${import.meta.env.VITE_BASE_URL}` + "/auth/signup",
+          `${import.meta.env.VITE_BASE_URL}auth/signup`,
           {
             name,
             email,
@@ -46,24 +43,6 @@ const Signup = () => {
         }
       }
     }
-  };
-
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        axios
-          .post(`${import.meta.env.VITE_BASE_URL}` + "auth/signup", {
-            name: result.user.displayName,
-            email: result.user.email,
-          })
-          .then((res) => {
-            console.log(res);
-            navigate("/signin");
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   return (
@@ -115,10 +94,6 @@ const Signup = () => {
 
             <button className="signup" type="submit" onClick={registerUser}>
               Sign Up
-            </button>
-            <button className="google" onClick={signInWithGoogle}>
-              <FcGoogle />
-              signup with google
             </button>
           </form>
         </div>
