@@ -57,7 +57,7 @@ const MessDetails = () => {
   const reviewSubmit = async (e) => {
     try {
       const isReviewed = await axios.post(
-        "${import.meta.env.VITE_BASE_URL}home/isReviewed",
+        `${import.meta.env.VITE_BASE_URL}home/isReviewed`,
         {
           email,
         }
