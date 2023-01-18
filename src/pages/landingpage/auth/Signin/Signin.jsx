@@ -26,7 +26,7 @@ const Signin = () => {
         }
         if (res.status === 200 && res.data.auth) {
           setCookie("jwt_token", res.data.token);
-          navigate("/dashboard");
+          navigate("/user");
         }
       } catch (error) {
         if (error.response.data.errors) {
