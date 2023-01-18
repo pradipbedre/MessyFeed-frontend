@@ -107,9 +107,9 @@ const ShowCustomer = () => {
             {data?.planName}
           </Descriptions.Item>
           <Descriptions.Item label="Status">{data?.status}</Descriptions.Item>
-          <Descriptions.Item label="Plan End Date">
+          {/* <Descriptions.Item label="Plan End Date">
             {data?.startDate}
-          </Descriptions.Item>
+          </Descriptions.Item> */}
         </Descriptions>
         <br />
         <br />
