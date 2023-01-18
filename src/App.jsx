@@ -1,5 +1,4 @@
 import React from "react";
-import AppRoutes from "./AppRoutes";
 import "./app.module.scss";
 import { Routes, Route } from "react-router-dom";
 import PivateRoutes from "./utils/ProtectedRoutes";

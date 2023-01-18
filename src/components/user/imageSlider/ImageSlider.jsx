@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./image_slider.scss";
-import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/Ai";
+import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 const ImageSlider = ({ urls }) => {
   const [currentIndex, setCurrentindex] = useState(0);
 

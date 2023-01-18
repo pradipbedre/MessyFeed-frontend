@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button, Descriptions, Modal } from "antd";
 import { useState } from "react";
 import { UpdateProfile } from "./UpdateProfile";
+import { getCookie } from "../../utils/Cookie";
 
 export const ViewProfile = () => {
   const [updateModal, setUpdateModal] = useState(false);
@@ -16,7 +17,7 @@ export const ViewProfile = () => {
 
         {
           headers: {
-            Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+            Authorization: `${getCookie("jwt_token")}`,
           },
         }
       );

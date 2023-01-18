@@ -2,6 +2,7 @@ import { Modal, Form, Input, Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import axios from "axios";
+import { getCookie } from "../../utils/Cookie";
 
 export const UpdatePlan = ({ planData, plansData, setPlansData }) => {
   const [updateModal, setUpdateModal] = useState(false);
@@ -21,7 +22,7 @@ export const UpdatePlan = ({ planData, plansData, setPlansData }) => {
           },
           {
             headers: {
-              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+              Authorization: `${getCookie("jwt_token")}`,
             },
           }
         );

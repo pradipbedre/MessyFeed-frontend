@@ -1,6 +1,7 @@
 import { DatePicker, Form, Input, Select } from "antd";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { getCookie } from "../../utils/Cookie";
 const { Option } = Select;
 
 export const PlanDetails = ({ form, setSelectedData }) => {
@@ -13,7 +14,7 @@ export const PlanDetails = ({ form, setSelectedData }) => {
           `${import.meta.env.VITE_BASE_URL}` + "user/mess/plans",
           {
             headers: {
-              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+              Authorization: `${getCookie("jwt_token")}`,
             },
           }
         );

@@ -3,6 +3,7 @@ import { Input, Space, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { getCookie } from "../../utils/Cookie";
 
 const { Search } = Input;
 
@@ -34,7 +35,7 @@ const ViewCustomers = () => {
           `${import.meta.env.VITE_BASE_URL}` + "user/mess/plans",
           {
             headers: {
-              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+              Authorization: `${getCookie("jwt_token")}`,
             },
           }
         );
@@ -54,7 +55,7 @@ const ViewCustomers = () => {
 
           {
             headers: {
-              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+              Authorization: `${getCookie("jwt_token")}`,
             },
           }
         );

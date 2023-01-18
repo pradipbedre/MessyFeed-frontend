@@ -15,6 +15,7 @@ import {
 import { useState, useEffect } from "react";
 import UpdateMess from "./UpdateMess";
 import ViewPlans from "./ViewPlans.jsx";
+import { getCookie } from "../../utils/Cookie";
 
 const tabList = [
   {
@@ -62,7 +63,7 @@ const ViewMess = () => {
           "http://localhost:8800/api/user/mess/",
           {
             headers: {
-              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+              Authorization: `${getCookie("jwt_token")}`,
             },
           }
         );

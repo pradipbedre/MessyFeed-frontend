@@ -1,6 +1,7 @@
 import axios from "axios";
 import { DatePicker, Form, Input, Select, Button } from "antd";
 import { useState } from "react";
+import { getCookie } from "../../utils/Cookie";
 const { Option } = Select;
 
 const AddPlan = () => {
@@ -20,7 +21,7 @@ const AddPlan = () => {
           },
           {
             headers: {
-              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+              Authorization: `${getCookie("jwt_token")}`,
             },
           }
         );

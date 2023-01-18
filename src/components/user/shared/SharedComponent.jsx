@@ -1,7 +1,7 @@
 import React from "react";
 import "./shared_component.scss";
 import okBtn from "../../../assets/popup.png";
-import { MdDangerous } from "react-icons/Md";
+import { MdDangerous } from "react-icons/md";
 
 export const SuccessPopUp = ({ setPopup, name }) => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
-import { BsStarHalf } from "react-icons/Bs";
-import { BsStar } from "react-icons/Bs";
-import { BsStarFill } from "react-icons/Bs";
+import { BsStarHalf } from "react-icons/bs";
+import { BsStar } from "react-icons/bs";
+import { BsStarFill } from "react-icons/bs";
 
 const StarRating = ({ rating }) => {
   const star = [];

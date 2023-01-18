@@ -5,6 +5,7 @@ import { Table, Button } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import DeletePlan from "./DeletePlan.jsx";
 import UpdatePlan from "./UpdatePlan.jsx";
+import { getCookie } from "../../utils/Cookie.js";
 
 const columns = [
   {
@@ -46,7 +47,7 @@ const ViewPlans = () => {
 
           {
             headers: {
-              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+              Authorization: `${getCookie("jwt_token")}`,
             },
           }
         );

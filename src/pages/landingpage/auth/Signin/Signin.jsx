@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FcGoogle } from "react-icons/Fc";
+import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import "./signin.scss";
 import welcome from "../../../../assets/welcome.svg";
@@ -26,6 +26,10 @@ const Signin = () => {
         }
         if (res.status === 200 && res.data.auth) {
           setCookie("jwt_token", res.data.token);
+          // localStorage.setItem(
+          //   "access_token",
+          //   JSON.stringify(res?.data?.token)
+          // );
           navigate("/user");
         }
       } catch (error) {

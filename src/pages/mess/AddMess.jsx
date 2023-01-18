@@ -3,6 +3,7 @@ import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import { Select, Button, TimePicker, Form, Input, Upload } from "antd";
 import { useState } from "react";
+import { getCookie } from "../../utils/Cookie";
 
 const AddMess = () => {
   const [messData, setMessData] = useState();
@@ -18,7 +19,7 @@ const AddMess = () => {
         { address: addr, pincode: pin, ...otherValues },
         {
           headers: {
-            Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+            Authorization: `${getCookie("jwt_token")}`,
           },
         }
       );

@@ -1,5 +1,6 @@
 import { Form, Input, Select, Button } from "antd";
 import axios from "axios";
+import { getCookie } from "../../utils/Cookie";
 const { Option } = Select;
 
 const onFinishFailed = (errorInfo) => {
@@ -22,7 +23,7 @@ export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
           { address: addr, ...otherValues },
           {
             headers: {
-              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+              Authorization: `${getCookie("jwt_token")}`,
             },
           }
         );

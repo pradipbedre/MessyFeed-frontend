@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, TimePicker, Form, Input, Upload } from "antd";
+import { getCookie } from "../../utils/Cookie";
 
 const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
   const [form] = Form.useForm();
@@ -18,7 +19,7 @@ const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
         { address: addr, pincode: pin, ...otherValues },
         {
           headers: {
-            Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+            Authorization: `${getCookie("jwt_token")}`,
           },
         }
       );

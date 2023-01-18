@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { PlanDetails } from "./PlanDetails.jsx";
 import { PersonalDetails } from "./PersonalDetails.jsx";
 import { ConfirmData } from "./ConfirmData.jsx";
+import { getCookie } from "../../utils/Cookie.js";
 
 const AddCustomer = () => {
   const [current, setCurrent] = useState(0);
@@ -34,7 +35,7 @@ const AddCustomer = () => {
         dataBody,
         {
           headers: {
-            Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+            Authorization: `${getCookie("jwt_token")}`,
           },
         }
       );

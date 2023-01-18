@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HiMenu } from "react-icons/Hi";
+import { HiMenu } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import hero from "../../assets/hero.svg";
 import SearchMess from "../../assets/search-mess.svg";
