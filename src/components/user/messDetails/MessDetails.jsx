@@ -50,17 +50,32 @@ const MessDetails = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [allReviews]);
 
   // adding review to DB
   const reviewSubmit = async (e) => {
     try {
-      const res = await axios.post(`http://localhost:8800/api/home/review`, {
-        email,
-        review,
-        messId,
-        rating,
-      });
+      const isReviewed = await axios.post(
+        "http://localhost:8800/api/home/isReviewed",
+        {
+          email,
+        }
+      );
+      if (isReviewed.data.isCheck) {
+        alert("your review already submitted!");
+      } else {
+        const res = await axios.post(`http://localhost:8800/api/home/review`, {
+          email,
+          review,
+          messId,
+          rating,
+        });
+        if (res) {
+          setEmail("");
+          setRating("");
+          setReview("");
+        }
+      }
     } catch (error) {
       console.log(error);
       if (error) {

@@ -1,0 +1,25 @@
+$bodyColor: #cc6200;
+$navColor: #133c4f;
+$brandBackColor: #0e2e3c;
+$shadow: 0px 0px 20px black;
+
+.signupAntdContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  label {
+    color: white;
+  }
+  .left {
+    padding: 20px;
+    background-color: $navColor;
+    width: 50vw;
+    height: 100vh;
+  }
+  .right {
+    padding: 20px;
+    background-color: $brandBackColor;
+    width: 50vw;
+    height: 100vh;
+  }
+}

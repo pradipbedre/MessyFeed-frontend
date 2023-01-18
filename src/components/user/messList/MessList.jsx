@@ -36,7 +36,7 @@ const MessList = () => {
           <button className="back">Back</button>
         </Link>
       </nav>
-
+    
       <div className="mess-list">
         {messList &&
           messList.map((mess) => (

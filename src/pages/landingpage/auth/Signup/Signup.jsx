@@ -45,7 +45,7 @@ const Signup = () => {
     }
   };
 
-  /*   const signInWithGoogle = () => {
+  const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         axios
@@ -61,7 +61,7 @@ const Signup = () => {
       .catch((error) => {
         console.log(error);
       });
-  }; */
+  };
 
   return (
     <div>
@@ -103,7 +103,7 @@ const Signup = () => {
             />
             <label htmlFor="">Password:*</label>
             <input
-              type="text"
+              type="password"
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -113,7 +113,7 @@ const Signup = () => {
             <button className="signup" type="submit" onClick={registerUser}>
               Sign Up
             </button>
-            <button className="google">
+            <button className="google" onClick={signInWithGoogle}>
               <FcGoogle />
               signup with google
             </button>

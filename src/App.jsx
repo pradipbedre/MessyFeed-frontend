@@ -3,7 +3,7 @@ import "./app.module.scss";
 import { Routes, Route } from "react-router-dom";
 import PivateRoutes from "./utils/ProtectedRoutes";
 import LandingPage from "./pages/landingpage/LandingPage";
-import Signup from "./pages/landingpage/auth/Signup/Signup";
+import Signup from "./pages/landingpage/auth/Signup";
 import Signin from "./pages/landingpage/auth/Signin/Signin";
 import DashboardPage from "./pages/user/dashboard/DashboardPage";
 import MessList from "./components/user/messList/MessList";

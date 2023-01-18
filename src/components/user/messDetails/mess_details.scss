@@ -1,10 +1,11 @@
 $brandColor: #cc6200;
 $brandBackColor: #0e2e3c;
 $cardColor: #f2f2f2;
-$shadow: 0px 0px 20px black;
+$shadow: 0px 0px 20px rgb(255, 255, 255);
 
 .messDetailsContainer {
-  background-color: rgb(255, 255, 255);
+  background-color: #133C4F;
+  color: white;
   nav {
     padding: 10px 20px;
     background-color: $brandBackColor;
@@ -142,8 +143,8 @@ $shadow: 0px 0px 20px black;
     gap: 20px;
     .review {
       display: flex;
-      padding: 20px;
-      box-shadow: $shadow;
+      padding: 10px;
+      box-shadow: 0px 0px 10px rgb(255, 255, 255);
       flex: 0 0 20%;
       border-radius: 10px;
       flex-direction: column;
@@ -172,6 +173,11 @@ $shadow: 0px 0px 20px black;
       }
       .plans {
         width: 90vw;
+      }
+    }
+    .all-reviews {
+      .review {
+        flex: 0 0 40%;
       }
     }
   }

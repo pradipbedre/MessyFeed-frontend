@@ -5,7 +5,6 @@ import "./signin.scss";
 import welcome from "../../../../assets/welcome.svg";
 import axios from "axios";
 import { setCookie } from "../../../../utils/Cookie";
-
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
