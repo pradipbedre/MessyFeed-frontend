@@ -15,7 +15,7 @@ const App = () => {
       <Routes>
         {/* Private Routes */}
         <Route element={<PivateRoutes />}>
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/dashboard" element={<AppRoutes />} />
         </Route>
         {/* Public Routes */}
         <Route path="/messList" element={<MessList />} />
