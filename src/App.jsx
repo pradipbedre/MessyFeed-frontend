@@ -1,4 +1,5 @@
-import React from "react";
+import React from "react";;
+import AppRoutes from './AppRoutes';
 import "./app.module.scss";
 import { Routes, Route } from "react-router-dom";
 import PivateRoutes from "./utils/ProtectedRoutes";
@@ -14,7 +15,7 @@ const App = () => {
       <Routes>
         {/* Private Routes */}
         <Route element={<PivateRoutes />}>
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/dashboard" element={<AppRoutes />} />
         </Route>
         {/* Public Routes */}
         <Route path="/messList" element={<MessList />} />
