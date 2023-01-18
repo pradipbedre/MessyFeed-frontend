@@ -1,27 +1,45 @@
 import { DatePicker, Form, Input, Select } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 const { Option } = Select;
 
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
+export const PlanDetails = ({ form, setSelectedData }) => {
+  const [plansData, setPlansData] = useState();
 
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
+  useEffect(() => {
+    const getPlansData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/plans",
+          {
+            headers: {
+              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+            },
+          }
+        );
+        setPlansData(response?.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    getPlansData();
+  }, []);
 
-export const PlanDetails = ({ form }) => {
-  const [selectedOption, setSelectedOption] = useState("");
-  const [inputValue, setInputValue] = useState("");
-
-  const handleSelectChange = (value) => {
-    console.log(value);
-    setSelectedOption(value);
-    setInputValue(selectedOption);
+  const onFinish = (values) => {
+    console.log("Success:", values);
   };
 
-  const handleInputChange = () => {
-    setInputValue(selectedOption);
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  const handleSelectChange = (value) => {
+    const selectedPlan = plansData.find((item) => item._id === value);
+    form.setFieldsValue({
+      planCost: selectedPlan?.planCost,
+      mealsLeft: selectedPlan?.mealCount,
+    });
+    setSelectedData(selectedPlan?.name);
   };
 
   return (
@@ -50,17 +68,21 @@ export const PlanDetails = ({ form }) => {
             },
           ]}
         >
-          <Select
-            placeholder="select Meal Plan"
-            value={selectedOption}
-            onChange={handleSelectChange}
-          >
-            <Option value="plan1">One Meal - 1000</Option>
-            <Option value="plan2">Two Meal - 2000</Option>
+          <Select placeholder="select Meal Plan" onChange={handleSelectChange}>
+            {plansData?.map((plan) => {
+              return plan ? (
+                <Option value={plan?._id}>{plan?.name}</Option>
+              ) : (
+                ""
+              );
+            })}
           </Select>
         </Form.Item>
-        <Form.Item name="planAmount" label="Plan Amount">
-          <Input value={inputValue} onChange={handleInputChange} />
+        <Form.Item name="planCost" label="Plan Cost">
+          <Input />
+        </Form.Item>
+        <Form.Item name="mealsLeft" label="Meal Count">
+          <Input />
         </Form.Item>
         <Form.Item label="Payment Mode" name="paymentMode" initialValue="Cash">
           <Input />

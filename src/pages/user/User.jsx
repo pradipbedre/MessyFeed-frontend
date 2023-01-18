@@ -147,7 +147,6 @@ const UserPage = () => {
         style={{
           overflow: "auto",
           height: "100vh",
-          //   position: "sticky",
           left: 0,
           top: 0,
           bottom: 0,

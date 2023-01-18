@@ -37,11 +37,12 @@ const columns = [
 
 const ViewPlans = () => {
   const [plansData, setPlansData] = useState();
+
   useEffect(() => {
-    const getUserData = async () => {
+    const getPlansData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8800/api/user/mess/plans",
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/plans",
 
           {
             headers: {
@@ -71,7 +72,7 @@ const ViewPlans = () => {
         console.log(err.message);
       }
     };
-    getUserData();
+    getPlansData();
   }, []);
 
   return (

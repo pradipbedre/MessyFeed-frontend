@@ -78,31 +78,37 @@ import { Button, Descriptions, Modal } from "antd";
 
 const ShowCustomer = () => {
   const location = useLocation();
-  // const history = useHistory();
   const [data, setData] = useState({});
 
   useEffect(() => {
-    setData(location.state);
+    const key = location.state.record.key;
+    const data = location.state.allCustomersData?.find(
+      (item) => item._id === key
+    );
+    setData(data);
+    console.log(data);
   }, [location]);
 
-  // const handleBackButton = () => {
-  //   history.goBack();
-  // };
   return (
     <>
-      {/* <button onClick={handleBackButton}>Back</button> */}
       <div>
         <h2>Details</h2>
         <Descriptions column={1} bordered>
           <Descriptions.Item label="Name">{data?.name}</Descriptions.Item>
           <Descriptions.Item label="Email">{data?.email}</Descriptions.Item>
-          <Descriptions.Item label="Phone No">{data?.phone}</Descriptions.Item>
-          <Descriptions.Item label="Address">{data?.address}</Descriptions.Item>
+          <Descriptions.Item label="Phone No">
+            {data?.phoneNo}
+          </Descriptions.Item>
+          <Descriptions.Item label="Address">
+            {`${data?.address?.street} ${data?.address?.city} ${data?.address?.state} ${data?.address?.pincode}`}
+          </Descriptions.Item>
           <Descriptions.Item label="Gender">{data?.gender}</Descriptions.Item>
-          <Descriptions.Item label="Meal Plan">{data?.plan}</Descriptions.Item>
+          <Descriptions.Item label="Meal Plan">
+            {data?.planName}
+          </Descriptions.Item>
           <Descriptions.Item label="Status">{data?.status}</Descriptions.Item>
           <Descriptions.Item label="Plan End Date">
-            {data?.endDate}
+            {data?.startDate}
           </Descriptions.Item>
         </Descriptions>
         <br />

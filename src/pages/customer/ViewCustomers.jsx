@@ -1,98 +1,87 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Input, Space, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const { Search } = Input;
 
-const tableData = [
-  {
-    key: "1",
-    name: "Ram A",
-    email: "ram@gmail.com",
-    phone: "9282763453",
-    gender: "Male",
-    address: "Madhapur, Hyderabad, Telangana, India, 500082",
-    status: "Active",
-    plan: "One Meal",
-    endDate: "30-01-23",
-  },
-  {
-    key: "2",
-    name: "Seeta B",
-    email: "seeta@gmail.com",
-    phone: "9282773453",
-    gender: "Female",
-    address: "Gachibowli, Hyderabad, Telangana, India, 500083",
-    status: "Active",
-    plan: "Two Meal",
-    endDate: "31-01-23",
-  },
-  {
-    key: "3",
-    name: "Anshu C",
-    email: "anshu@gmail.com",
-    phone: "9282769453",
-    gender: "Female",
-    address: "Panjagutta, Hyderabad, Telangana, India, 500084",
-    status: "Active",
-    plan: "One Meal",
-    endDate: "25-01-23",
-  },
-  {
-    key: "4",
-    name: "Krishna D",
-    email: "krishna@gmail.com",
-    phone: "9222763453",
-    gender: "Male",
-    address: "Hitech City, Hyderabad, Telangana, India, 500085",
-    status: "Inactive",
-    plan: "One Meal",
-    endDate: "29-12-22",
-  },
-  {
-    key: "5",
-    name: "Chiru E",
-    email: "chiru@gmail.com",
-    phone: "9282563453",
-    gender: "Male",
-    address: "Madhapur, Hyderabad, Telangana, India, 500082",
-    status: "Active",
-    plan: "One Meal",
-    endDate: "30-01-23",
-  },
-  {
-    key: "6",
-    name: "Harini D",
-    email: "harini@gmail.com",
-    phone: "9282764453",
-    gender: "Female",
-    address: "Kukatpally, Hyderabad, Telangana, India, 500086",
-    status: "Active",
-    plan: "Two Meal",
-    endDate: "07-02-23",
-  },
-  {
-    key: "7",
-    name: "Kiran A",
-    email: "kiran@gmail.com",
-    phone: "9282763452",
-    gender: "Male",
-    address: "Gachibowli, Hyderabad, Telangana, India, 500083",
-    status: "Inactive",
-    plan: "One Meal",
-    endDate: "30-012-22",
-  },
-];
+// Sample table data const tableData = [
+//   {
+//     key: "1",
+//     name: "Ram A",
+//     email: "ram@gmail.com",
+//     phone: "9282763453",
+//     gender: "Male",
+//     address: "Madhapur, Hyderabad, Telangana, India, 500082",
+//     status: "Active",
+//     plan: "One Meal",
+//     endDate: "30-01-23",
+//   },
+// ];
 
 const ViewCustomers = () => {
-  const [data, setData] = useState(tableData);
+  const [allCustomersData, setAllCustomersData] = useState();
+  const [plansData, setPlansData] = useState();
+  const [customerData, setCustomerData] = useState();
   const [searchText, setSearchText] = useState("");
-  const [filteredData, setFilteredData] = useState(data);
+  const [filteredData, setFilteredData] = useState();
+
+  useEffect(() => {
+    const getPlansData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/plans",
+          {
+            headers: {
+              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+            },
+          }
+        );
+        setPlansData(response?.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    getPlansData();
+  }, []);
+
+  useEffect(() => {
+    const getCustomersData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/customer/all",
+
+          {
+            headers: {
+              Authorization: `${import.meta.env.VITE_ACCESS_TOKEN}`,
+            },
+          }
+        );
+        setAllCustomersData(
+          response?.data?.map((data) => {
+            data.key = data?._id;
+            const selectedPlan = plansData?.find(
+              (item) => item._id === data?.planId
+            );
+            data.planName = selectedPlan?.name;
+            return data;
+          })
+        );
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    plansData ? getCustomersData() : "";
+  }, [plansData]);
+
+  useEffect(() => {
+    setFilteredData(allCustomersData);
+  }, [allCustomersData]);
 
   const handleSearch = (e) => {
     setSearchText(e);
-    const filtered = data.filter((item) =>
+    const filtered = allCustomersData.filter((item) =>
       Object.values(item).some((val) =>
         val.toString().toLowerCase().includes(searchText.toLowerCase())
       )
@@ -105,7 +94,10 @@ const ViewCustomers = () => {
       title: "Name",
       dataIndex: "name",
       render: (text, record) => (
-        <Link to="/user/mess/customer/view" state={record}>
+        <Link
+          to="/user/mess/customer/view"
+          state={{ record, allCustomersData }}
+        >
           {text}
         </Link>
       ),
@@ -116,15 +108,7 @@ const ViewCustomers = () => {
     },
     {
       title: "Phone No",
-      dataIndex: "phone",
-    },
-    {
-      title: "Gender",
-      dataIndex: "gender",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
+      dataIndex: "phoneNo",
     },
     {
       title: "Status",
@@ -132,11 +116,7 @@ const ViewCustomers = () => {
     },
     {
       title: "Plan",
-      dataIndex: "plan",
-    },
-    {
-      title: "End Date",
-      dataIndex: "endDate",
+      dataIndex: "planName",
     },
   ];
 
@@ -145,7 +125,6 @@ const ViewCustomers = () => {
       <Space direction="vertical">
         <Search placeholder="Search" onSearch={handleSearch} enterButton />
       </Space>
-
       <Table
         columns={columns}
         dataSource={filteredData}

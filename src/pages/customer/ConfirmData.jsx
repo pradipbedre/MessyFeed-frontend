@@ -1,20 +1,34 @@
 import { Descriptions } from "antd";
-export const ConfirmData = (formData) => {
-  const data = formData.formData;
+export const ConfirmData = ({ formData, selectedData }) => {
+  const data = formData;
+  console.log(data);
   return (
     <div>
       <h3>Confirm Details</h3>
       <Descriptions column={2} bordered>
-        {Object.keys(data).map((key) =>
-          data[key] in ["street", "city", "state", "pincode"] ? (
-            ""
+        {Object.keys(data).map((key) => {
+          return key === "address" ? (
+            data[key] ? (
+              <Descriptions.Item
+                label={key}
+              >{`${data[key]["street"]} ${data[key]["city"]}, ${data[key]["state"]}, ${data[key]["pincode"]}`}</Descriptions.Item>
+            ) : (
+              ""
+            )
+          ) : key === "mealPlan" ? (
+            selectedData ? (
+              <Descriptions.Item
+                label={key}
+              >{`${selectedData}`}</Descriptions.Item>
+            ) : (
+              ""
+            )
           ) : data[key] ? (
             <Descriptions.Item label={key}>{`${data[key]}`}</Descriptions.Item>
           ) : (
             ""
-          )
-        )}
-        <Descriptions.Item label="address">{`${data["state"]}, ${data["city"]}, ${data["country"]}, ${data["pincode"]} `}</Descriptions.Item>
+          );
+        })}
       </Descriptions>
       <br />
       <br />

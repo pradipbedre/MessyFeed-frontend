@@ -10,18 +10,6 @@ const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 
-// const prefixSelector = (
-//   <Form.Item name="prefix" noStyle>
-//     <Select
-//       style={{
-//         width: 70,
-//       }}
-//     >
-//       <Option value="91">+91</Option>
-//     </Select>
-//   </Form.Item>
-// );
-
 export const PersonalDetails = ({ form }) => {
   return (
     <>
@@ -45,7 +33,7 @@ export const PersonalDetails = ({ form }) => {
       >
         <Form.Item
           label="Name"
-          name="customerName"
+          name="name"
           rules={[
             { required: true, message: "Please enter customer name here" },
           ]}
@@ -63,7 +51,7 @@ export const PersonalDetails = ({ form }) => {
           <Input />
         </Form.Item>
         <Form.Item
-          name="phone"
+          name="phoneNo"
           label="Contact No"
           rules={[
             {
@@ -73,7 +61,6 @@ export const PersonalDetails = ({ form }) => {
           ]}
         >
           <Input
-            // addonBefore={prefixSelector}
             style={{
               width: "100%",
             }}
@@ -96,24 +83,24 @@ export const PersonalDetails = ({ form }) => {
           </Select>
         </Form.Item>
         <Form.Item label="Address">
-          <Form.Item name="street" noStyle>
+          <Form.Item name={["address", "street"]} noStyle>
             <Input
               placeholder="Street"
               style={{ width: "45%", marginRight: "3%" }}
             />
           </Form.Item>
-          <Form.Item name="city" noStyle>
+          <Form.Item name={["address", "city"]} noStyle>
             <Input placeholder="City" style={{ width: "45%" }} />
           </Form.Item>
           <br />
           <br />
-          <Form.Item name="state" noStyle>
+          <Form.Item name={["address", "state"]} noStyle>
             <Input
               placeholder="State"
               style={{ width: "45%", marginRight: "3%" }}
             />
           </Form.Item>
-          <Form.Item name="pincode" noStyle>
+          <Form.Item name={["address", "pincode"]} noStyle>
             <Input placeholder="Pincode" style={{ width: "45%" }} />
           </Form.Item>
         </Form.Item>

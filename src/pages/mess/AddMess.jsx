@@ -14,7 +14,7 @@ const AddMess = () => {
     const { address, ...otherValues } = values;
     try {
       const response = await axios.post(
-        "http://localhost:8800/api/user/mess/",
+        `${import.meta.env.VITE_BASE_URL}` + "user/mess/",
         { address: addr, pincode: pin, ...otherValues },
         {
           headers: {
@@ -26,6 +26,8 @@ const AddMess = () => {
       if (response.status === 200) {
         setMessData(response.data);
         form.resetFields();
+      } else {
+        console.log(response.message);
       }
     } catch (err) {
       form.resetFields();
