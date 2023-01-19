@@ -4,17 +4,42 @@ import axios from "axios";
 import { getCookie } from "../../utils/Cookie";
 const { Option } = Select;
 
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-
 const PlanRenewal = () => {
   const [plansData, setPlansData] = useState();
   const [form] = Form.useForm();
+
+  const onFinish = () => {
+    form
+      .validateFields()
+      .then(async (values) => {
+        console.log(values);
+        const reqBody = {
+          email: values?.email,
+          planId: values?.messPlan,
+          mealsLeft: values?.mealsLeft,
+          paymentMode: values?.paymentMode,
+          paidAmount: values?.planCost,
+          startDate: values?.startDate,
+        };
+        const response = await axios.put(
+          `${import.meta.env.VITE_BASE_URL}` + "user/",
+          reqBody,
+          {
+            headers: {
+              Authorization: `${getCookie("jwt_token")}`,
+            },
+          }
+        );
+        form.resetFields();
+      })
+      .catch((errorInfo) => {
+        console.log(errorInfo);
+      });
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
 
   useEffect(() => {
     const getPlansData = async () => {
@@ -36,17 +61,32 @@ const PlanRenewal = () => {
     getPlansData();
   }, []);
 
+  const handleEmailChange = (value) => {
+    const getCustomersData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}user/mess/customer/${value}`,
+          {
+            headers: {
+              Authorization: `${getCookie("jwt_token")}`,
+            },
+          }
+        );
+        if (response?.data?.status === "Active")
+          alert("You already have an active plan");
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    getCustomersData();
+  };
+
   const handleSelectChange = (value) => {
     const selectedPlan = plansData.find((item) => item._id === value);
     form.setFieldsValue({
       planCost: selectedPlan?.planCost,
       mealsLeft: selectedPlan?.mealCount,
     });
-    setSelectedData(selectedPlan?.name);
-  };
-
-  const handleInputChange = () => {
-    setInputValue(selectedOption);
   };
 
   return (
@@ -75,7 +115,7 @@ const PlanRenewal = () => {
             { type: "email", message: "Pleasse enter valid email" },
           ]}
         >
-          <Input />
+          <Input.Search onSearch={handleEmailChange} />
         </Form.Item>
         <Form.Item
           name="mealPlan"
@@ -87,17 +127,21 @@ const PlanRenewal = () => {
             },
           ]}
         >
-          <Select
-            placeholder="select Meal Plan"
-            value={selectedOption}
-            onChange={handleSelectChange}
-          >
-            <Option value="plan1">One Meal - 1000</Option>
-            <Option value="plan2">Two Meal - 2000</Option>
+          <Select placeholder="select Meal Plan" onChange={handleSelectChange}>
+            {plansData?.map((plan) => {
+              return plan ? (
+                <Option value={plan?._id}>{plan?.name}</Option>
+              ) : (
+                ""
+              );
+            })}
           </Select>
         </Form.Item>
-        <Form.Item name="planAmount" label="Plan Amount">
-          <Input value={inputValue} onChange={handleInputChange} />
+        <Form.Item name="planCost" label="Plan Cost">
+          <Input />
+        </Form.Item>
+        <Form.Item name="mealsLeft" label="Meal Count">
+          <Input />
         </Form.Item>
         <Form.Item label="Payment Mode" name="paymentMode" initialValue="Cash">
           <Input />

@@ -46,7 +46,6 @@ const SendOtp = () => {
         action=""
         initialValues={{
           remember: true,
-          prefix: "+91",
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
