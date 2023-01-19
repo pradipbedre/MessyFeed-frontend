@@ -53,7 +53,6 @@ const ViewPlans = () => {
         );
         setPlansData(
           response?.data?.map((data) => {
-            console.log(data);
             data.key = data?._id;
             data.actions = (
               <>

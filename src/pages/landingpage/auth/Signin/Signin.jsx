@@ -16,10 +16,13 @@ const Signin = () => {
       alert("please enter valid details!");
     } else {
       try {
-        const res = await axios.post("http://localhost:8800/api/auth/signin", {
-          email,
-          password,
-        });
+        const res = await axios.post(
+          `${import.meta.env.VITE_BASE_URL}` + "auth/signin",
+          {
+            email,
+            password,
+          }
+        );
         console.log(res);
         if (res.data.Msg) {
           alert(`${res.data.Msg}`);

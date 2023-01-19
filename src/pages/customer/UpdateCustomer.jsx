@@ -1,37 +1,44 @@
 import React from "react";
+import axios from "axios";
 import { Select, Button, TimePicker, Form, Input, Upload } from "antd";
+import { getCookie } from "../../utils/Cookie";
 
-const UpdateCustomer = () => {
+const UpdateCustomer = ({ customerData, setUpdateModal, setCustomerData }) => {
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="91">+91</Option>
-      </Select>
-    </Form.Item>
-  );
-
-  const handleClick = (e) => {
-    e.preventDefault();
+  const onFinish = () => {
     form
       .validateFields()
-      .then((values) => {
-        console.log("Values: ", values);
+      .then(async (values) => {
+        const response = await axios.put(
+          `${import.meta.env.VITE_BASE_URL}` +
+            "user/mess/customer/" +
+            `${customerData._id}`,
+          values,
+          {
+            headers: {
+              Authorization: `${getCookie("jwt_token")}`,
+            },
+          }
+        );
+        setCustomerData((prevState) => {
+          const newCustomerData = { ...prevState };
+          newCustomerData.name = response?.data?.name;
+          newCustomerData.email = response?.data?.email;
+          newCustomerData.phoneNo = response?.data?.phoneNo;
+          newCustomerData.gender = response?.data?.gender;
+          newCustomerData.address = response?.data?.address;
+          return newCustomerData;
+        });
+        form.resetFields();
+        setUpdateModal(false);
       })
       .catch((errorInfo) => {
         console.log(errorInfo);
       });
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -49,14 +56,17 @@ const UpdateCustomer = () => {
         action=""
         initialValues={{
           remember: true,
-          prefix: "+91",
+          name: customerData?.name,
+          email: customerData?.email,
+          phoneNo: customerData?.phoneNo,
+          gender: customerData?.gender,
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
         <Form.Item
           label="Name"
-          name="customerName"
+          name="name"
           rules={[
             { required: true, message: "Please enter customer name here" },
           ]}
@@ -74,7 +84,7 @@ const UpdateCustomer = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          name="phone"
+          name="phoneNo"
           label="Contact No"
           rules={[
             {
@@ -84,7 +94,6 @@ const UpdateCustomer = () => {
           ]}
         >
           <Input
-            addonBefore={prefixSelector}
             style={{
               width: "100%",
             }}
@@ -101,30 +110,46 @@ const UpdateCustomer = () => {
           ]}
         >
           <Select placeholder="select your gender">
-            <Option value="Male">Male</Option>
-            <Option value="Female">Female</Option>
-            <Option value="Other">Other</Option>
+            <Select.Option value="Male">Male</Select.Option>
+            <Select.Option value="Female">Female</Select.Option>
+            <Select.Option value="Other">Other</Select.Option>
           </Select>
         </Form.Item>
         <Form.Item label="Address">
-          <Form.Item name="street" noStyle>
+          <Form.Item
+            name={["address", "street"]}
+            initialValue={customerData?.address?.street}
+            noStyle
+          >
             <Input
               placeholder="Street"
               style={{ width: "45%", marginRight: "3%" }}
             />
           </Form.Item>
-          <Form.Item name="city" noStyle>
+          <Form.Item
+            name={["address", "city"]}
+            initialValue={customerData?.address?.city}
+            noStyle
+          >
             <Input placeholder="City" style={{ width: "45%" }} />
           </Form.Item>
           <br />
           <br />
-          <Form.Item name="state" noStyle>
+          <Form.Item
+            name={["address", "state"]}
+            initialValue={customerData?.address?.state}
+            noStyle
+          >
             <Input
               placeholder="State"
               style={{ width: "45%", marginRight: "3%" }}
             />
           </Form.Item>
-          <Form.Item name="pincode" noStyle>
+          <Form.Item
+            name={["address", "pincode"]}
+            initialValue={customerData?.address?.pincode}
+            noStyle
+          >
             <Input placeholder="Pincode" style={{ width: "45%" }} />
           </Form.Item>
         </Form.Item>
@@ -135,7 +160,7 @@ const UpdateCustomer = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit" onClick={handleClick}>
+          <Button type="primary" htmlType="submit">
             Update Customer
           </Button>
         </Form.Item>

@@ -7,7 +7,6 @@ import { getCookie } from "../../utils/Cookie";
 const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
   const [form] = Form.useForm();
   const [street, city, state] = messData.address.split("  ");
-  console.log(messData.address.split("  "), street);
 
   const onFinish = async (values) => {
     const addr = `${values.address.street}  ${values.address.city}  ${values.address.state}`;
@@ -15,7 +14,7 @@ const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
     const { address, ...otherValues } = values;
     try {
       const response = await axios.put(
-        "http://localhost:8800/api/user/mess/",
+        `${import.meta.env.VITE_BASE_URL}` + "user/mess/",
         { address: addr, pincode: pin, ...otherValues },
         {
           headers: {
@@ -23,7 +22,6 @@ const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
           },
         }
       );
-      console.log(response.status);
       if (response.status === 200) {
         setMessData(response.data);
         form.resetFields();
@@ -47,7 +45,7 @@ const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
           span: 8,
         }}
         wrapperCol={{
-          span: 10,
+          span: 12,
         }}
         layout="horizontal"
         action=""
@@ -56,10 +54,6 @@ const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
           name: messData?.name,
           email: messData?.email,
           contactNo: messData?.contactNo,
-          "address.street": street,
-          "address.city": city,
-          "address.state": state,
-          "address.pincode": messData?.pincode,
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -104,24 +98,28 @@ const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
           <TimePicker />
         </Form.Item> */}
         <Form.Item label="Address">
-          <Form.Item name={["address", "street"]} noStyle>
+          <Form.Item name={["address", "street"]} initialValue={street} noStyle>
             <Input
               placeholder="Street"
               style={{ width: "45%", marginRight: "3%" }}
             />
           </Form.Item>
-          <Form.Item name={["address", "city"]} noStyle>
+          <Form.Item name={["address", "city"]} initialValue={city} noStyle>
             <Input placeholder="City" style={{ width: "45%" }} />
           </Form.Item>
           <br />
           <br />
-          <Form.Item name={["address", "state"]} noStyle>
+          <Form.Item name={["address", "state"]} initialValue={state} noStyle>
             <Input
               placeholder="State"
               style={{ width: "45%", marginRight: "3%" }}
             />
           </Form.Item>
-          <Form.Item name={["address", "pincode"]} noStyle>
+          <Form.Item
+            name={["address", "pincode"]}
+            initialValue={messData?.pincode}
+            noStyle
+          >
             <Input placeholder="Pincode" style={{ width: "45%" }} />
           </Form.Item>
         </Form.Item>

@@ -14,7 +14,9 @@ export const UpdatePlan = ({ planData, plansData, setPlansData }) => {
       .then(async (values) => {
         const { mealCount, planCost, ...otherValues } = values;
         const response = await axios.put(
-          "http://localhost:8800/api/user/mess/plan/" + `${planData._id}`,
+          `${import.meta.env.VITE_BASE_URL}` +
+            "user/mess/plan/" +
+            `${planData._id}`,
           {
             mealCount: parseInt(mealCount),
             planCost: parseInt(planCost),

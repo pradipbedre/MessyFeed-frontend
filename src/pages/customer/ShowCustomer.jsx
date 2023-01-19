@@ -1,121 +1,137 @@
-// import React from "react";
-// import { Button, Descriptions, Modal } from "antd";
-// import { useState } from "react";
-
-// export const ShowCustomer = (rowData) => {
-//   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-//   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-//   const showUpdateModal = () => {
-//     setIsUpdateModalOpen(true);
-//   };
-//   const showDeleteModal = () => {
-//     setIsDeleteModalOpen(true);
-//   };
-//   const handleUpdate = () => {
-//     setIsUpdateModalOpen(false);
-//   };
-//   const handleDelete = () => {
-//     setIsDeleteModalOpen(false);
-//   };
-//   const handleUpdateCancel = () => {
-//     setIsUpdateModalOpen(false);
-//   };
-
-//   const handleDeleteCancel = () => {
-//     setIsDeleteModalOpen(false);
-//   };
-
-// return (
-// <div>
-//   <h3>Mess Info</h3>
-//   <Descriptions column={1} bordered>
-//     <Descriptions.Item label="Mess Name">Super Mess</Descriptions.Item>
-//     <Descriptions.Item label="Email">
-//       super.mess@gmail.com
-//     </Descriptions.Item>
-//     <Descriptions.Item label="Phone">9618263578</Descriptions.Item>
-//     <Descriptions.Item label="Address">
-//       Hyderabad
-//       <br />
-//       500082
-//     </Descriptions.Item>
-//   </Descriptions>
-//   <br />
-//   <br />
-//   <Button type="primary" onClick={showUpdateModal}>
-//     Update Profile
-//   </Button>
-//   <Modal
-//     title="Update Mess Details"
-//     okText="Update"
-//     open={isUpdateModalOpen}
-//     onOk={handleUpdate}
-//     onCancel={handleUpdateCancel}
-//     centered={true}
-//   >
-//     <p>Are you sure??</p>
-//   </Modal>
-//   &nbsp;&nbsp;&nbsp;
-// <Button type="primary" onClick={showDeleteModal}>
-//   Delete Profile
-// </Button>
-//   <Modal
-//     title="Delete Mess"
-//     okText="Delete"
-//     open={isDeleteModalOpen}
-//     onOk={handleDelete}
-//     onCancel={handleDeleteCancel}
-//   >
-//     <p>Are you sure??</p>
-//   </Modal>
-// </div>
-//   );
-// };
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Button, Descriptions, Modal } from "antd";
+import UpdateCustomer from "./UpdateCustomer";
+import { getCookie } from "../../utils/Cookie";
 
 const ShowCustomer = () => {
   const location = useLocation();
-  const [data, setData] = useState({});
+  const [allCustomersData, setAllCustomersData] = useState();
+  const [customerData, setCustomerData] = useState();
+  const [updateModal, setUpdateModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const showUpdateModal = () => {
+    setUpdateModal(true);
+  };
+  const showDeleteModal = () => {
+    setDeleteModal(true);
+  };
+  const handleUpdate = () => {
+    setUpdateModal(false);
+  };
+  const handleDelete = () => {
+    setDeleteModal(false);
+  };
+  const handleUpdateCancel = () => {
+    setUpdateModal(false);
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteModal(false);
+  };
 
   useEffect(() => {
-    const key = location.state.record.key;
-    const data = location.state.allCustomersData?.find(
-      (item) => item._id === key
-    );
-    setData(data);
-    console.log(data);
+    const plansData = location?.state?.plansData;
+    const getCustomersData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/customer/all",
+
+          {
+            headers: {
+              Authorization: `${getCookie("jwt_token")}`,
+            },
+          }
+        );
+        setAllCustomersData(
+          response?.data?.map((data) => {
+            const selectedPlan = plansData?.find(
+              (item) => item._id === data?.planId
+            );
+            data.planName = selectedPlan?.name;
+            return data;
+          })
+        );
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    getCustomersData();
   }, [location]);
+
+  useEffect(() => {
+    const data = allCustomersData?.find(
+      (item) => item._id === location?.state?.record?.key
+    );
+    setCustomerData(data);
+  }, [allCustomersData]);
 
   return (
     <>
       <div>
         <h2>Details</h2>
         <Descriptions column={1} bordered>
-          <Descriptions.Item label="Name">{data?.name}</Descriptions.Item>
-          <Descriptions.Item label="Email">{data?.email}</Descriptions.Item>
+          <Descriptions.Item label="Name">
+            {customerData?.name}
+          </Descriptions.Item>
+          <Descriptions.Item label="Email">
+            {customerData?.email}
+          </Descriptions.Item>
           <Descriptions.Item label="Phone No">
-            {data?.phoneNo}
+            {customerData?.phoneNo}
           </Descriptions.Item>
           <Descriptions.Item label="Address">
-            {`${data?.address?.street} ${data?.address?.city} ${data?.address?.state} ${data?.address?.pincode}`}
+            {`${customerData?.address?.street} ${customerData?.address?.city} ${customerData?.address?.state} ${customerData?.address?.pincode}`}
           </Descriptions.Item>
-          <Descriptions.Item label="Gender">{data?.gender}</Descriptions.Item>
+          <Descriptions.Item label="Gender">
+            {customerData?.gender}
+          </Descriptions.Item>
           <Descriptions.Item label="Meal Plan">
-            {data?.planName}
+            {customerData?.planName}
           </Descriptions.Item>
-          <Descriptions.Item label="Status">{data?.status}</Descriptions.Item>
-          {/* <Descriptions.Item label="Plan End Date">
-            {data?.startDate}
-          </Descriptions.Item> */}
+          <Descriptions.Item label="Status">
+            {customerData?.status}
+          </Descriptions.Item>
+          <Descriptions.Item label="Plan End Date">
+            {customerData?.startDate}
+          </Descriptions.Item>
         </Descriptions>
         <br />
         <br />
-        <Button type="primary">Update Customer</Button>
+        <Button type="primary" onClick={showUpdateModal}>
+          Update Customer
+        </Button>
+        <Modal
+          destroyOnClose={true}
+          title="Update Customer Details"
+          okText="Update"
+          open={updateModal}
+          onOk={handleUpdate}
+          onCancel={handleUpdateCancel}
+          centered={true}
+          footer={null}
+        >
+          <UpdateCustomer
+            customerData={customerData}
+            setUpdateModal={setUpdateModal}
+            setCustomerData={setCustomerData}
+          />
+        </Modal>
         &nbsp;&nbsp;
-        <Button type="primary">Delete Customer</Button>
+        <Button type="primary" onClick={showDeleteModal}>
+          Delete Customer
+        </Button>
+        <Modal
+          title="Delete Customer"
+          okText="Delete"
+          open={deleteModal}
+          onOk={handleDelete}
+          onCancel={handleDeleteCancel}
+        >
+          <p>Are you sure??</p>
+        </Modal>
       </div>
     </>
   );
