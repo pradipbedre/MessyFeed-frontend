@@ -19,7 +19,7 @@ const MessList = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        `http://localhost:8800/api/home/search?q=${pincode}`
+        `${import.meta.env.VITE_BASE_URL}/home/search?q=${pincode}`
       );
       //console.log(res);
       setMessList(res.data);
@@ -36,7 +36,7 @@ const MessList = () => {
           <button className="back">Back</button>
         </Link>
       </nav>
-    
+
       <div className="mess-list">
         {messList &&
           messList.map((mess) => (

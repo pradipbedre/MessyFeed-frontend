@@ -52,7 +52,7 @@ const Signup = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         axios
-          .post(`http://localhost:8800/api/auth/signup`, {
+          .post(`${import.meta.env.VITE_BASE_URL}/auth/signup`, {
             name: result.user.displayName,
             email: result.user.email,
           })
