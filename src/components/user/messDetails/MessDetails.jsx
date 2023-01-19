@@ -141,7 +141,7 @@ const MessDetails = () => {
           <h3>Plans</h3>
           {plans &&
             plans.map((plan) => (
-              <div className="plan" key={plan_id}>
+              <div className="plan" key={plan._id}>
                 <h4>{plan.name}</h4>
                 <p className="cost">{`Cost: ${plan.planCost} Rs`}</p>
                 <p className="meal">{`Total Meals: ${plan.mealCount}`}</p>
