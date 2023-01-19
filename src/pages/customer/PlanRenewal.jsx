@@ -1,5 +1,7 @@
 import { DatePicker, Form, Input, Select, Button } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { getCookie } from "../../utils/Cookie";
 const { Option } = Select;
 
 const onFinish = (values) => {
@@ -11,30 +13,40 @@ const onFinishFailed = (errorInfo) => {
 };
 
 const PlanRenewal = () => {
-  const [selectedOption, setSelectedOption] = useState("");
-  const [inputValue, setInputValue] = useState("");
+  const [plansData, setPlansData] = useState();
   const [form] = Form.useForm();
 
+  useEffect(() => {
+    const getPlansData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/plans",
+
+          {
+            headers: {
+              Authorization: `${getCookie("jwt_token")}`,
+            },
+          }
+        );
+        setPlansData(response?.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    getPlansData();
+  }, []);
+
   const handleSelectChange = (value) => {
-    console.log(value);
-    setSelectedOption(value);
-    setInputValue(selectedOption);
+    const selectedPlan = plansData.find((item) => item._id === value);
+    form.setFieldsValue({
+      planCost: selectedPlan?.planCost,
+      mealsLeft: selectedPlan?.mealCount,
+    });
+    setSelectedData(selectedPlan?.name);
   };
 
   const handleInputChange = () => {
     setInputValue(selectedOption);
-  };
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    form
-      .validateFields()
-      .then((values) => {
-        console.log("Values: ", values);
-      })
-      .catch((errorInfo) => {
-        console.log(errorInfo);
-      });
   };
 
   return (
@@ -100,7 +112,7 @@ const PlanRenewal = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit" onClick={handleClick}>
+          <Button type="primary" htmlType="submit">
             Renew Plan
           </Button>
         </Form.Item>
