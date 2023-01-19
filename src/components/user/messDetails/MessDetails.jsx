@@ -22,7 +22,7 @@ const MessDetails = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8800/api/user/mess/search/${messId}`
+          `http://localhost:8800/api/user/mess/${messId}`
         );
         const resPlans = await axios.get(
           `http://localhost:8800/api/user/mess/plans/${messId}`
