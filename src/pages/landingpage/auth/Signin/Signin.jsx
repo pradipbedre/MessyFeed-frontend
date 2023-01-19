@@ -23,7 +23,6 @@ const Signin = () => {
             password,
           }
         );
-        console.log(res);
         if (res.data.Msg) {
           alert(`${res.data.Msg}`);
         }

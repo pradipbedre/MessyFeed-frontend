@@ -37,7 +37,6 @@ const Signup = () => {
           setPassword("");
         }
       } catch (error) {
-        // console.log(error.response.data.errors[0].param);
         if (error.response.data.errors) {
           alert("Enter valid details!");
         }

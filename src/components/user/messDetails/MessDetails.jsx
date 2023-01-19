@@ -141,7 +141,7 @@ const MessDetails = () => {
           <h3>Plans</h3>
           {plans &&
             plans.map((plan) => (
-              <div className="plan">
+              <div className="plan" key={plan_id}>
                 <h4>{plan.name}</h4>
                 <p className="cost">{`Cost: ${plan.planCost} Rs`}</p>
                 <p className="meal">{`Total Meals: ${plan.mealCount}`}</p>
@@ -192,7 +192,7 @@ const MessDetails = () => {
       <div className="all-reviews">
         {allReviews &&
           allReviews.map((rev) => (
-            <div className="review">
+            <div className="review" >
               <p>{rev.review}</p>
               <div className="rating">
                 <p>{<StarRating rating={rev.rating} />}</p>
