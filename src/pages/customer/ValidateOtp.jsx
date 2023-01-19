@@ -1,26 +1,34 @@
 import React from "react";
+import axios from "axios";
 import { Button, Radio, Form, Input } from "antd";
+import { getCookie } from "../../utils/Cookie";
 
 const ValidateOtp = () => {
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  const handleClick = (e) => {
-    e.preventDefault();
+  const onFinish = () => {
     form
       .validateFields()
-      .then((values) => {
-        console.log("Values: ", values);
+      .then(async (values) => {
+        const response = await axios.put(
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/customer/validateOtp",
+          values,
+          {
+            headers: {
+              Authorization: `${getCookie("jwt_token")}`,
+            },
+          }
+        );
+        console.log(response?.data);
+        form.resetFields();
       })
       .catch((errorInfo) => {
         console.log(errorInfo);
       });
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -43,6 +51,16 @@ const ValidateOtp = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            { required: true, message: "Please enter email" },
+            { type: "email", message: "Pleasse enter valid email" },
+          ]}
+        >
+          <Input />
+        </Form.Item>
         <Form.Item
           label="OTP"
           name="otp"
@@ -67,7 +85,7 @@ const ValidateOtp = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit" onClick={handleClick}>
+          <Button type="primary" htmlType="submit">
             Validate OTP
           </Button>
         </Form.Item>

@@ -18,7 +18,11 @@ const Signup = () => {
     } else {
       try {
         const res = await axios.post(
+<<<<<<< HEAD
           `${import.meta.env.VITE_BASE_URL}auth/signup`,
+=======
+          `${import.meta.env.VITE_BASE_URL}` + "auth/signup",
+>>>>>>> dev
           {
             name,
             email,
@@ -44,6 +48,27 @@ const Signup = () => {
     }
   };
 
+<<<<<<< HEAD
+=======
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        axios
+          .post(`${import.meta.env.VITE_BASE_URL}/auth/signup`, {
+            name: result.user.displayName,
+            email: result.user.email,
+          })
+          .then((res) => {
+            console.log(res);
+            navigate("/signin");
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+>>>>>>> dev
   return (
     <div>
       <div className="signup-container">

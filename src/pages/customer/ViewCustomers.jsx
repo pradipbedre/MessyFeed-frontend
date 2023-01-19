@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { getCookie } from "../../utils/Cookie";
+import ShowCustomer from "./ShowCustomer";
 
 const { Search } = Input;
 
@@ -95,10 +96,7 @@ const ViewCustomers = () => {
       title: "Name",
       dataIndex: "name",
       render: (text, record) => (
-        <Link
-          to="/user/mess/customer/view"
-          state={{ record, allCustomersData }}
-        >
+        <Link to="/user/mess/customer/view" state={{ record, plansData }}>
           {text}
         </Link>
       ),

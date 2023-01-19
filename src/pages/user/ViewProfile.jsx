@@ -13,7 +13,7 @@ export const ViewProfile = () => {
   useEffect(() => {
     const getUserData = async () => {
       const response = await axios.get(
-        "http://localhost:8800/api/user/",
+        `${import.meta.env.VITE_BASE_URL}` + "user/",
 
         {
           headers: {

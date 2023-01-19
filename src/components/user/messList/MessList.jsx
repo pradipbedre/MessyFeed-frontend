@@ -21,7 +21,7 @@ const MessList = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}home/search?q=${pincode}`
+        `${import.meta.env.VITE_BASE_URL}/home/search?q=${pincode}`
       );
       setMessList(res.data);
     };

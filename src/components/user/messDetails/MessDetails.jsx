@@ -22,11 +22,11 @@ const MessDetails = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}user/mess/${messId}`
+          `${import.meta.env.VITE_BASE_URL}/user/mess/${messId}`
         );
         console.log("Mess Details: ", res);
         const resPlans = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}user/mess/plans/${messId}`
+          `${import.meta.env.VITE_BASE_URL}/user/mess/plans/${messId}`
         );
         console.log("mess plans: ", resPlans);
         setMess(res.data);
@@ -43,7 +43,7 @@ const MessDetails = () => {
     const fetchData = async () => {
       try {
         const resReview = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}home/reviews/${messId}`
+          `${import.meta.env.VITE_BASE_URL}/home/reviews/${messId}`
         );
         setAllReviews(resReview.data);
       } catch (error) {
@@ -57,7 +57,7 @@ const MessDetails = () => {
   const reviewSubmit = async (e) => {
     try {
       const isReviewed = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}home/isReviewed`,
+        `${import.meta.env.VITE_BASE_URL}` + "home/isReviewed",
         {
           email,
         }
@@ -66,7 +66,7 @@ const MessDetails = () => {
         alert("your review already submitted!");
       } else {
         const res = await axios.post(
-          `${import.meta.env.VITE_BASE_URL}home/review`,
+          `${import.meta.env.VITE_BASE_URL}/home/review`,
           {
             email,
             review,

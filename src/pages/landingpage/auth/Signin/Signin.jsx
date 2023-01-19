@@ -17,12 +17,20 @@ const Signin = () => {
     } else {
       try {
         const res = await axios.post(
+<<<<<<< HEAD
           `${import.meta.env.VITE_BASE_URL}auth/signin`,
+=======
+          `${import.meta.env.VITE_BASE_URL}` + "auth/signin",
+>>>>>>> dev
           {
             email,
             password,
           }
         );
+<<<<<<< HEAD
+=======
+        console.log(res);
+>>>>>>> dev
         if (res.data.Msg) {
           alert(`${res.data.Msg}`);
         }
