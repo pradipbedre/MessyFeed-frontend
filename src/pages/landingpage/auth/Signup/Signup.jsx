@@ -20,12 +20,15 @@ const Signup = () => {
       alert("please enter valid details!");
     } else {
       try {
-        const res = await axios.post("http://localhost:8800/api/auth/signup", {
-          name,
-          email,
-          password,
-          phoneNo,
-        });
+        const res = await axios.post(
+          `${import.meta.env.VITE_BASE_URL}` + "auth/signup",
+          {
+            name,
+            email,
+            password,
+            phoneNo,
+          }
+        );
         if (res.data.user) {
           alert("This email is already register, sign up with another email.");
         } else if (res.status === 200) {

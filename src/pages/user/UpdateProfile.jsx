@@ -10,7 +10,6 @@ const onFinishFailed = (errorInfo) => {
 export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
   const [form] = Form.useForm();
   const [street, city, state, pincode] = userData.address.split("  ");
-  console.log(userData.address.split("  "), street);
 
   const onFinish = () => {
     form
@@ -19,7 +18,7 @@ export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
         const addr = `${values.address.street}  ${values.address.city}  ${values.address.state}  ${values.address.pincode}`;
         const { address, ...otherValues } = values;
         const response = await axios.put(
-          "http://localhost:8800/api/user/",
+          `${import.meta.env.VITE_BASE_URL}` + "user/",
           { address: addr, ...otherValues },
           {
             headers: {
@@ -56,10 +55,6 @@ export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
           email: userData?.email,
           phoneNo: userData?.phoneNo,
           gender: userData?.gender,
-          street: street,
-          city: city,
-          state: state,
-          pincode: pincode,
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -97,7 +92,7 @@ export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
             { type: "email", message: "Pleasse enter valid email" },
           ]}
         >
-          <Input />
+          <Input disabled />
         </Form.Item>
         <Form.Item
           name="phoneNo"
@@ -117,24 +112,28 @@ export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
         </Form.Item>
 
         <Form.Item label="Address">
-          <Form.Item name={["address", "street"]} noStyle>
+          <Form.Item name={["address", "street"]} initialValue={street} noStyle>
             <Input
               placeholder="Street"
               style={{ width: "45%", marginRight: "3%" }}
             />
           </Form.Item>
-          <Form.Item name={["address", "city"]} noStyle>
+          <Form.Item name={["address", "city"]} initialValue={city} noStyle>
             <Input placeholder="City" style={{ width: "45%" }} />
           </Form.Item>
           <br />
           <br />
-          <Form.Item name={["address", "state"]} noStyle>
+          <Form.Item name={["address", "state"]} initialValue={state} noStyle>
             <Input
               placeholder="State"
               style={{ width: "45%", marginRight: "3%" }}
             />
           </Form.Item>
-          <Form.Item name={["address", "pincode"]} noStyle>
+          <Form.Item
+            name={["address", "pincode"]}
+            initialValue={pincode}
+            noStyle
+          >
             <Input placeholder="Pincode" style={{ width: "45%" }} />
           </Form.Item>
         </Form.Item>

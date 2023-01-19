@@ -60,7 +60,7 @@ const ViewMess = () => {
     const getMessData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8800/api/user/mess/",
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/",
           {
             headers: {
               Authorization: `${getCookie("jwt_token")}`,
@@ -132,7 +132,6 @@ const ViewMess = () => {
   };
 
   const onChange = (currentPage) => {
-    console.log(currentPage);
     setCurrentPage(currentPage);
     fetchData();
   };

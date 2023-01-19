@@ -69,14 +69,6 @@ const items = [
     ),
     getItem(
       <>
-        <Link to="/user/mess/customer/update" title="UpdateCustomer">
-          Update Customer
-        </Link>
-      </>,
-      "9"
-    ),
-    getItem(
-      <>
         <Link to="/user/mess/customer/delete" title="DeleteCustomer">
           Delete Customer
         </Link>

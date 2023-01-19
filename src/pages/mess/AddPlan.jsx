@@ -13,7 +13,7 @@ const AddPlan = () => {
       .then(async (values) => {
         const { mealCount, planCost, ...otherValues } = values;
         const response = await axios.post(
-          "http://localhost:8800/api/user/mess/plan/",
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/plan/",
           {
             mealCount: parseInt(mealCount),
             planCost: parseInt(planCost),
@@ -25,11 +25,9 @@ const AddPlan = () => {
             },
           }
         );
-        console.log(response.status);
         if (response.status === 200) {
           form.resetFields();
         } else {
-          console.log(response.data.message);
           form.resetFields();
         }
       })
