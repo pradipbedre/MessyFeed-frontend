@@ -103,6 +103,14 @@ const items = [
     ),
     getItem(
       <>
+        <Link to="/user/changePassword" title="Change Password">
+          Change Password
+        </Link>
+      </>,
+      "17"
+    ),
+    getItem(
+      <>
         <Link to="/user/logout" title="Logout">
           Logout
         </Link>
