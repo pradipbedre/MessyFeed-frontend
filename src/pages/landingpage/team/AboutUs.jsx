@@ -2,7 +2,7 @@ import React from "react";
 import "./about_us.scss";
 import pradipImg from "../../../assets/pradip.png";
 import indranilImg from "../../../assets/indranil.jpg";
-import dl from "../../../assets/dl.png";
+import dl from "../../../assets/dl1.jpg";
 const AboutUs = () => {
   return (
     <div className="AboutUsContainer">
@@ -76,15 +76,17 @@ const AboutUs = () => {
                 <h2>Dhanunjaya Lakshmi</h2>
                 <p className="title">Team Member</p>
                 <p className="desc">
-                  "I am a skilled software developer with a passion for tech and
-                  end to end product development in web"
+                  "I am a skilled software developer with 8 years of experience
+                  and passion for tech and product development in web."
                 </p>
                 <h4>
                   Email: <a href="">dhanunjaya.lakshmi60@gmail.com</a>
                 </h4>
                 <div className="links">
                   <a href="https://github.com/dhanunjayalakshmi">GitHub</a>
-                  <a href="">LinkedIn</a>
+                  <a href="https://www.linkedin.com/in/dhanunjaya-lakshmi-46a32876">
+                    LinkedIn
+                  </a>
                 </div>
               </div>
             </div>
