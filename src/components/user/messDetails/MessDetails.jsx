@@ -153,7 +153,7 @@ const MessDetails = () => {
 
       {/* Rating System */}
       <div className="rating-system-form">
-        <h2>All Ratings By Mess Customers</h2>
+        <h2>Our Customers Feedback</h2>
         <button className="givebtn" onClick={() => setFormActive(!formActive)}>
           Give Rating
         </button>
@@ -193,7 +193,7 @@ const MessDetails = () => {
       <div className="all-reviews">
         {allReviews &&
           allReviews.map((rev) => (
-            <div className="review" >
+            <div className="review">
               <p>{rev.review}</p>
               <div className="rating">
                 <p>{<StarRating rating={rev.rating} />}</p>
