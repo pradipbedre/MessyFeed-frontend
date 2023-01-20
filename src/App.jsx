@@ -19,6 +19,7 @@ import ValidateOtp from "./pages/customer/ValidateOtp.jsx";
 import PlanRenewal from "./pages/customer/PlanRenewal.jsx";
 import ViewCustomers from "./pages/customer/ViewCustomers.jsx";
 import ViewProfile from "./pages/user/ViewProfile.jsx";
+import ChangePassword from "./pages/user/ChangePassword.jsx";
 import Logout from "./pages/user/Logout.jsx";
 import UserPage from "./pages/user/User";
 import ShowCustomer from "./pages/customer/ShowCustomer.jsx";
@@ -30,6 +31,7 @@ const App = () => {
         <Route element={<PivateRoutes />}>
           <Route path="/user" element={<UserPage />}>
             <Route path="profile" element={<ViewProfile />} />
+            <Route path="changePassword" element={<ChangePassword />} />
             <Route path="logout" element={<Logout />} />
             <Route path="/user/mess">
               <Route path="view" element={<ViewMess />} />
