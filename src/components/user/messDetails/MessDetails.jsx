@@ -24,10 +24,11 @@ const MessDetails = () => {
         const res = await axios.get(
           `${import.meta.env.VITE_BASE_URL}user/mess/${messId}`
         );
+        console.log("Mess Details: ", res);
         const resPlans = await axios.get(
           `${import.meta.env.VITE_BASE_URL}user/mess/plans/${messId}`
         );
-
+        console.log("mess plans: ", resPlans);
         setMess(res.data);
         setPlans(resPlans.data);
       } catch (error) {
@@ -141,7 +142,7 @@ const MessDetails = () => {
           <h3 className="title">Plans</h3>
           {plans &&
             plans.map((plan) => (
-              <div className="plan">
+              <div className="plan" key={plan._id}>
                 <h4>{plan.name}</h4>
                 <p className="cost">{`Cost: ${plan.planCost} Rs`}</p>
                 <p className="meal">{`Total Meals: ${plan.mealCount}`}</p>
@@ -192,7 +193,7 @@ const MessDetails = () => {
       <div className="all-reviews">
         {allReviews &&
           allReviews.map((rev) => (
-            <div className="review">
+            <div className="review" >
               <p>{rev.review}</p>
               <div className="rating">
                 <p>{<StarRating rating={rev.rating} />}</p>

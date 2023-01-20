@@ -3,8 +3,6 @@ import "./signup.scss";
 import { Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { auth, provider } from "../../../../utils/Firebase";
-import { signInWithPopup } from "firebase/auth";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -39,30 +37,11 @@ const Signup = () => {
           setPassword("");
         }
       } catch (error) {
-        // console.log(error.response.data.errors[0].param);
         if (error.response.data.errors) {
           alert("Enter valid details!");
         }
       }
     }
-  };
-
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        axios
-          .post(`${import.meta.env.VITE_BASE_URL}/auth/signup`, {
-            name: result.user.displayName,
-            email: result.user.email,
-          })
-          .then((res) => {
-            console.log(res);
-            navigate("/signin");
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   return (

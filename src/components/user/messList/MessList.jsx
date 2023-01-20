@@ -9,19 +9,20 @@ const MessList = () => {
   const [messList, setMessList] = useState([]);
   const pincode = useSelector((state) => state.setCommonPincode);
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
+
+  /* Function for Navigate */
   const handelMessSelect = (id) => {
     dispatch(setMessId(id));
     navigate(`/messList/${id}`);
   };
 
+  /* Fetch all messes */
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
         `${import.meta.env.VITE_BASE_URL}home/search?q=${pincode}`
       );
-      //console.log(res);
       setMessList(res.data);
     };
 
@@ -44,7 +45,7 @@ const MessList = () => {
             <div
               className="mess-card"
               onClick={() => handelMessSelect(mess._id)}
-              id={mess._id}
+              key={mess._id}
             >
               <img src={mess.photos[0]} />
               <h3>{mess.name}</h3>
