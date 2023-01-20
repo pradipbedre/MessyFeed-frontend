@@ -76,8 +76,8 @@ const AboutUs = () => {
                 <h2>Dhanunjaya Lakshmi</h2>
                 <p className="title">Team Member</p>
                 <p className="desc">
-                  "I am a skilled software developer with 8 years of experience
-                  and passion for tech and product development in web."
+                  "Passionate about software development and product building,
+                  always pushing for innovation in my work."
                 </p>
                 <h4>
                   Email: <a href="">dhanunjaya.lakshmi60@gmail.com</a>
