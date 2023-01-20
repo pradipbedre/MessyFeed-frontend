@@ -9,11 +9,14 @@ $shadow: 0px 0px 20px black;
     margin-bottom: 16px;
     padding: 0 8px;
   }
-
+  img {
+    border-radius: 20px;
+  }
   .card {
     box-shadow: 0px 0px 10px black;
     margin: 8px;
     text-align: center;
+    border-radius: 20px;
   }
 
   .about-section {

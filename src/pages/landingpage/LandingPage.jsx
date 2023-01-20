@@ -8,38 +8,58 @@ import "./landingpage.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { setPin } from "../../redux-store/actions/index";
 import logo from "../../assets/logo.png";
-
+import pradipImg from "../../assets/pradip.png";
+import indranilImg from "../../assets/indranil.jpg";
+import dl from "../../assets/dl1.jpg";
 const Landingpage = () => {
   const [pincode, setPincode] = useState("");
   const pincodeSetting = useSelector((state) => state.setCommonPincode);
   const dispatch = useDispatch();
-
+  const [isChecked, setIsChecked] = useState(false);
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
   return (
     <>
       <div className="main">
         <nav>
           <div className="logo">
             <img src={logo} alt="logo" />
-            MessyFeed
           </div>
-          <input type="checkbox" id="menu" />
+          <input
+            type="checkbox"
+            id="menu"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+          />
           <label htmlFor="menu" className="menu-btn">
             <HiMenu className="menu-btn" />
           </label>
           <ul>
             <li>
-              <a href="#hero" className="active">
+              <a href="#hero" onClick={handleCheckboxChange}>
                 Home
               </a>
             </li>
             <li>
-              <a href="#searchmess">SearchMess</a>
+              <a href="#searchmess" onClick={handleCheckboxChange}>
+                SearchMess
+              </a>
             </li>
             <li>
-              <a href="#whywe">WhyUs</a>
+              <a href="#whywe" onClick={handleCheckboxChange}>
+                Why us
+              </a>
             </li>
             <li>
-              <a href="#testimonials">Testimonial</a>
+              <a href="#testimonials" onClick={handleCheckboxChange}>
+                Testimonial
+              </a>
+            </li>
+            <li>
+              <a href="#team" onClick={handleCheckboxChange}>
+                About us
+              </a>
             </li>
             <li>
               <Link to="/signup">
@@ -172,12 +192,46 @@ const Landingpage = () => {
             </div>
           </div>
         </section>
+        <section id="team">
+          <h1>Meet Our Team</h1>
+          <div className="profiles">
+            <div className="team-member">
+              <img src={pradipImg} alt="Pradip" />
+              <p className="role">Team Member</p>
+              <h3 className="name">Pradip Bedre</h3>
+              <p className="desc">
+                "I am a skilled software developer
+                <br /> with a passion for creating innovative products
+                <br /> that solve real-world problems."
+              </p>
+            </div>
+            <div className="team-member">
+              <img src={indranilImg} alt="Indranil" />
+              <p className="role">Mentor</p>
+              <h3 className="name">Indranil Tiwary</h3>
+              <p className="desc">
+                " I wish to bring a revolution in the
+                <br /> field of Information & Technology with my full <br />
+                integrity and enthusiasm."
+              </p>
+            </div>
+            <div className="team-member">
+              <img src={dl} alt="Dhanunjaya" />
+              <p className="role">Team Member</p>
+              <h3 className="name">Dhanunjaya Lakshmi</h3>
+              <p className="desc dldesc">
+                " Passionate about software development
+                <br /> and product building, always pushing for <br />
+                innovation in my work."
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
       <section id="footer">
         <div className="copyright">
           <h1>Messyfeed</h1>
           <p>© Copyright 2023, All Rights Reserved | MessyFeed</p>
-          
         </div>
         <div className="features">
           <h1>Features</h1>
