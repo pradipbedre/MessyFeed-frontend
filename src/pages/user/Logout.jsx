@@ -1,46 +1,16 @@
-import { Drawer, Button } from "antd";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import { removeCookie } from "../../utils/Cookie";
 
 const Logout = () => {
-  const [visible, setVisible] = useState(true);
+  const navigate = useNavigate();
 
-  const onClose = () => {
-    setVisible(false);
-  };
+  useEffect(() => {
+    removeCookie("jwt_token");
+    navigate("/signin");
+  }, []);
 
-  return (
-    <>
-      <Drawer
-        title="Are you sure you want to logout?"
-        placement="right"
-        closable={false}
-        onClose={onClose}
-        open={visible}
-        width={320}
-      >
-        <p>You can put your logout logic here</p>
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            bottom: 0,
-            width: "100%",
-            borderTop: "1px solid #e9e9e9",
-            padding: "10px 16px",
-            background: "#fff",
-            textAlign: "right",
-          }}
-        >
-          <Button onClick={onClose} style={{ marginRight: 8 }}>
-            Cancel
-          </Button>
-          <Button onClick={onClose} type="primary">
-            Logout
-          </Button>
-        </div>
-      </Drawer>
-    </>
-  );
+  return <></>;
 };
 
 export default Logout;
