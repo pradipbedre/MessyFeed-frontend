@@ -69,7 +69,9 @@ $shadow: 0px 0px 20px rgb(255, 255, 255);
       element.style {
         background-color: $navColor;
       }
-
+      :where(.css-dev-only-do-not-override-1i9hnpv).ant-input {
+        transition: none;
+      }
       label {
         margin-bottom: 5px;
         margin-top: 10px;

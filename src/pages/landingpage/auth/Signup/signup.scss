@@ -20,7 +20,7 @@ $shadow: 0px 0px 20px rgb(255, 255, 255);
     color: white;
     box-shadow: $shadow;
     border-radius: 10px;
-    height: 50vh;
+    height: 65vh;
     width: 50vw;
     justify-content: center;
     align-items: center;
@@ -58,6 +58,9 @@ $shadow: 0px 0px 20px rgb(255, 255, 255);
         color: white;
         background-color: $navColor;
         border: none;
+        transition: none;
+      }
+      :where(.css-dev-only-do-not-override-1i9hnpv).ant-input {
         transition: none;
       }
       .anticon svg {

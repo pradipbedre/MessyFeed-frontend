@@ -27,7 +27,7 @@ const AboutUs = () => {
         <div className="row">
           <div className="column">
             <div className="card">
-              <img src={pradipImg} alt="Jane" style={{ width: "100%" }} />
+              <img src={pradipImg} alt="pradip" style={{ width: "100%" }} />
               <div className="container">
                 <h2>Pradip Bedre</h2>
                 <p className="title">Team Member</p>
@@ -49,7 +49,7 @@ const AboutUs = () => {
           </div>
           <div className="column">
             <div className="card">
-              <img src={indranilImg} alt="Mike" style={{ width: "100%" }} />
+              <img src={indranilImg} alt="indranil" style={{ width: "100%" }} />
               <div className="container">
                 <h2>Indranil Tiwary </h2>
                 <p className="title">Mentor</p>
@@ -71,7 +71,7 @@ const AboutUs = () => {
           </div>
           <div className="column">
             <div className="card">
-              <img src={dl} alt="John" style={{ width: "100%" }} />
+              <img src={dl} alt="Dhunanjaya" style={{ width: "100%" }} />
               <div className="container">
                 <h2>Dhanunjaya Lakshmi</h2>
                 <p className="title">Team Member</p>

@@ -7,6 +7,7 @@ import WhyWe from "../../assets/whywe.svg";
 import "./landingpage.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { setPin } from "../../redux-store/actions/index";
+import logo from "../../assets/logo.png";
 
 const Landingpage = () => {
   const [pincode, setPincode] = useState("");
@@ -17,7 +18,10 @@ const Landingpage = () => {
     <>
       <div className="main">
         <nav>
-          <div className="logo">MessyFeed</div>
+          <div className="logo">
+            <img src={logo} alt="logo" />
+            MessyFeed
+          </div>
           <input type="checkbox" id="menu" />
           <label htmlFor="menu" className="menu-btn">
             <HiMenu className="menu-btn" />
@@ -173,6 +177,7 @@ const Landingpage = () => {
         <div className="copyright">
           <h1>Messyfeed</h1>
           <p>© Copyright 2023, All Rights Reserved | MessyFeed</p>
+          
         </div>
         <div className="features">
           <h1>Features</h1>

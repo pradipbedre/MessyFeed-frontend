@@ -16,6 +16,12 @@
       font-size: 1.9rem;
       color: white;
       cursor: pointer;
+      img {
+        width: 40px;
+        height: 40px;
+        margin-bottom: -10px;
+        border-radius: 50%;
+      }
     }
     .signin {
       background-color: #cc6200;
@@ -242,7 +248,7 @@
   .copyright {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 15px;
     h1 {
       font-size: 2rem;
 
@@ -274,7 +280,7 @@
     }
   }
 }
-@media screen and (max-width: 940px) {
+@media screen and (max-width: 950px) {
   .main {
     nav {
       position: sticky;
