@@ -61,7 +61,7 @@ const MessDetails = () => {
           email,
         }
       );
-      if (isReviewed.data.isCheck) {
+      if (isReviewed && isReviewed.data.isCheck) {
         alert("your review already submitted!");
       } else {
         const res = await axios.post(
@@ -90,12 +90,12 @@ const MessDetails = () => {
     }
   };
 
-  // Mess Images
+  /* // Mess Images
   const urls = [
     mess && mess.photos[0],
     mess && mess.photos[1],
     mess && mess.photos[2],
-  ];
+  ]; */
 
   // Average Rating
   let count = 0;
@@ -121,7 +121,7 @@ const MessDetails = () => {
 
       {/* Mess Images */}
       <div className="images">
-        <ImageSlider urls={mess && urls} />
+        <ImageSlider urls={mess && mess.photos} />
       </div>
 
       {/* Mess Info */}
@@ -129,6 +129,7 @@ const MessDetails = () => {
         <div className="mess">
           <h3>Address</h3>
           <p>{`${mess.address}, ${mess.pincode}`} </p>
+          <br />
           <h3>Contact Details</h3>
           <p>
             {`Mobile: ${mess.contactNo}`}
@@ -137,7 +138,7 @@ const MessDetails = () => {
           </p>
         </div>
         <div className="plans">
-          <h3>Plans</h3>
+          <h3 className="title">Plans</h3>
           {plans &&
             plans.map((plan) => (
               <div className="plan">

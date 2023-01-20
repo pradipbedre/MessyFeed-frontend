@@ -106,20 +106,20 @@ const Landingpage = () => {
             <h1 className="heading">Why MessyFeed?</h1>
             <ul>
               <li>
-                Wealth management services help investors calculatedly and
-                systematically create their corpus.
+                Automate tasks, save time and reduce errors with food mess
+                management software like messyfeed.
               </li>
               <li>
-                Wealth managers come armed with skills that help them understand
-                client requirement and financial goals.
+                Enhance customer service, improve satisfaction and boost revenue
+                with food mess management software.
               </li>
               <li>
-                Wealth management services help investors calculatedly and
-                systematically create their corpus.
+                Cut costs, increase efficiency and identify profitable
+                opportunities with messyfeed.
               </li>
               <li>
-                Wealth managers come armed with t skills that help them
-                understand client requirement and.
+                Make data-driven decisions, track key metrics and optimize
+                operations with messyfeed.
               </li>
             </ul>
           </div>
@@ -134,35 +134,36 @@ const Landingpage = () => {
 
           <div className="slide-container">
             <div className="slide">
-              <h3>Pradip Bedre</h3>
+              <h3>Sandeep More</h3>
               <p>
-                " Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Deserunt ratione dolorem totam optio asperiores tempora atque
-                architecto, aperiam facilis qui."
+                "This software has made it so much easier for us to track our
+                sales and analyze data. We're now able to make better decisions
+                and optimize our operations."
               </p>
             </div>
             <div className="slide">
-              <h3>Pradip Bedre</h3>
+              <h3>Javed Sharma</h3>
               <p>
-                " Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Deserunt ratione dolorem totam optio asperiores tempora atque
-                architecto, aperiam facilis qui."
+                "The reporting and analytics features of this software have been
+                incredibly useful. It's given us valuable insights into our
+                business that we never had before."
               </p>
             </div>
             <div className="slide">
-              <h3>Pradip Bedre</h3>
+              <h3>Neha Khare</h3>
               <p>
-                " Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Deserunt ratione dolorem totam optio asperiores tempora atque
-                architecto, aperiam facilis qui."
+                "We have been able to streamline our data access and share
+                information more easily with this software. It has improved
+                coordination between different departments and helped us work
+                more effectively as a team."
               </p>
             </div>
             <div className="slide">
-              <h3>Pradip Bedre</h3>
+              <h3>Soham Bansal</h3>
               <p>
-                "Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Deserunt ratione dolorem totam optio asperiores tempora atque
-                architecto, aperiam facilis qui"
+                "Since implementing this software, we've seen a drastic
+                reduction in labor costs and an increase in efficiency. It has
+                made managing our food mess so much easier!"
               </p>
             </div>
           </div>
@@ -181,10 +182,14 @@ const Landingpage = () => {
         <div className="company">
           <h1>Company</h1>
           <p>
-            <a href="">About Us</a>
+            <Link to="/aboutUs">
+              <a href="">About Us</a>
+            </Link>
           </p>
           <p>
-            <a href="">Contact Us</a>
+            <Link to="/aboutUs">
+              <a href="">Contact Us</a>
+            </Link>
           </p>
         </div>
       </section>

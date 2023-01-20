@@ -54,15 +54,14 @@ $shadow: 0px 0px 20px black;
         font-size: 14px;
       }
       &:hover {
-        background-color: $brandBackColor;
-        color: white;
+        background-color: #e2f5fd;
       }
     }
   }
   .footer {
     background-color: $brandBackColor;
     color: white;
-    padding: 40px;
+    padding: 10px;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -72,15 +71,21 @@ $shadow: 0px 0px 20px black;
       display: flex;
       justify-content: center;
     }
-    p {
-      margin-bottom: 10px;
-    }
   }
 }
 
 @media screen and (max-width: 900px) {
   .messListContainer {
+    nav {
+      .title {
+        display: none;
+      }
+    }
     .footer {
+      .title {
+        text-align: center;
+        margin-bottom: 5px;
+      }
       .rights {
       }
     }

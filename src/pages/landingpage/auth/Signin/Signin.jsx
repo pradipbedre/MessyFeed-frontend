@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import "./signin.scss";
-import welcome from "../../../../assets/welcome.svg";
 import axios from "axios";
 import { setCookie } from "../../../../utils/Cookie";
+import { Input } from "antd";
+
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,10 +29,6 @@ const Signin = () => {
         }
         if (res.status === 200 && res.data.auth) {
           setCookie("jwt_token", res.data.token);
-          // localStorage.setItem(
-          //   "access_token",
-          //   JSON.stringify(res?.data?.token)
-          // );
           navigate("/user");
         }
       } catch (error) {
@@ -43,20 +39,19 @@ const Signin = () => {
     }
   };
 
+  const visiblePassword = () => {};
+
   return (
     <div>
       <div className="signin-container">
-        <div className="left">
-          <img src={welcome} alt="signup" />
-        </div>
         <div className="right">
-          <h2>Login</h2>
+          <h2 className="heading">Login</h2>
           <p>
             or,
             <Link to="/signup"> create a account</Link>
           </p>
           <form action="">
-            <label htmlFor="">Email:*</label>
+            <label htmlFor="">Email</label>
             <input
               type="email"
               placeholder="email"
@@ -64,20 +59,13 @@ const Signin = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <label htmlFor="">Password:*</label>
-            <input
-              type="text"
-              placeholder="password"
+            <label htmlFor="">Password</label>
+            <Input.Password
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             />
             <button className="signin" type="submit" onClick={loginUser}>
               Sign In
-            </button>
-            <button className="google">
-              <FcGoogle />
-              signin with google
             </button>
           </form>
         </div>

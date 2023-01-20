@@ -32,6 +32,7 @@ const MessList = () => {
     <div className="messListContainer">
       <nav>
         <h1>MessyFeed</h1>
+        <h1 className="title">{`All Messes In ${pincode} Area Pincode`}</h1>
         <Link to="/">
           <button className="back">Back</button>
         </Link>
@@ -53,7 +54,7 @@ const MessList = () => {
         {messList.length === 0 && <h1>No Mess Found!</h1>}
       </div>
       <div className="footer">
-        <p>{`All Messes In This Area ${pincode} Pincode`}</p>
+        <p className="title">{`All Messes In ${pincode} Area Pincode`}</p>
         <div className="rights">
           <p>© Copyright 2023, All Rights Reserved | MessyFeed </p>
         </div>

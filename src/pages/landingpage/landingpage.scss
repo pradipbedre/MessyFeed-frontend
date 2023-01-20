@@ -296,7 +296,7 @@
       ul {
         position: fixed;
         top: 80px;
-        background-color: #e18a39;
+        background-color: #133c4f;
         left: -150%;
         color: white;
         height: 100vh;
@@ -305,6 +305,11 @@
         text-align: center;
         li {
           margin: 40px 0px;
+          a {
+            &:hover {
+              color: #ffbc7c;
+            }
+          }
         }
       }
     }

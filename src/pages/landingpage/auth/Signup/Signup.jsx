@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./signup.scss";
-import { FcGoogle } from "react-icons/fc";
-import welcome from "../../../../assets/welcome.svg";
+import { Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { auth, provider } from "../../../../utils/Firebase";
@@ -69,17 +68,14 @@ const Signup = () => {
   return (
     <div>
       <div className="signup-container">
-        <div className="left">
-          <img src={welcome} alt="signup" />
-        </div>
         <div className="right">
-          <h2>Register Now</h2>
+          <h2 className="heading">Register Now</h2>
           <p>
             or,
             <Link to="/signin"> Login to account</Link>
           </p>
           <form action="">
-            <label htmlFor="">Enter Name:*</label>
+            <label htmlFor="">*Enter Name</label>
             <input
               type="text"
               placeholder="enter name"
@@ -87,7 +83,7 @@ const Signup = () => {
               onChange={(e) => setName(e.target.value)}
               required
             />
-            <label htmlFor="">Email:*</label>
+            <label htmlFor="">*Email</label>
             <input
               type="email"
               placeholder="email"
@@ -95,7 +91,7 @@ const Signup = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <label htmlFor="">PhoneNo:*</label>
+            <label htmlFor="">*PhoneNo</label>
             <input
               type="number"
               placeholder="phone number"
@@ -104,21 +100,14 @@ const Signup = () => {
               onChange={(e) => setphoneNo(e.target.value)}
               required
             />
-            <label htmlFor="">Password:*</label>
-            <input
-              type="password"
-              placeholder="password"
+            <label htmlFor="">*Password</label>
+            <Input.Password
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             />
 
             <button className="signup" type="submit" onClick={registerUser}>
               Sign Up
-            </button>
-            <button className="google" onClick={signInWithGoogle}>
-              <FcGoogle />
-              signup with google
             </button>
           </form>
         </div>

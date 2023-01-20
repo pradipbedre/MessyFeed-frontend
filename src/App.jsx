@@ -7,6 +7,7 @@ import Signup from "./pages/landingpage/auth/Signup/Signup";
 import Signin from "./pages/landingpage/auth/Signin/Signin";
 import MessList from "./components/user/messList/MessList";
 import MessDetails from "./components/user/messDetails/MessDetails";
+import AboutUs from "./pages/landingpage/team/AboutUs";
 /* DL */
 import ViewMess from "./pages/mess/ViewMess.jsx";
 import AddMess from "./pages/mess/AddMess.jsx";
@@ -54,6 +55,7 @@ const App = () => {
         <Route index element={<LandingPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
       </Routes>
     </div>
   );
