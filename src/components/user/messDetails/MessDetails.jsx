@@ -179,7 +179,7 @@ const MessDetails = () => {
             </div>
             <textarea
               name="rating"
-              cols="50"
+              cols="30"
               rows="6"
               value={review}
               onChange={(e) => setReview(e.target.value)}
