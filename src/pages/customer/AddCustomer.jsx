@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Steps, DatePicker, Button, Form, Input } from "antd";
+import { Steps, DatePicker, Button, Form, Input, notification } from "antd";
 import { useState, useEffect } from "react";
 import { PlanDetails } from "./PlanDetails.jsx";
 import { PersonalDetails } from "./PersonalDetails.jsx";
@@ -13,6 +13,14 @@ const AddCustomer = () => {
   const [formValues, setFormValues] = useState({});
   const [form1] = Form.useForm();
   const [form2] = Form.useForm();
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, title, message) => {
+    api[type]({
+      message: title,
+      description: message,
+    });
+  };
 
   const handleSubmit = async () => {
     try {
@@ -29,9 +37,6 @@ const AddCustomer = () => {
         planEndDate: new Date(
           formValues?.startDate + formValues?.mealsLeft * 24 * 60 * 60 * 1000
         ),
-        // new Date().setDate(
-        //   formValues?.startDate.getDate() + mealsLeft
-        // ),
         status: "Active",
         planId: formValues?.mealPlan,
       };
@@ -47,11 +52,29 @@ const AddCustomer = () => {
       );
       if (response?.data?.statusCode === 200) {
         console.log(response?.data?.statusCode);
+        openNotificationWithIcon(
+          "success",
+          "Success!",
+          "Customer added successfully!"
+        );
+        setTimeout(() => {
+          navigate("/user/mess/customer/viewAll");
+        }, 2000);
       } else {
         console.log(response?.data?.message);
+        openNotificationWithIcon(
+          "error",
+          "Error!",
+          "Something went wrong! Please try again."
+        );
       }
     } catch (err) {
       console.log(err.message);
+      openNotificationWithIcon(
+        "error",
+        "Error!",
+        "Something went wrong! Please try again."
+      );
     }
   };
 
@@ -126,6 +149,7 @@ const AddCustomer = () => {
           )}
         </div>
       </div>
+      {contextHolder}
     </>
   );
 };

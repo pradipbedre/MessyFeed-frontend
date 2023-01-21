@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Modal, Button, Radio, Form, Input } from "antd";
+import { Modal, Button, Radio, Form, Input, notification } from "antd";
 import { getCookie } from "../../utils/Cookie";
 import { useLocation } from "react-router";
 
 const ValidateOtp = () => {
   const [form] = Form.useForm();
   const location = useLocation();
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, title, message) => {
+    api[type]({
+      message: title,
+      description: message,
+    });
+  };
 
   const onFinish = () => {
     form
@@ -21,11 +29,21 @@ const ValidateOtp = () => {
             },
           }
         );
-        console.log(response?.data?.message);
         form.resetFields();
+        openNotificationWithIcon(
+          "success",
+          "Success!",
+          "OTP successfully validated!"
+        );
+        console.log(response?.data?.message);
       })
       .catch((errorInfo) => {
         console.log(errorInfo);
+        openNotificationWithIcon(
+          "error",
+          "Error!",
+          "Something went wrong! Please try again."
+        );
       });
   };
 
@@ -94,6 +112,7 @@ const ValidateOtp = () => {
           </Button>
         </Form.Item>
       </Form>
+      {contextHolder}
     </>
   );
 };
