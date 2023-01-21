@@ -6,6 +6,7 @@ import axios from "axios";
 import { getCookie } from "../../utils/Cookie";
 import SendOtp from "./SendOtp";
 import ValidateOtp from "./ValidateOtp";
+import Title from "antd/es/typography/Title";
 
 const { Search } = Input;
 
@@ -142,14 +143,14 @@ const ViewCustomers = () => {
 
   return (
     <div>
-      <Space direction="vertical">
+      <Space direction="vertical" style={{ marginBottom: "20px" }}>
         <Search placeholder="Search" onSearch={handleSearch} enterButton />
       </Space>
       <Table
         columns={columns}
         dataSource={filteredData}
         bordered
-        title={() => "All Customers"}
+        title={() => <Title level={3}>All Customers</Title>}
         pagination={{ defaultPageSize: "5" }}
       />
     </div>

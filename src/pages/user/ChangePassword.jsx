@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button, Radio, Form, Input } from "antd";
 import { getCookie } from "../../utils/Cookie";
 import { useNavigate } from "react-router";
+import Title from "antd/es/typography/Title";
 
 const ChangePassword = () => {
   const [form] = Form.useForm();
@@ -36,6 +37,9 @@ const ChangePassword = () => {
 
   return (
     <>
+      <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Change Password
+      </Title>
       <Form
         form={form}
         autoComplete="off"
@@ -92,7 +96,7 @@ const ChangePassword = () => {
         </Form.Item>
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 10,
             span: 16,
           }}
         >

@@ -146,7 +146,7 @@ const UserPage = () => {
       >
         <div
           style={{
-            height: 32,
+            padding: "10px",
             margin: 16,
             background: "rgba(255, 255, 255, 0.2)",
             textAlign: "center",

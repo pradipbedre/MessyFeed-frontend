@@ -3,6 +3,7 @@ import axios from "axios";
 import { Modal, Button, Radio, Form, Input, notification } from "antd";
 import { getCookie } from "../../utils/Cookie";
 import { useLocation } from "react-router";
+import Title from "antd/es/typography/Title";
 
 const ValidateOtp = () => {
   const [form] = Form.useForm();
@@ -55,6 +56,9 @@ const ValidateOtp = () => {
 
   return (
     <>
+      <Title level={3} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Validate OTP
+      </Title>
       <Form
         form={form}
         autoComplete="off"
@@ -103,7 +107,7 @@ const ValidateOtp = () => {
 
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 12,
             span: 16,
           }}
         >

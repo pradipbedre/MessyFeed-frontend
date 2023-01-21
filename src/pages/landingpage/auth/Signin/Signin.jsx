@@ -29,7 +29,7 @@ const Signin = () => {
         }
         if (res.status === 200 && res.data.auth) {
           setCookie("jwt_token", res.data.token);
-          navigate("/user");
+          navigate("/user/mess/view");
         }
       } catch (error) {
         if (error.response.data.errors) {

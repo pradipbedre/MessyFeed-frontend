@@ -45,7 +45,7 @@ const UpdateMess = ({
         openNotificationWithIcon(
           "success",
           "Success!",
-          "Congratulations!!! New Mess plan added successfuly"
+          "Congratulations!!! Mess has been updated successfuly"
         );
         form.resetFields();
 

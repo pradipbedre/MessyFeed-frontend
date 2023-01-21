@@ -1,6 +1,9 @@
 import axios from "axios";
-import { DatePicker, Form, Input, Select, Button, notification } from "antd";
 import { getCookie } from "../../utils/Cookie";
+import { DatePicker, Form, Input, Select, Button, notification } from "antd";
+import { Typography } from "antd";
+const { Title } = Typography;
+
 const { Option } = Select;
 
 const AddPlan = () => {
@@ -65,6 +68,9 @@ const AddPlan = () => {
 
   return (
     <>
+      <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Add Mess Plan
+      </Title>
       <Form
         form={form}
         labelCol={{
@@ -109,7 +115,7 @@ const AddPlan = () => {
 
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 12,
             span: 16,
           }}
         >

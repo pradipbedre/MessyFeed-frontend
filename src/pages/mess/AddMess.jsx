@@ -10,10 +10,13 @@ import {
   Upload,
   notification,
 } from "antd";
+import { Typography } from "antd";
+
 import { useState } from "react";
 import { getCookie } from "../../utils/Cookie";
 import Success from "../../components/notifications/Success";
 import { useNavigate } from "react-router";
+const { Title } = Typography;
 
 const AddMess = () => {
   const [form] = Form.useForm();
@@ -95,8 +98,12 @@ const AddMess = () => {
 
   return (
     <>
+      <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Add New Mess
+      </Title>
       <Form
         form={form}
+        title="Add New Mess"
         autoComplete="off"
         labelCol={{
           span: 8,
@@ -194,12 +201,12 @@ const AddMess = () => {
         </Form.Item>
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 12,
             span: 16,
           }}
         >
           <Button type="primary" htmlType="submit">
-            Add Mess
+            Add
           </Button>
         </Form.Item>
       </Form>

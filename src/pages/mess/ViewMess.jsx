@@ -13,12 +13,14 @@ import {
   Carousel,
   notification,
   Spin,
+  Typography,
 } from "antd";
 import { useState, useEffect } from "react";
 import UpdateMess from "./UpdateMess";
 import ViewPlans from "./ViewPlans.jsx";
 import { getCookie } from "../../utils/Cookie";
 import StarRating from "../../components/user/starrRating/StarRating";
+const { Title } = Typography;
 
 const tabList = [
   {
@@ -66,15 +68,6 @@ const ViewMess = () => {
       description: message,
     });
   };
-
-  // const [api, contextHolder] = notification.useNotification();
-
-  // const openNotificationWithIcon = (type, title, message) => {
-  //   api[type]({
-  //     message: title,
-  //     description: message,
-  //   });
-  // };
 
   const handlePrev = () => {
     carouselRef.current.prev();
@@ -191,7 +184,9 @@ const ViewMess = () => {
       <div>
         <Row gutter={[24, 8]}>
           <Col xs={24} sm={8}>
-            <h3>Mess Info</h3>
+            <Title level={3} style={{ marginBottom: "10px" }}>
+              Mess Info
+            </Title>
 
             <>
               <Descriptions column={1} bordered>
@@ -246,11 +241,15 @@ const ViewMess = () => {
             </>
           </Col>
           <Col xs={24} sm={8}>
-            <h3>Mess Plans</h3>
+            <Title level={3} style={{ marginBottom: "10px" }}>
+              Mess Plans
+            </Title>
             <ViewPlans openNotificationWithIcon={openNotificationWithIcon} />
           </Col>
           <Col xs={24} sm={6}>
-            <h3>Mess Daily Reports</h3>
+            <Title level={3} style={{ marginBottom: "10px" }}>
+              Mess Daily Reports
+            </Title>
             <Card
               hoverable={true}
               tabList={tabList}
@@ -264,7 +263,9 @@ const ViewMess = () => {
           </Col>
         </Row>
         <Divider></Divider>
-        <h3>Mess Images</h3>
+        <Title level={3} style={{ marginBottom: "10px" }}>
+          Mess Images
+        </Title>
         <Row around="xs" gutter={[8, 8]}>
           {messData?.photos?.slice(0, 4)?.map((image) => (
             <Col sm={12} md={8} lg={4}>
@@ -321,7 +322,9 @@ const ViewMess = () => {
           )}
         </Row>
         <Divider></Divider>
-        <h3>Mess Reviews</h3>
+        <Title level={3} style={{ marginBottom: "10px" }}>
+          Mess Reviews
+        </Title>
         <Row gutter={[8, 8]}>{data}</Row>
         <Divider></Divider>
         <Pagination

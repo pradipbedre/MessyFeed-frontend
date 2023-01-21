@@ -2,6 +2,7 @@ import { DatePicker, Form, Input, Select, Button } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getCookie } from "../../utils/Cookie";
+import Title from "antd/es/typography/Title";
 const { Option } = Select;
 
 const PlanRenewal = () => {
@@ -91,6 +92,9 @@ const PlanRenewal = () => {
 
   return (
     <>
+      <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Plan Renewal
+      </Title>
       <Form
         form={form}
         labelCol={{
@@ -152,7 +156,7 @@ const PlanRenewal = () => {
 
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 12,
             span: 16,
           }}
         >

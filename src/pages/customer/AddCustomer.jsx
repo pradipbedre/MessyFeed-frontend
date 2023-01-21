@@ -1,11 +1,20 @@
 import React from "react";
 import axios from "axios";
-import { Steps, DatePicker, Button, Form, Input, notification } from "antd";
+import {
+  Steps,
+  DatePicker,
+  Button,
+  Form,
+  Input,
+  notification,
+  Typography,
+} from "antd";
 import { useState, useEffect } from "react";
 import { PlanDetails } from "./PlanDetails.jsx";
 import { PersonalDetails } from "./PersonalDetails.jsx";
 import { ConfirmData } from "./ConfirmData.jsx";
 import { getCookie } from "../../utils/Cookie.js";
+const { Title } = Typography;
 
 const AddCustomer = () => {
   const [current, setCurrent] = useState(0);
@@ -124,8 +133,11 @@ const AddCustomer = () => {
 
   return (
     <>
+      <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Add New Customer
+      </Title>
       <div>
-        <Steps size="small" current={current}>
+        <Steps size="small" current={current} style={{ marginBottom: "20px" }}>
           {steps.map((item) => (
             <Steps.Item key={item.title} title={item.title} />
           ))}
