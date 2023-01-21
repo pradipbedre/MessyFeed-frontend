@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Radio, Form, Input } from "antd";
+import { Modal, Button, Radio, Form, Input } from "antd";
 import { getCookie } from "../../utils/Cookie";
+import { useLocation } from "react-router";
 
 const ValidateOtp = () => {
   const [form] = Form.useForm();
+  const location = useLocation();
 
   const onFinish = () => {
     form
@@ -19,7 +21,7 @@ const ValidateOtp = () => {
             },
           }
         );
-        console.log(response?.data);
+        console.log(response?.data?.message);
         form.resetFields();
       })
       .catch((errorInfo) => {
@@ -30,6 +32,8 @@ const ValidateOtp = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -46,7 +50,7 @@ const ValidateOtp = () => {
         action=""
         initialValues={{
           remember: true,
-          prefix: "+91",
+          email: location?.state?.email || "",
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}

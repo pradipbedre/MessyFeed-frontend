@@ -22,7 +22,6 @@ const ChangePassword = () => {
             },
           }
         );
-        console.log(response?.data);
         form.resetFields();
         navigate("/user/logout");
       })

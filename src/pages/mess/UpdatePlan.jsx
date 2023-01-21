@@ -1,12 +1,19 @@
 import { Modal, Form, Input, Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { getCookie } from "../../utils/Cookie";
+import { useNavigate } from "react-router";
 
-export const UpdatePlan = ({ planData, plansData, setPlansData }) => {
+export const UpdatePlan = ({
+  planData,
+  plansData,
+  setPlansData,
+  openNotificationWithIcon,
+}) => {
   const [updateModal, setUpdateModal] = useState(false);
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const onFinish = (values) => {
     form
@@ -28,22 +35,36 @@ export const UpdatePlan = ({ planData, plansData, setPlansData }) => {
             },
           }
         );
+        if (response.status === 200) {
+          setPlansData((prevState) => {
+            const newPlansData = [...prevState];
+            const index = newPlansData.findIndex(
+              (obj) => obj._id === response?.data?.message?._id
+            );
+            newPlansData[index].name = response?.data?.message?.name;
+            newPlansData[index].mealCount = response?.data?.message?.mealCount;
+            newPlansData[index].planCost = response?.data?.message?.planCost;
+            console.log("New Plans Data = ", newPlansData);
+            return newPlansData;
+          });
 
-        setPlansData((prevState) => {
-          const newPlansData = [...prevState];
-          const index = newPlansData.findIndex(
-            (obj) => obj._id === response?.data?._id
+          openNotificationWithIcon(
+            "success",
+            "Success!",
+            "Congratulations!!! Plan updated successfuly"
           );
-          newPlansData[index].name = response?.data?.name;
-          newPlansData[index].mealCount = response?.data?.mealCount;
-          newPlansData[index].planCost = response?.data?.planCost;
-          return newPlansData;
-        });
-        form.resetFields();
-        setUpdateModal(false);
+          form.resetFields();
+
+          setUpdateModal(false);
+        }
       })
       .catch((errorInfo) => {
         console.log(errorInfo);
+        openNotificationWithIcon(
+          "error",
+          "Error!",
+          "Something went wrong! Please try again."
+        );
       });
   };
 

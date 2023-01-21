@@ -18,7 +18,7 @@ export const PlanDetails = ({ form, setSelectedData }) => {
             },
           }
         );
-        setPlansData(response?.data);
+        setPlansData(response?.data?.message);
       } catch (err) {
         console.log(err.message);
       }

@@ -22,7 +22,7 @@ const PlanRenewal = () => {
           startDate: values?.startDate,
         };
         const response = await axios.put(
-          `${import.meta.env.VITE_BASE_URL}` + "user/",
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/customer/",
           reqBody,
           {
             headers: {
@@ -53,7 +53,7 @@ const PlanRenewal = () => {
             },
           }
         );
-        setPlansData(response?.data);
+        setPlansData(response?.data?.message);
       } catch (err) {
         console.log(err.message);
       }
@@ -72,7 +72,7 @@ const PlanRenewal = () => {
             },
           }
         );
-        if (response?.data?.status === "Active")
+        if (response?.data?.message?.status === "Active")
           alert("You already have an active plan");
       } catch (err) {
         console.log(err.message);

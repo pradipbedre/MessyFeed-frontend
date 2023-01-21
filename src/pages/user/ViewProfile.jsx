@@ -21,7 +21,7 @@ export const ViewProfile = () => {
           },
         }
       );
-      setUserData(response.data);
+      setUserData(response?.data?.message);
     };
     getUserData();
   }, []);
@@ -95,7 +95,7 @@ export const ViewProfile = () => {
           </Button>
           <Modal
             destroyOnClose={true}
-            title="Delete User PRofile"
+            title="Delete User Profile"
             okText="Delete"
             open={deleteModal}
             onOk={handleDelete}

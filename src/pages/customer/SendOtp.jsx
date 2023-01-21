@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Button, Radio, Form, Input } from "antd";
+import { Modal, Button, Radio, Form, Input } from "antd";
 import { getCookie } from "../../utils/Cookie";
+import { useNavigate } from "react-router-dom";
 
 const SendOtp = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const onFinish = () => {
     form
@@ -19,7 +21,10 @@ const SendOtp = () => {
             },
           }
         );
-        console.log(response?.data);
+        navigate("/user/mess/customer/validateOtp", {
+          state: { email: values.email },
+        });
+        console.log(response?.data?.message);
         form.resetFields();
       })
       .catch((errorInfo) => {
@@ -46,6 +51,7 @@ const SendOtp = () => {
         action=""
         initialValues={{
           remember: true,
+          // email: email,
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}

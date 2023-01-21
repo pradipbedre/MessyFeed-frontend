@@ -26,7 +26,7 @@ export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
             },
           }
         );
-        setUserData(response.data);
+        setUserData(response?.data?.message);
         form.resetFields();
         setUpdateModal(false);
       })

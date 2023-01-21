@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { Input, Space, Table } from "antd";
+import { Button, Input, Space, Spin, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { getCookie } from "../../utils/Cookie";
-import ShowCustomer from "./ShowCustomer";
+import SendOtp from "./SendOtp";
+import ValidateOtp from "./ValidateOtp";
 
 const { Search } = Input;
 
@@ -28,9 +29,11 @@ const ViewCustomers = () => {
   const [customerData, setCustomerData] = useState();
   const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getPlansData = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}` + "user/mess/plans",
@@ -40,9 +43,12 @@ const ViewCustomers = () => {
             },
           }
         );
-        setPlansData(response?.data);
+        setPlansData(response?.data?.message);
+        setIsLoading(false);
       } catch (err) {
         console.log(err.message);
+      } finally {
+        setIsLoading(false);
       }
     };
     getPlansData();
@@ -61,13 +67,20 @@ const ViewCustomers = () => {
           }
         );
         setAllCustomersData(
-          response?.data?.map((data) => {
-            data.key = data?._id;
+          response?.data?.message?.map((customer) => {
+            customer.key = customer?._id;
             const selectedPlan = plansData?.find(
-              (item) => item._id === data?.planId
+              (item) => item._id === customer?.planId
             );
-            data.planName = selectedPlan?.name;
-            return data;
+            customer.planName = selectedPlan?.name;
+            // customer.actions =
+            //   customer?.otp > 0 ? (
+            //     <ValidateOtp email={customer?.email} />
+            //   ) : (
+            //     <SendOtp email={customer?.email} />
+            //   );
+            // console.log(customer);
+            return customer;
           })
         );
       } catch (err) {
@@ -95,11 +108,13 @@ const ViewCustomers = () => {
     {
       title: "Name",
       dataIndex: "name",
-      render: (text, record) => (
-        <Link to="/user/mess/customer/view" state={{ record, plansData }}>
-          {text}
-        </Link>
-      ),
+      render: (text, record) => {
+        return (
+          <Link to="/user/mess/customer/view" state={{ record, plansData }}>
+            {text}
+          </Link>
+        );
+      },
     },
     {
       title: "Email",
@@ -117,7 +132,13 @@ const ViewCustomers = () => {
       title: "Plan",
       dataIndex: "planName",
     },
+    // {
+    //   title: "Actions",
+    //   dataIndex: "actions",
+    // },
   ];
+
+  if (isLoading) return <Spin />;
 
   return (
     <div>

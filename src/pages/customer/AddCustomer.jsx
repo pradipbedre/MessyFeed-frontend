@@ -39,10 +39,10 @@ const AddCustomer = () => {
           },
         }
       );
-      if (response.status === 200) {
-        console.log(response.status);
+      if (response?.data?.statusCode === 200) {
+        console.log(response?.data?.statusCode);
       } else {
-        console.log(response.message);
+        console.log(response?.data?.message);
       }
     } catch (err) {
       console.log(err.message);

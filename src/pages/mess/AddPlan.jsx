@@ -1,11 +1,18 @@
 import axios from "axios";
-import { DatePicker, Form, Input, Select, Button } from "antd";
-import { useState } from "react";
+import { DatePicker, Form, Input, Select, Button, notification } from "antd";
 import { getCookie } from "../../utils/Cookie";
 const { Option } = Select;
 
 const AddPlan = () => {
   const [form] = Form.useForm();
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, title, message) => {
+    api[type]({
+      message: title,
+      description: message,
+    });
+  };
 
   const onFinish = () => {
     form
@@ -25,14 +32,30 @@ const AddPlan = () => {
             },
           }
         );
-        if (response.status === 200) {
+        if (response?.data?.statusCode === 200) {
+          openNotificationWithIcon(
+            "success",
+            "Success!",
+            "Congratulations!!! New Mess plan added successfuly"
+          );
           form.resetFields();
         } else {
-          form.resetFields();
+          console.log(response?.data?.message);
+          openNotificationWithIcon(
+            "error",
+            "Error!",
+            "Something went wrong! Please try again."
+          );
         }
       })
       .catch((errorInfo) => {
         console.log(errorInfo);
+
+        openNotificationWithIcon(
+          "error",
+          "Error!",
+          "Something went wrong! Please try again."
+        );
       });
   };
 
@@ -95,6 +118,7 @@ const AddPlan = () => {
           </Button>
         </Form.Item>
       </Form>
+      {contextHolder}
     </>
   );
 };
