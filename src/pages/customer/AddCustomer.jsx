@@ -14,6 +14,7 @@ import { PlanDetails } from "./PlanDetails.jsx";
 import { PersonalDetails } from "./PersonalDetails.jsx";
 import { ConfirmData } from "./ConfirmData.jsx";
 import { getCookie } from "../../utils/Cookie.js";
+import { useNavigate } from "react-router";
 const { Title } = Typography;
 
 const AddCustomer = () => {
@@ -22,6 +23,8 @@ const AddCustomer = () => {
   const [formValues, setFormValues] = useState({});
   const [form1] = Form.useForm();
   const [form2] = Form.useForm();
+
+  const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
 
   const openNotificationWithIcon = (type, title, message) => {
@@ -71,11 +74,10 @@ const AddCustomer = () => {
         }, 2000);
       } else {
         console.log(response?.data?.message);
-        openNotificationWithIcon(
-          "error",
-          "Error!",
-          "Something went wrong! Please try again."
-        );
+        openNotificationWithIcon("error", "Error!", response?.data?.message);
+        // setTimeout(() => {
+        //   navigate("/user/mess/customer/viewAll");
+        // }, 2000);
       }
     } catch (err) {
       console.log(err.message);
@@ -143,19 +145,31 @@ const AddCustomer = () => {
           ))}
         </Steps>
         <div className="steps-content">{steps[current].content}</div>
-        <div className="steps-action">
+        <div className="steps-action" style={{ textAlign: "center" }}>
           {current > 0 && current < steps.length && (
-            <Button type="primary" onClick={handlePrev}>
+            <Button
+              type="primary"
+              style={{ margin: "5px" }}
+              onClick={handlePrev}
+            >
               Prev
             </Button>
           )}
           {current < steps.length - 1 && (
-            <Button type="primary" onClick={handleNext}>
+            <Button
+              type="primary"
+              style={{ margin: "5px" }}
+              onClick={handleNext}
+            >
               Next
             </Button>
           )}
           {current === steps.length - 1 && (
-            <Button type="primary" onClick={handleSubmit}>
+            <Button
+              type="primary"
+              style={{ margin: "5px" }}
+              onClick={handleSubmit}
+            >
               Confirm
             </Button>
           )}

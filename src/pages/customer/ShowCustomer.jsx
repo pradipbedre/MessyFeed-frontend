@@ -1,37 +1,46 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { Button, Descriptions, Modal } from "antd";
+import { Button, Descriptions, Modal, notification } from "antd";
 import UpdateCustomer from "./UpdateCustomer";
 import { getCookie } from "../../utils/Cookie";
 import SendOtp from "./SendOtp";
 import ValidateOtp from "./ValidateOtp";
+import PlanRenewal from "./PlanRenewal";
 
 const ShowCustomer = () => {
   const location = useLocation();
   const [allCustomersData, setAllCustomersData] = useState();
   const [customerData, setCustomerData] = useState();
   const [updateModal, setUpdateModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [renewalModal, setRenewalModal] = useState(false);
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, title, message) => {
+    api[type]({
+      message: title,
+      description: message,
+    });
+  };
 
   const showUpdateModal = () => {
     setUpdateModal(true);
   };
-  const showDeleteModal = () => {
-    setDeleteModal(true);
+  const showRenewalModal = () => {
+    setRenewalModal(true);
   };
   const handleUpdate = () => {
     setUpdateModal(false);
   };
-  const handleDelete = () => {
-    setDeleteModal(false);
+  const handleRenewal = () => {
+    setRenewalModal(false);
   };
   const handleUpdateCancel = () => {
     setUpdateModal(false);
   };
 
-  const handleDeleteCancel = () => {
-    setDeleteModal(false);
+  const handleRenewalCancel = () => {
+    setRenewalModal(false);
   };
 
   useEffect(() => {
@@ -125,19 +134,26 @@ const ShowCustomer = () => {
           />
         </Modal>
         &nbsp;&nbsp;
-        <Button type="primary" onClick={showDeleteModal}>
-          Delete Customer
+        <Button type="primary" onClick={showRenewalModal}>
+          Renew Plan
         </Button>
         <Modal
-          title="Delete Customer"
-          okText="Delete"
-          open={deleteModal}
-          onOk={handleDelete}
-          onCancel={handleDeleteCancel}
+          title="Renew Plan"
+          okText="Renew"
+          open={renewalModal}
+          onOk={handleRenewal}
+          onCancel={handleRenewalCancel}
+          footer={null}
         >
-          <p>Are you sure??</p>
+          <PlanRenewal
+            email={customerData?.email}
+            setRenewalModal={setRenewalModal}
+            setCustomerData={setCustomerData}
+            openNotificationWithIcon={openNotificationWithIcon}
+          />
         </Modal>
       </div>
+      {contextHolder}
     </>
   );
 };
