@@ -96,8 +96,11 @@ const ShowCustomer = () => {
           <Descriptions.Item label="Status">
             {customerData?.status}
           </Descriptions.Item>
+          <Descriptions.Item label="Plan Start Date">
+            {customerData?.planStartDate?.split("T")[0]}
+          </Descriptions.Item>
           <Descriptions.Item label="Plan End Date">
-            {customerData?.startDate}
+            {customerData?.planEndDate?.split("T")[0]}
           </Descriptions.Item>
         </Descriptions>
         <br />

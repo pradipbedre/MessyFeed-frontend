@@ -26,6 +26,12 @@ const AddCustomer = () => {
         paidAmount: formValues?.planCost,
         mealsLeft: formValues?.mealsLeft,
         planStartDate: formValues?.startDate,
+        planEndDate: new Date(
+          formValues?.startDate + formValues?.mealsLeft * 24 * 60 * 60 * 1000
+        ),
+        // new Date().setDate(
+        //   formValues?.startDate.getDate() + mealsLeft
+        // ),
         status: "Active",
         planId: formValues?.mealPlan,
       };
