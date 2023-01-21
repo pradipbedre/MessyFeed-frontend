@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 import { Button, Descriptions, Modal } from "antd";
 import UpdateCustomer from "./UpdateCustomer";
 import { getCookie } from "../../utils/Cookie";
+import SendOtp from "./SendOtp";
+import ValidateOtp from "./ValidateOtp";
 
 const ShowCustomer = () => {
   const location = useLocation();
@@ -33,40 +35,40 @@ const ShowCustomer = () => {
   };
 
   useEffect(() => {
-    const plansData = location?.state?.plansData;
     const getCustomersData = async () => {
       try {
+        const plansData = location?.state?.plansData;
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}` + "user/mess/customer/all",
-
+          `${import.meta.env.VITE_BASE_URL}user/mess/customer/${
+            location?.state?.record?._id
+          }`,
           {
             headers: {
               Authorization: `${getCookie("jwt_token")}`,
             },
           }
         );
-        setAllCustomersData(
-          response?.data?.map((data) => {
-            const selectedPlan = plansData?.find(
-              (item) => item._id === data?.planId
-            );
-            data.planName = selectedPlan?.name;
-            return data;
-          })
-        );
+        console.log("Response = ", response?.data?.message, plansData);
+        if (response?.data?.statusCode === 200) {
+          const selectedPlan = plansData?.find(
+            (item) => item._id === response?.data?.message?.planId
+          );
+          response.data.message.planName = selectedPlan?.name;
+          setCustomerData(response?.data?.message);
+        } else {
+          console.log(response?.data?.message);
+        }
       } catch (err) {
-        console.log(err.message);
+        console.log(err);
       }
     };
-    getCustomersData();
-  }, [location]);
 
-  useEffect(() => {
-    const data = allCustomersData?.find(
-      (item) => item._id === location?.state?.record?.key
-    );
-    setCustomerData(data);
-  }, [allCustomersData]);
+    try {
+      getCustomersData();
+    } catch (err) {
+      console.log(err);
+    }
+  }, [location]);
 
   return (
     <>
@@ -94,8 +96,11 @@ const ShowCustomer = () => {
           <Descriptions.Item label="Status">
             {customerData?.status}
           </Descriptions.Item>
+          <Descriptions.Item label="Plan Start Date">
+            {customerData?.planStartDate?.split("T")[0]}
+          </Descriptions.Item>
           <Descriptions.Item label="Plan End Date">
-            {customerData?.startDate}
+            {customerData?.planEndDate?.split("T")[0]}
           </Descriptions.Item>
         </Descriptions>
         <br />

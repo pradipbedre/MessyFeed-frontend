@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import axios from "axios";
 import {
   Button,
@@ -11,11 +11,16 @@ import {
   Pagination,
   Modal,
   Carousel,
+  notification,
+  Spin,
+  Typography,
 } from "antd";
 import { useState, useEffect } from "react";
 import UpdateMess from "./UpdateMess";
 import ViewPlans from "./ViewPlans.jsx";
 import { getCookie } from "../../utils/Cookie";
+import StarRating from "../../components/user/starrRating/StarRating";
+const { Title } = Typography;
 
 const tabList = [
   {
@@ -44,13 +49,33 @@ const contentList = {
 const ViewMess = () => {
   const [activeTabKey1, setActiveTabKey1] = useState("tab1");
   const [messData, setMessData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
+  const [reviewsCount, setReviewsCount] = useState(0);
 
   const [updateModal, setUpdateModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [imageModal, setImageModal] = useState(false);
+
+  const carouselRef = useRef(null);
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, title, message) => {
+    api[type]({
+      message: title,
+      description: message,
+    });
+  };
+
+  const handlePrev = () => {
+    carouselRef.current.prev();
+  };
+
+  const handleNext = () => {
+    carouselRef.current.next();
+  };
 
   const onTab1Change = (key) => {
     setActiveTabKey1(key);
@@ -58,6 +83,7 @@ const ViewMess = () => {
 
   useEffect(() => {
     const getMessData = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}` + "user/mess/",
@@ -67,13 +93,16 @@ const ViewMess = () => {
             },
           }
         );
-        if (response.status === 200) {
-          setMessData(response.data);
+        if (response?.data?.statusCode === 200) {
+          setMessData(response?.data?.message);
         } else {
-          console.log(response.message);
+          console.log(response?.data?.message);
         }
+        setIsLoading(false);
       } catch (err) {
         console.log(err.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -81,59 +110,44 @@ const ViewMess = () => {
   }, []);
 
   useEffect(() => {
-    fetchData();
+    getReviewsData();
   }, []);
 
-  const fetchData = async () => {
-    const arr = [1, 2, 3, 4, 5];
-    const dArr = [
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    ];
-    let tempData = "";
-    let i = -1;
-    if (currentPage % 2 === 1) {
-      tempData =
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad error,temporibus odit tenetur itaque iusto, qui unde provident blanditiis,earum deleniti facere! Culpa, molestias possimus.";
-    } else {
-      tempData =
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea odio incidunt magni sint, ducimus pariatur.";
-    }
+  const getReviewsData = async () => {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}` + "user/mess/reviews",
+      {
+        headers: {
+          Authorization: `${getCookie("jwt_token")}`,
+        },
+      }
+    );
+    setReviewsCount(response?.data?.message?.length || 0);
     setData(
-      arr.map(() => {
-        i = i + 1;
+      response?.data?.message?.map((review) => {
         return (
-          <Col key={(currentPage - 1) * 5 + i} sm={12} md={8} lg={4}>
+          <Col key={review?._id} sm={12} md={8} lg={4}>
             <Card
               style={{
                 width: 200,
               }}
             >
-              {tempData}
-              {/* {currentPage},{(currentPage - 1) * 5 + i},
-              {dArr[(currentPage - 1) * 5 + i]} */}
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <p>{review?.review}</p>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <StarRating rating={review?.rating} />
+                </div>
+              </div>
             </Card>
           </Col>
         );
       })
     );
-    //   dArr.slice((currentPage - 1) * 5, currentPage * 5).map((value) => (
-    //     <Col key={(currentPage - 1) * 5 + i} sm={12} md={8} lg={4}>
-    //       <Card
-    //         style={{
-    //           width: 200,
-    //         }}
-    //       >
-    //         {(currentPage - 1) * 5}
-    //         {currentPage * 5}
-    //       </Card>
-    //     </Col>
-    //   ))
-    // );
   };
 
   const onChange = (currentPage) => {
     setCurrentPage(currentPage);
-    fetchData();
+    getReviewsData();
   };
 
   const showImageModal = () => {
@@ -163,12 +177,17 @@ const ViewMess = () => {
     setImageModal(false);
   };
 
-  return (
-    <div>
-      <Row gutter={[24, 8]}>
-        <Col xs={24} sm={8}>
-          <h3>Mess Info</h3>
-          {messData ? (
+  if (isLoading) return <Spin />;
+
+  return messData ? (
+    <>
+      <div>
+        <Row gutter={[24, 8]}>
+          <Col xs={24} sm={8}>
+            <Title level={3} style={{ marginBottom: "10px" }}>
+              Mess Info
+            </Title>
+
             <>
               <Descriptions column={1} bordered>
                 <Descriptions.Item label="Name">
@@ -202,6 +221,7 @@ const ViewMess = () => {
                   messData={messData}
                   setMessData={setMessData}
                   setUpdateModal={setUpdateModal}
+                  openNotificationWithIcon={openNotificationWithIcon}
                 />
               </Modal>
               &nbsp;&nbsp;&nbsp;
@@ -219,72 +239,105 @@ const ViewMess = () => {
                 <p>Are you sure??</p>
               </Modal>
             </>
-          ) : (
-            <p>Mess data is not available</p>
-          )}
-        </Col>
-        <Col xs={24} sm={8}>
-          <h3>Mess Plans</h3>
-          <ViewPlans />
-        </Col>
-        <Col xs={24} sm={6}>
-          <h3>Mess Daily Reports</h3>
-          <Card
-            hoverable={true}
-            tabList={tabList}
-            activeTabKey={activeTabKey1}
-            onTabChange={(key) => {
-              onTab1Change(key);
-            }}
-          >
-            {contentList[activeTabKey1]}
-          </Card>
-        </Col>
-      </Row>
-      <Divider></Divider>
-      <h3>Mess Images</h3>
-      <Row around="xs" gutter={[8, 8]}>
-        {[1, 2, 3, 4].map(() => (
-          <Col sm={12} md={8} lg={4}>
-            <Image
-              width={200}
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
           </Col>
-        ))}
-        <Col sm={12} md={8} lg={4}>
-          <div width={200} textAlign="Center">
-            <Button type="text" onClick={showImageModal}>
-              Show More
-            </Button>
-            <Modal
-              title="Gallery"
-              okText=""
-              cancelText=""
-              onOk={handleImage}
-              onCancel={handleImageCancel}
-              open={imageModal}
+          <Col xs={24} sm={8}>
+            <Title level={3} style={{ marginBottom: "10px" }}>
+              Mess Plans
+            </Title>
+            <ViewPlans openNotificationWithIcon={openNotificationWithIcon} />
+          </Col>
+          <Col xs={24} sm={6}>
+            <Title level={3} style={{ marginBottom: "10px" }}>
+              Mess Daily Reports
+            </Title>
+            <Card
+              hoverable={true}
+              tabList={tabList}
+              activeTabKey={activeTabKey1}
+              onTabChange={(key) => {
+                onTab1Change(key);
+              }}
             >
-              <Carousel autoplay={true}>
-                {[1, 2, 3, 4].map(() => (
-                  <Image src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
-                ))}
-              </Carousel>
-            </Modal>
-          </div>
-        </Col>
-      </Row>
-      <Divider></Divider>
-      <h3>Mess Reviews</h3>
-      <Row gutter={[8, 8]}>{data}</Row>
-      <Divider></Divider>
-      <Pagination
-        onChange={onChange}
-        defaultPageSize={5}
-        defaultCurrent={1}
-        total={20}
-      />
-    </div>
+              {contentList[activeTabKey1]}
+            </Card>
+          </Col>
+        </Row>
+        <Divider></Divider>
+        <Title level={3} style={{ marginBottom: "10px" }}>
+          Mess Images
+        </Title>
+        <Row around="xs" gutter={[8, 8]}>
+          {messData?.photos?.slice(0, 4)?.map((image) => (
+            <Col sm={12} md={8} lg={4}>
+              <Image width={200} src={image} />
+            </Col>
+          ))}
+          {messData?.photos?.length > 4 && (
+            <Col sm={12} md={8} lg={4}>
+              <div width={200} textAlign="Center">
+                <Button type="text" onClick={showImageModal}>
+                  Show More
+                </Button>
+                <Modal
+                  title="Gallery"
+                  okText=""
+                  cancelText=""
+                  onOk={handleImage}
+                  onCancel={handleImageCancel}
+                  open={imageModal}
+                  footer={null}
+                >
+                  <Carousel
+                    ref={carouselRef}
+                    autoplay={true}
+                    footer={null}
+                    style={{ backgroundColor: "#0e2e3c" }}
+                  >
+                    {messData?.photos?.map((image) => (
+                      <Image src={image} />
+                    ))}
+                  </Carousel>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignContent: "space-around",
+                    }}
+                  >
+                    <Button
+                      style={{ textAlign: "left", marginTop: "10px" }}
+                      onClick={handlePrev}
+                    >
+                      Previous
+                    </Button>
+                    <Button
+                      style={{ textAlign: "right", marginTop: "10px" }}
+                      onClick={handleNext}
+                    >
+                      Next
+                    </Button>
+                  </div>
+                </Modal>
+              </div>
+            </Col>
+          )}
+        </Row>
+        <Divider></Divider>
+        <Title level={3} style={{ marginBottom: "10px" }}>
+          Mess Reviews
+        </Title>
+        <Row gutter={[8, 8]}>{data}</Row>
+        <Divider></Divider>
+        <Pagination
+          onChange={onChange}
+          defaultPageSize={5}
+          defaultCurrent={1}
+          total={reviewsCount}
+        />
+      </div>
+      {contextHolder}
+    </>
+  ) : (
+    <p>No data available</p>
   );
 };
 

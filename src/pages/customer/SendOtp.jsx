@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Button, Radio, Form, Input } from "antd";
+import { Modal, Button, Radio, Form, Input, notification } from "antd";
 import { getCookie } from "../../utils/Cookie";
+import { useNavigate } from "react-router-dom";
+import Typography from "antd/es/typography/Typography";
+const { Title } = Typography;
 
 const SendOtp = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, title, message) => {
+    api[type]({
+      message: title,
+      description: message,
+    });
+  };
 
   const onFinish = () => {
     form
@@ -19,11 +31,23 @@ const SendOtp = () => {
             },
           }
         );
-        console.log(response?.data);
+        openNotificationWithIcon("success", "Success!", "OTP sent via E-Mail");
         form.resetFields();
+        setTimeout(() => {
+          navigate("/user/mess/customer/validateOtp", {
+            state: { email: values.email },
+          });
+        }, 2000);
+
+        // console.log(response?.data?.message);
       })
       .catch((errorInfo) => {
         console.log(errorInfo);
+        openNotificationWithIcon(
+          "error",
+          "Error!",
+          "Something went wrong! Please try again."
+        );
       });
   };
 
@@ -33,6 +57,9 @@ const SendOtp = () => {
 
   return (
     <>
+      <Title level={3} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Send OTP
+      </Title>
       <Form
         form={form}
         autoComplete="off"
@@ -46,6 +73,7 @@ const SendOtp = () => {
         action=""
         initialValues={{
           remember: true,
+          // email: email,
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -62,7 +90,7 @@ const SendOtp = () => {
         </Form.Item>
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 12,
             span: 16,
           }}
         >
@@ -71,6 +99,7 @@ const SendOtp = () => {
           </Button>
         </Form.Item>
       </Form>
+      {contextHolder}
     </>
   );
 };
