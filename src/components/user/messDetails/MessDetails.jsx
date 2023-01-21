@@ -4,6 +4,7 @@ import "./mess_details.scss";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import StarRating from "../starrRating/StarRating";
+import { Link } from "react-router-dom";
 
 const MessDetails = () => {
   const [formActive, setFormActive] = useState(false);
@@ -112,6 +113,9 @@ const MessDetails = () => {
       {/* Navbar */}
       <nav>
         <h1>MessyFeed</h1>
+        <Link to="/messList">
+          <button className="back">Back</button>
+        </Link>
       </nav>
 
       {/* Mess Topbar */}
