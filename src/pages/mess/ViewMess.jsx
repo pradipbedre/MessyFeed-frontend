@@ -177,7 +177,7 @@ const ViewMess = () => {
     setImageModal(false);
   };
 
-  if (isLoading) return <Spin />;
+  if (isLoading) return <Spin size="large" style={{ textAlign: "center" }} />;
 
   return messData ? (
     <>
