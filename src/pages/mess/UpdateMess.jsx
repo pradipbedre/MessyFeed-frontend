@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, TimePicker, Form, Input, Upload } from "antd";
 import { getCookie } from "../../utils/Cookie";
+import { useNavigate } from "react-router";
+import AlertModal from "../../components/notifications/AlertModal";
+// import { openNotificationWithIcon } from "../../components/notifications/toastAlert";
 
-const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
+const UpdateMess = ({
+  messData,
+  setMessData,
+  setUpdateModal,
+  openNotificationWithIcon,
+}) => {
+  const [images, setImages] = useState([]);
   const [form] = Form.useForm();
   const [street, city, state] = messData.address.split("  ");
+
+  const handleImageUpload = (fileData) => {
+    const fileReader = new FileReader();
+    fileReader.onloadend = () => {
+      setImages((prevList) => [...prevList, fileReader.result.toString()]);
+    };
+    fileReader.readAsDataURL(fileData);
+    return false;
+  };
 
   const onFinish = async (values) => {
     const addr = `${values.address.street}  ${values.address.city}  ${values.address.state}`;
@@ -15,7 +33,7 @@ const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
     try {
       const response = await axios.put(
         `${import.meta.env.VITE_BASE_URL}` + "user/mess/",
-        { address: addr, pincode: pin, ...otherValues },
+        { photos: images, address: addr, pincode: pin, ...otherValues },
         {
           headers: {
             Authorization: `${getCookie("jwt_token")}`,
@@ -23,13 +41,24 @@ const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
         }
       );
       if (response.status === 200) {
-        setMessData(response.data);
+        setMessData(response?.data?.message);
+        openNotificationWithIcon(
+          "success",
+          "Success!",
+          "Congratulations!!! Mess has been updated successfuly"
+        );
         form.resetFields();
+
         setUpdateModal(false);
       }
     } catch (err) {
       form.resetFields();
       console.log(err.message);
+      openNotificationWithIcon(
+        "error",
+        "Error!",
+        "Something went wrong! Please try again."
+      );
     }
   };
   const onFinishFailed = (errorInfo) => {
@@ -124,7 +153,12 @@ const UpdateMess = ({ messData, setMessData, setUpdateModal }) => {
           </Form.Item>
         </Form.Item>
         <Form.Item label="Images" valuePropName="fileList">
-          <Upload action="/upload.do" listType="picture-card">
+          <Upload
+            action=""
+            listType="picture-card"
+            // onChange={handleChange}
+            beforeUpload={handleImageUpload}
+          >
             <div>
               <PlusOutlined />
               <div

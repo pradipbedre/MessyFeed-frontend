@@ -23,11 +23,11 @@ const UpdateCustomer = ({ customerData, setUpdateModal, setCustomerData }) => {
         );
         setCustomerData((prevState) => {
           const newCustomerData = { ...prevState };
-          newCustomerData.name = response?.data?.name;
-          newCustomerData.email = response?.data?.email;
-          newCustomerData.phoneNo = response?.data?.phoneNo;
-          newCustomerData.gender = response?.data?.gender;
-          newCustomerData.address = response?.data?.address;
+          newCustomerData.name = response?.data?.message?.name;
+          newCustomerData.email = response?.data?.message?.email;
+          newCustomerData.phoneNo = response?.data?.message?.phoneNo;
+          newCustomerData.gender = response?.data?.message?.gender;
+          newCustomerData.address = response?.data?.message?.address;
           return newCustomerData;
         });
         form.resetFields();

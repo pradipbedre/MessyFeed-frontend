@@ -36,7 +36,7 @@ const columns = [
 // }
 // ];
 
-const ViewPlans = () => {
+const ViewPlans = ({ openNotificationWithIcon }) => {
   const [plansData, setPlansData] = useState();
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const ViewPlans = () => {
           }
         );
         setPlansData(
-          response?.data?.map((data) => {
+          response?.data?.message?.map((data) => {
             data.key = data?._id;
             data.actions = (
               <>
@@ -60,6 +60,7 @@ const ViewPlans = () => {
                   planData={data}
                   plansData={plansData}
                   setPlansData={setPlansData}
+                  openNotificationWithIcon={openNotificationWithIcon}
                 />
                 &nbsp;&nbsp;&nbsp;
                 <DeletePlan />

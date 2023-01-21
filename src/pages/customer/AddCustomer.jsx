@@ -1,11 +1,20 @@
 import React from "react";
 import axios from "axios";
-import { Steps, DatePicker, Button, Form, Input } from "antd";
+import {
+  Steps,
+  DatePicker,
+  Button,
+  Form,
+  Input,
+  notification,
+  Typography,
+} from "antd";
 import { useState, useEffect } from "react";
 import { PlanDetails } from "./PlanDetails.jsx";
 import { PersonalDetails } from "./PersonalDetails.jsx";
 import { ConfirmData } from "./ConfirmData.jsx";
 import { getCookie } from "../../utils/Cookie.js";
+const { Title } = Typography;
 
 const AddCustomer = () => {
   const [current, setCurrent] = useState(0);
@@ -13,6 +22,14 @@ const AddCustomer = () => {
   const [formValues, setFormValues] = useState({});
   const [form1] = Form.useForm();
   const [form2] = Form.useForm();
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, title, message) => {
+    api[type]({
+      message: title,
+      description: message,
+    });
+  };
 
   const handleSubmit = async () => {
     try {
@@ -26,6 +43,9 @@ const AddCustomer = () => {
         paidAmount: formValues?.planCost,
         mealsLeft: formValues?.mealsLeft,
         planStartDate: formValues?.startDate,
+        planEndDate: new Date(
+          formValues?.startDate + formValues?.mealsLeft * 24 * 60 * 60 * 1000
+        ),
         status: "Active",
         planId: formValues?.mealPlan,
       };
@@ -39,13 +59,31 @@ const AddCustomer = () => {
           },
         }
       );
-      if (response.status === 200) {
-        console.log(response.status);
+      if (response?.data?.statusCode === 200) {
+        console.log(response?.data?.statusCode);
+        openNotificationWithIcon(
+          "success",
+          "Success!",
+          "Customer added successfully!"
+        );
+        setTimeout(() => {
+          navigate("/user/mess/customer/viewAll");
+        }, 2000);
       } else {
-        console.log(response.message);
+        console.log(response?.data?.message);
+        openNotificationWithIcon(
+          "error",
+          "Error!",
+          "Something went wrong! Please try again."
+        );
       }
     } catch (err) {
       console.log(err.message);
+      openNotificationWithIcon(
+        "error",
+        "Error!",
+        "Something went wrong! Please try again."
+      );
     }
   };
 
@@ -95,8 +133,11 @@ const AddCustomer = () => {
 
   return (
     <>
+      <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Add New Customer
+      </Title>
       <div>
-        <Steps size="small" current={current}>
+        <Steps size="small" current={current} style={{ marginBottom: "20px" }}>
           {steps.map((item) => (
             <Steps.Item key={item.title} title={item.title} />
           ))}
@@ -120,6 +161,7 @@ const AddCustomer = () => {
           )}
         </div>
       </div>
+      {contextHolder}
     </>
   );
 };
