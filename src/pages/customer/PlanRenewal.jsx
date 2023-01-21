@@ -2,6 +2,7 @@ import { DatePicker, Form, Input, Select, Button } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getCookie } from "../../utils/Cookie";
+import Title from "antd/es/typography/Title";
 const { Option } = Select;
 
 const PlanRenewal = () => {
@@ -22,7 +23,7 @@ const PlanRenewal = () => {
           startDate: values?.startDate,
         };
         const response = await axios.put(
-          `${import.meta.env.VITE_BASE_URL}` + "user/",
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/customer/",
           reqBody,
           {
             headers: {
@@ -53,7 +54,7 @@ const PlanRenewal = () => {
             },
           }
         );
-        setPlansData(response?.data);
+        setPlansData(response?.data?.message);
       } catch (err) {
         console.log(err.message);
       }
@@ -72,7 +73,7 @@ const PlanRenewal = () => {
             },
           }
         );
-        if (response?.data?.status === "Active")
+        if (response?.data?.message?.status === "Active")
           alert("You already have an active plan");
       } catch (err) {
         console.log(err.message);
@@ -91,6 +92,9 @@ const PlanRenewal = () => {
 
   return (
     <>
+      <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Plan Renewal
+      </Title>
       <Form
         form={form}
         labelCol={{
@@ -152,7 +156,7 @@ const PlanRenewal = () => {
 
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 12,
             span: 16,
           }}
         >
