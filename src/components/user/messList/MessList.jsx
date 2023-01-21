@@ -4,13 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setMessId } from "../../../redux-store/actions";
+import { Loading } from "../shared/SharedComponent";
+import { NotFoundMess } from "../shared/SharedComponent";
 
 const MessList = () => {
   const [messList, setMessList] = useState([]);
   const pincode = useSelector((state) => state.setCommonPincode);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
   /* Function for Navigate */
   const handelMessSelect = (id) => {
     dispatch(setMessId(id));
@@ -20,10 +23,20 @@ const MessList = () => {
   /* Fetch all messes */
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}home/search?q=${pincode}`
-      );
-      setMessList(res.data);
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}home/search?q=${pincode}`
+        );
+        setMessList(res.data);
+        if (res.data) {
+          setLoading(false);
+        }
+        if (res.data.length == 0) {
+          setNotFound(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     fetchData();
@@ -38,7 +51,7 @@ const MessList = () => {
           <button className="back">Back</button>
         </Link>
       </nav>
-
+      {loading && <Loading />}
       <div className="mess-list">
         {messList &&
           messList.map((mess) => (
@@ -52,8 +65,8 @@ const MessList = () => {
               <p>{`${mess.address}, ${mess.pincode}`}</p>
             </div>
           ))}
-        {messList.length === 0 && <h1>No Mess Found!</h1>}
       </div>
+      {notFound && <NotFoundMess />}
       <div className="footer">
         <p className="title">{`All Messes In ${pincode} Area Pincode`}</p>
         <div className="rights">
