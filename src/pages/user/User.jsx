@@ -1,8 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
-
-/* Ant design layout component */
-
 import {
   FileOutlined,
   PieChartOutlined,
@@ -10,9 +7,11 @@ import {
   DesktopOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Breadcrumb, Layout, Menu, theme, Grid, Tag } from "antd";
 import { useState } from "react";
 const { Header, Content, Footer, Sider } = Layout;
+
+const { useBreakpoint } = Grid;
 
 function getItem(label, key, icon, children) {
   return {
@@ -83,14 +82,6 @@ const items = [
       </>,
       "12"
     ),
-    getItem(
-      <>
-        <Link to="/user/mess/customer/PlanRenewal" title="planRenewal">
-          Plan Renewal
-        </Link>
-      </>,
-      "13"
-    ),
   ]),
   getItem("User", "sub1", <DesktopOutlined />, [
     getItem(
@@ -122,6 +113,17 @@ const items = [
 
 const UserPage = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const screens = useBreakpoint();
+  const [isXs, setIsXS] = useState();
+
+  useEffect(() => {
+    setIsXS(
+      Object.entries(screens)
+        .filter((screen) => !!screen[1])
+        ?.find((s) => s[0] === "xs")
+    );
+  }, [screens]);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -132,39 +134,76 @@ const UserPage = () => {
         height: "100vh",
       }}
     >
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          left: 0,
-          top: 0,
-          bottom: 0,
-        }}
-      >
-        <div
+      {!isXs ? (
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(value) => setCollapsed(value)}
           style={{
-            padding: "10px",
-            margin: 16,
-            background: "rgba(255, 255, 255, 0.2)",
-            textAlign: "center",
+            overflow: "auto",
+            height: "100vh",
+            position: "fixed",
+            left: 0,
+            top: 0,
+            bottom: 0,
+            transition: "all 500ms linear 0s",
           }}
         >
-          <h1 style={{ color: "white" }}>MessyFeed</h1>
-        </div>
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={["1"]}
-          mode="inline"
-          items={items}
-        />
-      </Sider>
+          <div
+            style={{
+              padding: "10px",
+              margin: 16,
+              background: "rgba(255, 255, 255, 0.2)",
+              textAlign: "center",
+            }}
+          >
+            <h1 style={{ color: "white" }}>MessyFeed</h1>
+          </div>
+          <Menu
+            theme="dark"
+            defaultSelectedKeys={["1"]}
+            mode="inline"
+            items={items}
+            style={{ transition: "all 500ms linear 0s" }}
+          />
+        </Sider>
+      ) : (
+        <Header
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 1,
+            width: "100%",
+          }}
+        >
+          <div
+            style={{
+              float: "left",
+              width: 120,
+              height: 31,
+              margin: "16px 24px 16px 0",
+              background: "rgba(255, 255, 255, 0.2)",
+            }}
+          >
+            <h1 style={{ color: "white" }}>MessyFeed</h1>
+          </div>
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={["1"]}
+            // items={new Array(3).fill(null).map((_, index) => ({
+            //   key: String(index + 1),
+            //   label: `nav ${index + 1}`,
+            // }))}
+            items={items}
+          />
+        </Header>
+      )}
       <Layout className="site-layout">
         <Content
           style={{
-            margin: "0 16px",
+            margin: collapsed ? "0 100px" : "0 0 0 200px",
+            transition: "all 500ms linear 0s",
           }}
         >
           <Breadcrumb
