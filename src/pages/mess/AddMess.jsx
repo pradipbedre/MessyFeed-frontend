@@ -17,6 +17,10 @@ import { getCookie } from "../../utils/Cookie";
 import Success from "../../components/notifications/Success";
 import { useNavigate } from "react-router";
 const { Title } = Typography;
+import { firebaseStorage } from "../../main";
+// import {v4} from uuidv4
+import { uuidv4 } from "@firebase/util";
+import { ref, uploadString } from "firebase/storage";
 
 const AddMess = () => {
   const [form] = Form.useForm();
@@ -38,6 +42,31 @@ const AddMess = () => {
   //       image: info?.file?.response?.data,
   //     });
   //   }
+  // };
+
+  // const handleImageUpload = (fileData) => {
+  //   const fileReader = new FileReader();
+  //   fileReader.onloadend = () => {
+  //     const fileExtension = fileReader.result
+  //       .toString()
+  //       ?.split(";base64,")[0]
+  //       .split("/")[1];
+  //     const base64Content = fileReader.result.toString()?.split(";base64,")[1];
+
+  //     const storageRef = ref(firebaseStorage, `${uuidv4()}.${fileExtension}`);
+  //     uploadString(storageRef, base64Content, "base64", {
+  //       contentType: `image/${fileExtension}`,
+  //     }).then((snapshot) => {
+  //       console.log(
+  //         "Uploaded a base64url string! ",
+  //         `gs://${snapshot?.metadata?.bucket}/${snapshot?.metadata?.fullPath}`
+  //         // snapshot?.metadata?.bucket + "/" + snapshot?.metadata?.fullPath
+  //       );
+  //       setImages((prevList) => [...prevList, fileReader.result.toString()]);
+  //     });
+  //     // setImages((prevList) => [...prevList, fileReader.result.toString()]);
+  //   };
+  //   fileReader.readAsDataURL(fileData);
   // };
 
   const handleImageUpload = (fileData) => {
@@ -71,7 +100,7 @@ const AddMess = () => {
         // ;
         form.resetFields();
         setTimeout(() => {
-          navigate("/user/mess/view/");
+          navigate("/user/mess/view");
         }, 3000);
       } else {
         console.log(response?.data?.message);
