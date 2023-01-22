@@ -72,7 +72,7 @@ export const ViewProfile = () => {
                 {userData?.phoneNo}
               </Descriptions.Item>
               <Descriptions.Item label="Address">
-                {userData?.address}
+                {`${userData?.address?.street}  ${userData?.address?.city}  ${userData?.address?.state}  ${userData?.address?.pincode}`}
               </Descriptions.Item>
               <Descriptions.Item label="Role">
                 {userData?.role}
