@@ -184,7 +184,9 @@ const PlanRenewal = ({
           <Input />
         </Form.Item>
         <Form.Item label="Start Date" name="startDate">
-          <DatePicker />
+          <DatePicker
+            disabledDate={(current) => current.isBefore(new Date())}
+          />
         </Form.Item>
 
         <Form.Item

@@ -89,7 +89,9 @@ export const PlanDetails = ({ form, setSelectedData }) => {
           <Input />
         </Form.Item>
         <Form.Item label="Start Date" name="startDate">
-          <DatePicker />
+          <DatePicker
+            disabledDate={(current) => current.isBefore(new Date())}
+          />
         </Form.Item>
       </Form>
     </>
