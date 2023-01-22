@@ -422,18 +422,19 @@ const UserPage = () => {
             style={{
               padding: "10px",
               margin: 16,
-              background: "rgba(255, 255, 255, 0.2)",
+              // background: "rgba(255, 255, 255, 0.2)",
+              backgroundColor: "#cc6200",
               textAlign: "center",
             }}
           >
-            <h1 style={{ color: "white" }}>MessyFeed</h1>
+            <h1 style={{ color: "white", overflow: "clip" }}>MessyFeed</h1>
           </div>
           <Menu
             theme="dark"
             defaultSelectedKeys={["1"]}
             mode="inline"
             items={items}
-            style={{ transition: "all 500ms linear 0s" }}
+            style={{ transition: "all 0.2s linear 0s" }}
           />
         </Sider>
       ) : (
@@ -451,10 +452,10 @@ const UserPage = () => {
               width: 120,
               height: 31,
               margin: "16px 24px 16px 0",
-              background: "rgba(255, 255, 255, 0.2)",
+              backgroundColor: "#cc6200",
             }}
           >
-            <h1 style={{ color: "white" }}>MessyFeed</h1>
+            <h1 style={{ color: "white", overflow: "clip" }}>MessyFeed</h1>
           </div>
           <Menu
             theme="dark"
