@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sentry/react": "^7.31.1",
+    "@sentry/tracing": "^7.31.1",
     "antd": "^5.1.5",
     "axios": "^1.2.2",
     "firebase": "^9.14.0",
