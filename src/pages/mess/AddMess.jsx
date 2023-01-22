@@ -100,6 +100,7 @@ const AddMess = () => {
         // ;
         form.resetFields();
         setTimeout(() => {
+          window.location.reload();
           navigate("/user/mess/view");
         }, 3000);
       } else {
