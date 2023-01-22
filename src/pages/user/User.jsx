@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import {
   FileOutlined,
   PieChartOutlined,
@@ -7,9 +7,10 @@ import {
   DesktopOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, theme, Grid, Tag } from "antd";
+import { Breadcrumb, Layout, Menu, theme, Grid, Tag, Spin } from "antd";
 import { useState } from "react";
 const { Header, Content, Footer, Sider } = Layout;
+import axios from "axios";
 
 const { useBreakpoint } = Grid;
 
@@ -115,6 +116,9 @@ const UserPage = () => {
   const [collapsed, setCollapsed] = useState(false);
   const screens = useBreakpoint();
   const [isXs, setIsXS] = useState();
+  const [messData, setMessData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsXS(
@@ -124,10 +128,48 @@ const UserPage = () => {
     );
   }, [screens]);
 
+  useEffect(() => {
+    const getMessData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}` + "user/mess/",
+          {
+            headers: {
+              Authorization: `${getCookie("jwt_token")}`,
+            },
+          }
+        );
+        if (response?.data?.statusCode === 200) {
+          setMessData(response?.data?.message);
+          console.log("Mess Data = ", response?.data?.message);
+        } else {
+          console.log(response?.data?.message);
+        }
+        setIsLoading(false);
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getMessData();
+  }, []);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  if (isLoading) return <Spin />;
+  if (
+    !isLoading &&
+    !messData &&
+    window?.location?.pathname != "/user/mess/add"
+  ) {
+    navigate("/user/mess/add");
+    console.log(window.location, window);
+  }
   return (
     <Layout
       style={{

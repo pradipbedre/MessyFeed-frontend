@@ -9,17 +9,18 @@ const onFinishFailed = (errorInfo) => {
 
 export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
   const [form] = Form.useForm();
-  const [street, city, state, pincode] = userData.address.split("  ");
+  // const [street, city, state, pincode] = userData?.address?.split("  ");
 
   const onFinish = () => {
     form
       .validateFields()
       .then(async (values) => {
-        const addr = `${values.address.street}  ${values.address.city}  ${values.address.state}  ${values.address.pincode}`;
-        const { address, ...otherValues } = values;
+        // const addr = `${values?.address?.street}  ${values?.address?.city}  ${values?.address?.state}  ${values?.address?.pincode}`;
+        // const { address, ...otherValues } = values;
         const response = await axios.put(
           `${import.meta.env.VITE_BASE_URL}` + "user/",
-          { address: addr, ...otherValues },
+          // { address: addr, ...otherValues },
+          values,
           {
             headers: {
               Authorization: `${getCookie("jwt_token")}`,
@@ -112,18 +113,30 @@ export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
         </Form.Item>
 
         <Form.Item label="Address">
-          <Form.Item name={["address", "street"]} initialValue={street} noStyle>
+          <Form.Item
+            name={["address", "street"]}
+            initialValue={userData?.address?.street}
+            noStyle
+          >
             <Input
               placeholder="Street"
               style={{ width: "45%", marginRight: "3%" }}
             />
           </Form.Item>
-          <Form.Item name={["address", "city"]} initialValue={city} noStyle>
+          <Form.Item
+            name={["address", "city"]}
+            initialValue={userData?.address?.city}
+            noStyle
+          >
             <Input placeholder="City" style={{ width: "45%" }} />
           </Form.Item>
           <br />
           <br />
-          <Form.Item name={["address", "state"]} initialValue={state} noStyle>
+          <Form.Item
+            name={["address", "state"]}
+            initialValue={userData?.address?.state}
+            noStyle
+          >
             <Input
               placeholder="State"
               style={{ width: "45%", marginRight: "3%" }}
@@ -131,7 +144,7 @@ export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
           </Form.Item>
           <Form.Item
             name={["address", "pincode"]}
-            initialValue={pincode}
+            initialValue={userData?.address?.pincode}
             noStyle
           >
             <Input placeholder="Pincode" style={{ width: "45%" }} />
