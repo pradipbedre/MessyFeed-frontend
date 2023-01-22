@@ -30,12 +30,25 @@ const ValidateOtp = () => {
             },
           }
         );
-        form.resetFields();
-        openNotificationWithIcon(
-          "success",
-          "Success!",
-          "OTP successfully validated!"
-        );
+
+        if (response?.data?.statusCode === 200) {
+          openNotificationWithIcon(
+            "success",
+            "Success!",
+            "OTP successfully validated!"
+          );
+          setTimeout(() => {
+            navigate("/user/mess/customer/viewAll");
+          }, 3000);
+          form.resetFields();
+        } else {
+          openNotificationWithIcon(
+            "error",
+            "Error!",
+            "Invalid OTP. Please check your mail!"
+          );
+        }
+
         console.log(response?.data?.message);
       })
       .catch((errorInfo) => {
