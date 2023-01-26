@@ -31,5 +31,5 @@ logo and introduction of project
 
 
 # Authors
-  [Pradip Bedre](https://github.com/pradipbedre)
-  [Dhanunjaya Lakshm](https://github.com/dhanunjayalakshmi)
+- [Pradip Bedre](https://github.com/pradipbedre)
+- [Dhanunjaya Lakshm](https://github.com/dhanunjayalakshmi)
