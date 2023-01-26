@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Radio, Form, Input } from "antd";
+import { Modal, Button, Radio, Form, Input, notification } from "antd";
 import { getCookie } from "../../utils/Cookie";
+import { useLocation } from "react-router";
+import Title from "antd/es/typography/Title";
 
 const ValidateOtp = () => {
   const [form] = Form.useForm();
+  const location = useLocation();
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, title, message) => {
+    api[type]({
+      message: title,
+      description: message,
+    });
+  };
 
   const onFinish = () => {
     form
@@ -19,11 +30,34 @@ const ValidateOtp = () => {
             },
           }
         );
-        console.log(response?.data);
-        form.resetFields();
+
+        if (response?.data?.statusCode === 200) {
+          openNotificationWithIcon(
+            "success",
+            "Success!",
+            "OTP successfully validated!"
+          );
+          setTimeout(() => {
+            navigate("/user/mess/customer/viewAll");
+          }, 3000);
+          form.resetFields();
+        } else {
+          openNotificationWithIcon(
+            "error",
+            "Error!",
+            "Invalid OTP. Please check your mail!"
+          );
+        }
+
+        console.log(response?.data?.message);
       })
       .catch((errorInfo) => {
         console.log(errorInfo);
+        openNotificationWithIcon(
+          "error",
+          "Error!",
+          "Something went wrong! Please try again."
+        );
       });
   };
 
@@ -31,8 +65,13 @@ const ValidateOtp = () => {
     console.log("Failed:", errorInfo);
   };
 
+  useEffect(() => {}, []);
+
   return (
     <>
+      <Title level={3} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Validate OTP
+      </Title>
       <Form
         form={form}
         autoComplete="off"
@@ -46,7 +85,7 @@ const ValidateOtp = () => {
         action=""
         initialValues={{
           remember: true,
-          prefix: "+91",
+          email: location?.state?.email || "",
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -81,7 +120,7 @@ const ValidateOtp = () => {
 
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 12,
             span: 16,
           }}
         >
@@ -90,6 +129,7 @@ const ValidateOtp = () => {
           </Button>
         </Form.Item>
       </Form>
+      {contextHolder}
     </>
   );
 };

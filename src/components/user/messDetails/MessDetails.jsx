@@ -4,6 +4,7 @@ import "./mess_details.scss";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import StarRating from "../starrRating/StarRating";
+import { Link } from "react-router-dom";
 
 const MessDetails = () => {
   const [formActive, setFormActive] = useState(false);
@@ -112,6 +113,9 @@ const MessDetails = () => {
       {/* Navbar */}
       <nav>
         <h1>MessyFeed</h1>
+        <Link to="/messList">
+          <button className="back">Back</button>
+        </Link>
       </nav>
 
       {/* Mess Topbar */}
@@ -153,7 +157,7 @@ const MessDetails = () => {
 
       {/* Rating System */}
       <div className="rating-system-form">
-        <h2>All Ratings By Mess Customers</h2>
+        <h2>Our Customers Feedback</h2>
         <button className="givebtn" onClick={() => setFormActive(!formActive)}>
           Give Rating
         </button>
@@ -179,7 +183,7 @@ const MessDetails = () => {
             </div>
             <textarea
               name="rating"
-              cols="50"
+              cols="30"
               rows="6"
               value={review}
               onChange={(e) => setReview(e.target.value)}
@@ -193,7 +197,7 @@ const MessDetails = () => {
       <div className="all-reviews">
         {allReviews &&
           allReviews.map((rev) => (
-            <div className="review" >
+            <div className="review">
               <p>{rev.review}</p>
               <div className="rating">
                 <p>{<StarRating rating={rev.rating} />}</p>

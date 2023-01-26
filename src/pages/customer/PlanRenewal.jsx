@@ -2,9 +2,15 @@ import { DatePicker, Form, Input, Select, Button } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getCookie } from "../../utils/Cookie";
+import Title from "antd/es/typography/Title";
 const { Option } = Select;
 
-const PlanRenewal = () => {
+const PlanRenewal = ({
+  email,
+  setRenewalModal,
+  setCustomerData,
+  openNotificationWithIcon,
+}) => {
   const [plansData, setPlansData] = useState();
   const [form] = Form.useForm();
 
@@ -12,28 +18,58 @@ const PlanRenewal = () => {
     form
       .validateFields()
       .then(async (values) => {
-        console.log(values);
-        const reqBody = {
-          email: values?.email,
-          planId: values?.messPlan,
-          mealsLeft: values?.mealsLeft,
-          paymentMode: values?.paymentMode,
-          paidAmount: values?.planCost,
-          startDate: values?.startDate,
-        };
-        const response = await axios.put(
-          `${import.meta.env.VITE_BASE_URL}` + "user/",
-          reqBody,
-          {
-            headers: {
-              Authorization: `${getCookie("jwt_token")}`,
-            },
-          }
-        );
-        form.resetFields();
+        const activeCustomer = await getCustomerData(values?.email);
+        console.log(activeCustomer);
+        if (!activeCustomer.active) {
+          console.log(1, values);
+          const reqBody = {
+            email: values?.email,
+            planId: values?.mealPlan,
+            mealsLeft: values?.mealsLeft,
+            paymentMode: values?.paymentMode,
+            paidAmount: values?.planCost,
+            startDate: values?.startDate,
+            status: "Active",
+          };
+          console.log(reqBody, 2);
+          const response = await axios.put(
+            `${import.meta.env.VITE_BASE_URL}user/mess/customer/${
+              activeCustomer?.id
+            }`,
+            reqBody,
+            {
+              headers: {
+                Authorization: `${getCookie("jwt_token")}`,
+              },
+            }
+          );
+          console.log(3);
+          console.log(response?.data);
+          openNotificationWithIcon(
+            "success",
+            "Success!",
+            "Plan Renewal successfull!"
+          );
+          form.resetFields();
+          setRenewalModal(false);
+        } else {
+          console.log("You already have an active plan");
+          openNotificationWithIcon(
+            "error",
+            "Error!",
+            "You already have an active plan"
+          );
+          form.resetFields();
+          setRenewalModal(false);
+        }
       })
       .catch((errorInfo) => {
         console.log(errorInfo);
+        openNotificationWithIcon(
+          "error",
+          "Error!",
+          "Something went wrong! Please try again."
+        );
       });
   };
 
@@ -53,7 +89,7 @@ const PlanRenewal = () => {
             },
           }
         );
-        setPlansData(response?.data);
+        setPlansData(response?.data?.message);
       } catch (err) {
         console.log(err.message);
       }
@@ -61,24 +97,22 @@ const PlanRenewal = () => {
     getPlansData();
   }, []);
 
-  const handleEmailChange = (value) => {
-    const getCustomersData = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}user/mess/customer/${value}`,
-          {
-            headers: {
-              Authorization: `${getCookie("jwt_token")}`,
-            },
-          }
-        );
-        if (response?.data?.status === "Active")
-          alert("You already have an active plan");
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-    getCustomersData();
+  const getCustomerData = async (value) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}user/mess/customer/${value}`,
+        {
+          headers: {
+            Authorization: `${getCookie("jwt_token")}`,
+          },
+        }
+      );
+      if (response?.data?.message?.status === "Active")
+        return { active: true, id: response?.data?.message?._id };
+      else return { active: false, id: response?.data?.message?._id };
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   const handleSelectChange = (value) => {
@@ -91,6 +125,9 @@ const PlanRenewal = () => {
 
   return (
     <>
+      {/* <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Plan Renewal
+      </Title> */}
       <Form
         form={form}
         labelCol={{
@@ -103,7 +140,7 @@ const PlanRenewal = () => {
         }}
         layout="horizontal"
         action=""
-        initialValues={{ remember: "true" }}
+        initialValues={{ remember: "true", email: email }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
@@ -115,7 +152,7 @@ const PlanRenewal = () => {
             { type: "email", message: "Pleasse enter valid email" },
           ]}
         >
-          <Input.Search onSearch={handleEmailChange} />
+          <Input />
         </Form.Item>
         <Form.Item
           name="mealPlan"
@@ -147,12 +184,14 @@ const PlanRenewal = () => {
           <Input />
         </Form.Item>
         <Form.Item label="Start Date" name="startDate">
-          <DatePicker />
+          <DatePicker
+            disabledDate={(current) => current.isBefore(new Date())}
+          />
         </Form.Item>
 
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 9,
             span: 16,
           }}
         >

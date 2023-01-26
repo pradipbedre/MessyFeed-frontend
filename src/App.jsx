@@ -1,5 +1,6 @@
 import React from "react";
 import "./app.module.scss";
+import * as Sentry from "@sentry/react";
 import { Routes, Route } from "react-router-dom";
 import PivateRoutes from "./utils/ProtectedRoutes";
 import LandingPage from "./pages/landingpage/LandingPage";
@@ -63,4 +64,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Sentry.withProfiler(App);

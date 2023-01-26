@@ -1,13 +1,81 @@
 import React from "react";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
-import { Select, Button, TimePicker, Form, Input, Upload } from "antd";
+import {
+  Select,
+  Button,
+  TimePicker,
+  Form,
+  Input,
+  Upload,
+  notification,
+} from "antd";
+import { Typography } from "antd";
+
 import { useState } from "react";
 import { getCookie } from "../../utils/Cookie";
+import Success from "../../components/notifications/Success";
+import { useNavigate } from "react-router";
+const { Title } = Typography;
+import { firebaseStorage } from "../../main";
+// import {v4} from uuidv4
+import { uuidv4 } from "@firebase/util";
+import { ref, uploadString } from "firebase/storage";
 
 const AddMess = () => {
-  const [messData, setMessData] = useState();
   const [form] = Form.useForm();
+  const [images, setImages] = useState([]);
+  const navigate = useNavigate();
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, title, message) => {
+    api[type]({
+      message: title,
+      description: message,
+    });
+  };
+
+  // const handleChange = (info) => {
+  //   console.log(info?.file?.response);
+  //   if (info?.file?.status === "done") {
+  //     form.setFieldsValue({
+  //       image: info?.file?.response?.data,
+  //     });
+  //   }
+  // };
+
+  // const handleImageUpload = (fileData) => {
+  //   const fileReader = new FileReader();
+  //   fileReader.onloadend = () => {
+  //     const fileExtension = fileReader.result
+  //       .toString()
+  //       ?.split(";base64,")[0]
+  //       .split("/")[1];
+  //     const base64Content = fileReader.result.toString()?.split(";base64,")[1];
+
+  //     const storageRef = ref(firebaseStorage, `${uuidv4()}.${fileExtension}`);
+  //     uploadString(storageRef, base64Content, "base64", {
+  //       contentType: `image/${fileExtension}`,
+  //     }).then((snapshot) => {
+  //       console.log(
+  //         "Uploaded a base64url string! ",
+  //         `gs://${snapshot?.metadata?.bucket}/${snapshot?.metadata?.fullPath}`
+  //         // snapshot?.metadata?.bucket + "/" + snapshot?.metadata?.fullPath
+  //       );
+  //       setImages((prevList) => [...prevList, fileReader.result.toString()]);
+  //     });
+  //     // setImages((prevList) => [...prevList, fileReader.result.toString()]);
+  //   };
+  //   fileReader.readAsDataURL(fileData);
+  // };
+
+  const handleImageUpload = (fileData) => {
+    const fileReader = new FileReader();
+    fileReader.onloadend = () => {
+      setImages((prevList) => [...prevList, fileReader.result.toString()]);
+    };
+    fileReader.readAsDataURL(fileData);
+  };
 
   const onFinish = async (values) => {
     const addr = `${values.address.street}  ${values.address.city}  ${values.address.state}`;
@@ -16,25 +84,42 @@ const AddMess = () => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}` + "user/mess/",
-        { address: addr, pincode: pin, ...otherValues },
+        { photos: images, address: addr, pincode: pin, ...otherValues },
         {
           headers: {
             Authorization: `${getCookie("jwt_token")}`,
           },
         }
       );
-      console.log(response.status);
-      if (response.status === 200) {
-        setMessData(response.data);
+      if (response?.data?.statusCode === 200) {
+        openNotificationWithIcon(
+          "success",
+          "Success!",
+          "Congratulations!!! New Mess added successfuly. You will be redirected to mess page now!"
+        );
+        // ;
         form.resetFields();
+        setTimeout(() => {
+          window.location.reload();
+          navigate("/user/mess/view");
+        }, 3000);
       } else {
-        console.log(response.message);
+        console.log(response?.data?.message);
+        openNotificationWithIcon(
+          "error",
+          "Error!",
+          "Something went wrong! Please try again."
+        );
       }
     } catch (err) {
       form.resetFields();
       console.log(err.message);
+      openNotificationWithIcon(
+        "error",
+        "Error!",
+        "Something went wrong! Please try again."
+      );
     }
-    // console.log("Response... :", response.data);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -43,8 +128,12 @@ const AddMess = () => {
 
   return (
     <>
+      <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Add New Mess
+      </Title>
       <Form
         form={form}
+        title="Add New Mess"
         autoComplete="off"
         labelCol={{
           span: 8,
@@ -122,7 +211,12 @@ const AddMess = () => {
           </Form.Item>
         </Form.Item>
         <Form.Item label="Images" valuePropName="fileList">
-          <Upload action="/upload.do" listType="picture-card">
+          <Upload
+            action=""
+            listType="picture-card"
+            // onChange={handleChange}
+            beforeUpload={handleImageUpload}
+          >
             <div>
               <PlusOutlined />
               <div
@@ -137,15 +231,20 @@ const AddMess = () => {
         </Form.Item>
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 12,
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
-            Add Mess
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ colorPrimary: "#cc6200" }}
+          >
+            Add
           </Button>
         </Form.Item>
       </Form>
+      {contextHolder}
     </>
   );
 };
