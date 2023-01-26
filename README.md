@@ -10,7 +10,7 @@ logo and introduction of project
 # Demo
 [Messyfeed-Website](https://messyfeed.netlify.app/)
 
-**Test Credentials for SharedSpace Users**
+**Test Credentials for Messyfeed Users**
 
 **Email:** demo@gmail.com
 
