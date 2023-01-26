@@ -10,9 +10,6 @@ logo and introduction of project
 # Demo
 [Messyfeed-Website](https://messyfeed.netlify.app/)
 
-Please Note:
-   1. We recommend using this app in any browser
-
 **Test Credentials for SharedSpace Users**
 
 **Email:** demo@gmail.com
