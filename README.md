@@ -32,4 +32,4 @@ logo and introduction of project
 
 # Authors
 - [Pradip Bedre](https://github.com/pradipbedre)
-- [Dhanunjaya Lakshm](https://github.com/dhanunjayalakshmi)
+- [Dhanunjaya Lakshmi](https://github.com/dhanunjayalakshmi)
