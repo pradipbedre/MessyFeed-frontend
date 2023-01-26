@@ -2,10 +2,10 @@
 logo and introduction of project
 
 # Table of Content
-1. Demo
-2. Installation
-3. Technology Stack
-4. Authors
+1. [Demo](#Demo)
+2. [Installation](#Installation)
+3. [Technology Stack](#Technology Stack)
+4. [Authors](Authors)
 
 # Demo
 [Messyfeed-Website](https://messyfeed.netlify.app/)
