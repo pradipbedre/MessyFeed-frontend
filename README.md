@@ -4,7 +4,7 @@ logo and introduction of project
 # Table of Content
 1. [Demo](#Demo)
 2. [Installation](#Installation)
-3. [TechnologyStack](#Technology Stack)
+3. [TechnologyStack](#Technology)
 4. [Authors](Authors)
 
 # Demo
