@@ -16,15 +16,15 @@ logo and introduction of project
 - Copy the .env.example to .env file and configure the .env file
 - Run the below command to install the packages in package.json
 
-`code`
+`
 npm install
-`code`
+`
 
 - Run the below command to start the app
 
-`code`
+`
 npm run dev
-`code`
+`
 
 # Technology Stack
 
