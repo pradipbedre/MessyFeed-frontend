@@ -2,12 +2,12 @@
 logo and introduction of project
 
 # Table of Content
-1. [Demo](# Demo)
-2. [Installation](# Installation)
-3. [TechnologyStack](# Technology)
-4. [Authors](# Authors)
+1. [Demo](#Demo)
+2. [Installation](#Installation)
+3. [TechnologyStack](#Technology)
+4. [Authors](#Authors)
 
-# Demo
+## Demo
 [Messyfeed-Website](https://messyfeed.netlify.app/)
 
 **Test Credentials for Messyfeed Users**
@@ -16,7 +16,7 @@ logo and introduction of project
 
 **Password:** Demo@9090
 
-# Installation
+## Installation
 
 - Fork or directly clone this repository to your local machine
 - Copy the .env.example to .env file and configure the .env file
@@ -28,7 +28,7 @@ logo and introduction of project
 
   `npm run dev`
 
-# Technology Stack
+## Technology Stack
  
  -  React JS (Vite)
  -  HTML
@@ -37,6 +37,6 @@ logo and introduction of project
  -  Javascript
 
 
-# Authors
+## Authors
 - [Pradip Bedre](https://github.com/pradipbedre)
 - [Dhanunjaya Lakshmi](https://github.com/dhanunjayalakshmi)
