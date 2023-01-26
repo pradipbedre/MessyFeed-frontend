@@ -1,7 +1,7 @@
-#Messyfeed
+# Messyfeed
 logo and introduction of project
 
-#Table of Content
+# Table of Content
 1. Demo
 2. Installation
 3. Technology Stack
