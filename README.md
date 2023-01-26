@@ -16,7 +16,7 @@ logo and introduction of project
 - Copy the .env.example to .env file and configure the .env file
 - Run the below command to install the packages in package.json
 
-  `npm install`
+  [`npm install`]
 
 - Run the below command to start the app
 
