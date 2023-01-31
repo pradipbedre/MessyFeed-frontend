@@ -3,7 +3,7 @@
 
 - Mess means like restaurants but it is like monthly subscription base plans, especially messes works for students who are in hostels and professionals    who want homemade food daily so in India messes is here to provide that.
 
-- Messyfeed is a platform that helps food mess owners to make their business digital, this is a mess management platform that provides                     customer management, mess management.
+- Messyfeed is a platform that helps food mess owners to make their business digital, it's a mess management platform that provides                     customer management, mess management.
 
 - And we are providing mess customers like students,professionals who want to join mess to find the best possible mess in their area by using **area       pincode** for ex: if you enter   778899 thisn area pincode and search then it will give you results from all messyfeed register messes in your area.
 
