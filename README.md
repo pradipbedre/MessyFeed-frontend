@@ -25,6 +25,7 @@
 
 **Password:** Demo@9090
 
+**Pincode:** 778899
 ## Installation
 
 - Fork or directly clone this repository to your local machine
