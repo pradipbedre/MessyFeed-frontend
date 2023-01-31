@@ -1,5 +1,6 @@
 # Messyfeed
-![logo](https://user-images.githubusercontent.com/60803643/214928528-2ee1976d-5bdd-4da4-8b7f-b71a9ada4949.png)
+![messyfeed](https://user-images.githubusercontent.com/60803643/215692195-f5fb510b-8a61-4dbb-b71e-b6766312d299.png)
+
 
 - Mess means like restaurants but it is like monthly subscription base plans, especially messes works for students who are in hostels and professionals    who want homemade food daily so in India messes is here to provide that.
 
