@@ -11,11 +11,12 @@
 
 
 
-# Table of Content
+# Table of Contents
 1. [Demo](#Demo)
 2. [Installation](#Installation)
 3. [TechnologyStack](#Technology)
 4. [Authors](#Authors)
+5. [License](#License)
 
 ## Demo
 [Messyfeed-Website](https://messyfeed.netlify.app/)
@@ -52,3 +53,6 @@
 ## Authors
 - [Pradip Bedre](https://github.com/pradipbedre)
 - [Dhanunjaya Lakshmi](https://github.com/dhanunjayalakshmi)
+
+## License
+[MIT](https://opensource.org/licenses/MIT)
