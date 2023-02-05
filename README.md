@@ -10,7 +10,9 @@
   according to rating.
 
 
-**[PRD](https://drive.google.com/file/d/1GF98HgOdRvejjICacmYIfxZtmIWUGERH/view?usp=sharing)**  **(Wireframes)[https://www.figma.com/file/v1qMCur2Vcn1wTZf2FtAfn/Landing-Page?node-id=0%3A1&t=D5EeAXZUprBn5abn-1]**  **(HLD)[https://drive.google.com/file/d/1xwl-eD0pzTQyaAtYvahNMaKqFA1ucJLj/view?usp=sharing]**  
+**[PRD](https://drive.google.com/file/d/1GF98HgOdRvejjICacmYIfxZtmIWUGERH/view?usp=sharing)**
+**[Wireframes](https://www.figma.com/file/v1qMCur2Vcn1wTZf2FtAfn/Landing-Page?node-id=0%3A1&t=D5EeAXZUprBn5abn-1)**
+**[HLD](https://drive.google.com/file/d/1xwl-eD0pzTQyaAtYvahNMaKqFA1ucJLj/view?usp=sharing) **
 
 
 # Table of Contents
