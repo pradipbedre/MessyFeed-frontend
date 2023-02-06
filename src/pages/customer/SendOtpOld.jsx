@@ -20,17 +20,17 @@ const SendOtp = ({ email }) => {
             },
           }
         );
-        console.log(response?.data?.message);
+        //console.log(response?.data?.message);
         form.resetFields();
         setSendOtpModal(false);
       })
       .catch((errorInfo) => {
-        console.log(errorInfo);
+     //   console.log(errorInfo);
       });
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+   // console.log("Failed:", errorInfo);
   };
 
   const showSendOtpModal = () => {

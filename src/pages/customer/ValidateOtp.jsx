@@ -49,10 +49,10 @@ const ValidateOtp = () => {
           );
         }
 
-        console.log(response?.data?.message);
+      //  console.log(response?.data?.message);
       })
       .catch((errorInfo) => {
-        console.log(errorInfo);
+       // console.log(errorInfo);
         openNotificationWithIcon(
           "error",
           "Error!",
@@ -62,7 +62,7 @@ const ValidateOtp = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+   // console.log("Failed:", errorInfo);
   };
 
   useEffect(() => {}, []);

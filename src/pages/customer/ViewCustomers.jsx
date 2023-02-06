@@ -47,7 +47,7 @@ const ViewCustomers = () => {
         setPlansData(response?.data?.message);
         setIsLoading(false);
       } catch (err) {
-        console.log(err.message);
+       // console.log(err.message);
       } finally {
         setIsLoading(false);
       }
@@ -85,7 +85,7 @@ const ViewCustomers = () => {
           })
         );
       } catch (err) {
-        console.log(err.message);
+        //console.log(err.message);
       }
     };
     plansData ? getCustomersData() : "";

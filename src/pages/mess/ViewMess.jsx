@@ -96,11 +96,11 @@ const ViewMess = () => {
         if (response?.data?.statusCode === 200) {
           setMessData(response?.data?.message);
         } else {
-          console.log(response?.data?.message);
+         // console.log(response?.data?.message);
         }
         setIsLoading(false);
       } catch (err) {
-        console.log(err.message);
+       // console.log(err.message);
       } finally {
         setIsLoading(false);
       }

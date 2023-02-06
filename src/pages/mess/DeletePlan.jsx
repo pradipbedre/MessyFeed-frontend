@@ -2,11 +2,11 @@ import { Popconfirm } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
 const handleCancel = (e) => {
-  console.log("Cancelled");
+  //console.log("Cancelled");
 };
 
 const handleConfirm = (e) => {
-  console.log(e);
+ // console.log(e);
 };
 
 export const DeletePlan = () => (

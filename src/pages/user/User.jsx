@@ -234,13 +234,13 @@ const UserPage = () => {
         if (response?.data?.statusCode === 200) {
           if (response?.data?.message) setMessData(true);
           else setMessData(false);
-          console.log("Mess Data = ", response?.data?.message);
+       //   console.log("Mess Data = ", response?.data?.message);
         } else {
-          console.log(response?.data?.message);
+       //   console.log(response?.data?.message);
         }
         setIsLoading(false);
       } catch (err) {
-        console.log(err.message);
+      //  console.log(err.message);
       } finally {
         setIsLoading(false);
       }

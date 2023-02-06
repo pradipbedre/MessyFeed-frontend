@@ -13,7 +13,7 @@ const ChangePassword = () => {
     form
       .validateFields()
       .then(async (values) => {
-        console.log("Values....", values);
+      //  console.log("Values....", values);
         const response = await axios.put(
           `${import.meta.env.VITE_BASE_URL}` + "user/changePassword",
           values,
@@ -27,12 +27,12 @@ const ChangePassword = () => {
         navigate("/user/logout");
       })
       .catch((errorInfo) => {
-        console.log(errorInfo);
+       // console.log(errorInfo);
       });
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+   // console.log("Failed:", errorInfo);
   };
 
   return (

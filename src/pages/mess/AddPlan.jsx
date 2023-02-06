@@ -43,7 +43,7 @@ const AddPlan = () => {
           );
           form.resetFields();
         } else {
-          console.log(response?.data?.message);
+        //  console.log(response?.data?.message);
           openNotificationWithIcon(
             "error",
             "Error!",
@@ -52,7 +52,7 @@ const AddPlan = () => {
         }
       })
       .catch((errorInfo) => {
-        console.log(errorInfo);
+        //console.log(errorInfo);
 
         openNotificationWithIcon(
           "error",
@@ -63,7 +63,7 @@ const AddPlan = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    //console.log("Failed:", errorInfo);
   };
 
   return (

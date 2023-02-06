@@ -12,7 +12,7 @@ const Logout = () => {
   };
 
   const handleOk = () => {
-    console.log("enter");
+ //   console.log("enter");
     removeCookie("jwt_token");
     navigate("/signin");
   };

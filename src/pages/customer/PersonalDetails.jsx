@@ -3,11 +3,11 @@ import { useState } from "react";
 const { Option } = Select;
 
 const onFinish = (values) => {
-  console.log("Success:", values);
+ // console.log("Success:", values);
 };
 
 const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
+ // console.log("Failed:", errorInfo);
 };
 
 export const PersonalDetails = ({ form }) => {

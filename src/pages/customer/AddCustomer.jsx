@@ -52,7 +52,7 @@ const AddCustomer = () => {
         status: "Active",
         planId: formValues?.mealPlan,
       };
-      console.log(dataBody);
+      //console.log(dataBody);
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}` + "user/mess/customer",
         dataBody,
@@ -63,7 +63,7 @@ const AddCustomer = () => {
         }
       );
       if (response?.data?.statusCode === 200) {
-        console.log(response?.data?.statusCode);
+       // console.log(response?.data?.statusCode);
         openNotificationWithIcon(
           "success",
           "Success!",
@@ -73,14 +73,14 @@ const AddCustomer = () => {
           navigate("/user/mess/customer/viewAll");
         }, 2000);
       } else {
-        console.log(response?.data?.message);
+       // console.log(response?.data?.message);
         openNotificationWithIcon("error", "Error!", response?.data?.message);
         // setTimeout(() => {
         //   navigate("/user/mess/customer/viewAll");
         // }, 2000);
       }
     } catch (err) {
-      console.log(err.message);
+    //  console.log(err.message);
       openNotificationWithIcon(
         "error",
         "Error!",
@@ -98,7 +98,7 @@ const AddCustomer = () => {
           setCurrent(current + 1);
         })
         .catch((errorInfo) => {
-          console.log(errorInfo);
+         // console.log(errorInfo);
         });
     current === 1 &&
       form2
@@ -108,7 +108,7 @@ const AddCustomer = () => {
           setCurrent(current + 1);
         })
         .catch((errorInfo) => {
-          console.log(errorInfo);
+        //  console.log(errorInfo);
         });
   };
 

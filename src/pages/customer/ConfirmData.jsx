@@ -1,7 +1,7 @@
 import { Descriptions } from "antd";
 export const ConfirmData = ({ formData, selectedData }) => {
   const data = formData;
-  console.log(data);
+  //console.log(data);
   return (
     <div>
       <h3>Confirm Details</h3>

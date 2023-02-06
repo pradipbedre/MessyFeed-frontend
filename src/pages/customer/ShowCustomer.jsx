@@ -57,7 +57,7 @@ const ShowCustomer = () => {
             },
           }
         );
-        console.log("Response = ", response?.data?.message, plansData);
+      //  console.log("Response = ", response?.data?.message, plansData);
         if (response?.data?.statusCode === 200) {
           const selectedPlan = plansData?.find(
             (item) => item._id === response?.data?.message?.planId
@@ -65,17 +65,17 @@ const ShowCustomer = () => {
           response.data.message.planName = selectedPlan?.name;
           setCustomerData(response?.data?.message);
         } else {
-          console.log(response?.data?.message);
+       //   console.log(response?.data?.message);
         }
       } catch (err) {
-        console.log(err);
+       // console.log(err);
       }
     };
 
     try {
       getCustomersData();
     } catch (err) {
-      console.log(err);
+     // console.log(err);
     }
   }, [location]);
 

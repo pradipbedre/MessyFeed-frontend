@@ -4,7 +4,7 @@ import { getCookie } from "../../utils/Cookie";
 const { Option } = Select;
 
 const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
+  //console.log("Failed:", errorInfo);
 };
 
 export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
@@ -32,7 +32,7 @@ export const UpdateProfile = ({ userData, setUserData, setUpdateModal }) => {
         setUpdateModal(false);
       })
       .catch((errorInfo) => {
-        console.log(errorInfo);
+       // console.log(errorInfo);
       });
   };
 

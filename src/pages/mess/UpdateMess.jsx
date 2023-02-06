@@ -53,7 +53,7 @@ const UpdateMess = ({
       }
     } catch (err) {
       form.resetFields();
-      console.log(err.message);
+      //console.log(err.message);
       openNotificationWithIcon(
         "error",
         "Error!",
@@ -62,7 +62,7 @@ const UpdateMess = ({
     }
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  //  console.log("Failed:", errorInfo);
   };
 
   return (

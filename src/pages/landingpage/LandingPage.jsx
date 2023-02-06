@@ -12,7 +12,7 @@ import pradipImg from "../../assets/pradip.png";
 import indranilImg from "../../assets/indranil.jpg";
 import dl from "../../assets/dl1.jpg";
 const Landingpage = () => {
-  const [pincode, setPincode] = useState("");
+  const [pincode, setPincode] = useState(778899);
   const pincodeSetting = useSelector((state) => state.setCommonPincode);
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);

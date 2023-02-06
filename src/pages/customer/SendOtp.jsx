@@ -42,7 +42,7 @@ const SendOtp = () => {
         // console.log(response?.data?.message);
       })
       .catch((errorInfo) => {
-        console.log(errorInfo);
+        //console.log(errorInfo);
         openNotificationWithIcon(
           "error",
           "Error!",
@@ -52,7 +52,7 @@ const SendOtp = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+   // console.log("Failed:", errorInfo);
   };
 
   return (

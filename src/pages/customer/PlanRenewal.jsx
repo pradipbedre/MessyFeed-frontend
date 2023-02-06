@@ -19,9 +19,9 @@ const PlanRenewal = ({
       .validateFields()
       .then(async (values) => {
         const activeCustomer = await getCustomerData(values?.email);
-        console.log(activeCustomer);
+       // console.log(activeCustomer);
         if (!activeCustomer.active) {
-          console.log(1, values);
+         // console.log(1, values);
           const reqBody = {
             email: values?.email,
             planId: values?.mealPlan,
@@ -31,7 +31,7 @@ const PlanRenewal = ({
             startDate: values?.startDate,
             status: "Active",
           };
-          console.log(reqBody, 2);
+         // console.log(reqBody, 2);
           const response = await axios.put(
             `${import.meta.env.VITE_BASE_URL}user/mess/customer/${
               activeCustomer?.id
@@ -43,8 +43,8 @@ const PlanRenewal = ({
               },
             }
           );
-          console.log(3);
-          console.log(response?.data);
+         // console.log(3);
+         // console.log(response?.data);
           openNotificationWithIcon(
             "success",
             "Success!",
@@ -53,7 +53,7 @@ const PlanRenewal = ({
           form.resetFields();
           setRenewalModal(false);
         } else {
-          console.log("You already have an active plan");
+         // console.log("You already have an active plan");
           openNotificationWithIcon(
             "error",
             "Error!",
@@ -64,7 +64,7 @@ const PlanRenewal = ({
         }
       })
       .catch((errorInfo) => {
-        console.log(errorInfo);
+       // console.log(errorInfo);
         openNotificationWithIcon(
           "error",
           "Error!",
@@ -74,7 +74,7 @@ const PlanRenewal = ({
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+   // console.log("Failed:", errorInfo);
   };
 
   useEffect(() => {
@@ -91,7 +91,7 @@ const PlanRenewal = ({
         );
         setPlansData(response?.data?.message);
       } catch (err) {
-        console.log(err.message);
+        //console.log(err.message);
       }
     };
     getPlansData();
@@ -111,7 +111,7 @@ const PlanRenewal = ({
         return { active: true, id: response?.data?.message?._id };
       else return { active: false, id: response?.data?.message?._id };
     } catch (err) {
-      console.log(err.message);
+     // console.log(err.message);
     }
   };
 

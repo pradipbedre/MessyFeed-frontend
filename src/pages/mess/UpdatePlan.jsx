@@ -44,7 +44,7 @@ export const UpdatePlan = ({
             newPlansData[index].name = response?.data?.message?.name;
             newPlansData[index].mealCount = response?.data?.message?.mealCount;
             newPlansData[index].planCost = response?.data?.message?.planCost;
-            console.log("New Plans Data = ", newPlansData);
+        //    console.log("New Plans Data = ", newPlansData);
             return newPlansData;
           });
 
@@ -59,7 +59,7 @@ export const UpdatePlan = ({
         }
       })
       .catch((errorInfo) => {
-        console.log(errorInfo);
+      //  console.log(errorInfo);
         openNotificationWithIcon(
           "error",
           "Error!",
@@ -69,7 +69,7 @@ export const UpdatePlan = ({
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    //console.log("Failed:", errorInfo);
   };
 
   const showUpdateModal = () => {

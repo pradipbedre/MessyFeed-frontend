@@ -25,15 +25,15 @@ const MessDetails = () => {
         const res = await axios.get(
           `${import.meta.env.VITE_BASE_URL}user/mess/${messId}`
         );
-        console.log("Mess Details: ", res);
+        //console.log("Mess Details: ", res);
         const resPlans = await axios.get(
           `${import.meta.env.VITE_BASE_URL}user/mess/plans/${messId}`
         );
-        console.log("mess plans: ", resPlans);
+      //  console.log("mess plans: ", resPlans);
         setMess(res.data);
         setPlans(resPlans.data);
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
     fetchData();

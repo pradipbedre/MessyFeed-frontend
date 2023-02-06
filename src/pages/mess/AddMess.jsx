@@ -104,7 +104,7 @@ const AddMess = () => {
           navigate("/user/mess/view");
         }, 3000);
       } else {
-        console.log(response?.data?.message);
+       // console.log(response?.data?.message);
         openNotificationWithIcon(
           "error",
           "Error!",
@@ -113,7 +113,7 @@ const AddMess = () => {
       }
     } catch (err) {
       form.resetFields();
-      console.log(err.message);
+    //  console.log(err.message);
       openNotificationWithIcon(
         "error",
         "Error!",
@@ -123,7 +123,7 @@ const AddMess = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  //  console.log("Failed:", errorInfo);
   };
 
   return (

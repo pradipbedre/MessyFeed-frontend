@@ -20,18 +20,18 @@ export const PlanDetails = ({ form, setSelectedData }) => {
         );
         setPlansData(response?.data?.message);
       } catch (err) {
-        console.log(err.message);
+       // console.log(err.message);
       }
     };
     getPlansData();
   }, []);
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+   // console.log("Success:", values);
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+   // console.log("Failed:", errorInfo);
   };
 
   const handleSelectChange = (value) => {

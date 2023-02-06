@@ -34,11 +34,11 @@ const UpdateCustomer = ({ customerData, setUpdateModal, setCustomerData }) => {
         setUpdateModal(false);
       })
       .catch((errorInfo) => {
-        console.log(errorInfo);
+      //  console.log(errorInfo);
       });
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+   // console.log("Failed:", errorInfo);
   };
 
   return (

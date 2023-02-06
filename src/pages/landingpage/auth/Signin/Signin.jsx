@@ -6,8 +6,8 @@ import { setCookie } from "../../../../utils/Cookie";
 import { Input } from "antd";
 
 const Signin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("demo@gmail.com");
+  const [password, setPassword] = useState("Demo@9090");
   const navigate = useNavigate();
 
   const loginUser = async (e) => {
@@ -23,7 +23,7 @@ const Signin = () => {
             password,
           }
         );
-        console.log(res);
+      //  console.log(res);
         if (res.data.Msg) {
           alert(`${res.data.Msg}`);
         }
